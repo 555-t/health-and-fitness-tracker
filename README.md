@@ -9,7 +9,8 @@ Project Structure
 │    ├── profile.html  
 │    ├── tracker.html  
 │    ├── nutrition.html 
-│    ├── css/  
+│    
+├── css/  
 │    ├── js/  
 │  
 ├── /backend (Phase 2)  
