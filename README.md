@@ -1,6 +1,7 @@
 # health-and-fitness-tracker
 
 Project Structure 
+
 /project  
 ├── /frontend (Phase 1)  
 │    ├── index.html  
