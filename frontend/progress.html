@@ -1,261 +1,328 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Track your fitness progress and set workout reminders.">
-  <meta name="author" content="">
-  <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
+  <title>Progress | Get Buff'd</title>
 
-  <title>Progress | getBuff'd</title>
+  <!-- load Bootstrap to handle our responsive grid -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 
-  <!-- Bootstrap 4 (local, same as template) -->
-  <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+  <!-- pull in Font Awesome for our icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-  <!-- Font Awesome (local) -->
-  <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
+  <!-- match the site's branding: Poppins for body, Raleway for headers -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&family=Raleway:wght@400;700;900&display=swap" rel="stylesheet">
 
-  <!-- Template CSS -->
-  <link rel="stylesheet" href="assets/css/templatemo-training-studio.css">
-
-  <!-- Chart.js -->
+  <!-- Chart.js to handle both the line chart and doughnut chart -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-  <!-- Custom Styles -->
+  <!-- Our custom styles for the progress page -->
   <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-  <!-- ***** Preloader Start ***** -->
-  <div id="js-preloader" class="js-preloader">
-    <div class="preloader-inner">
-      <span class="dot"></span>
-      <div class="dots">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
+<!-- navbar stays at the top when you scroll  -->
+<nav class="navbar navbar-expand-lg navbar-custom">
+  <div class="container">
+
+    <!-- logo links back to the homepage -->
+    <a class="navbar-brand" href="index.html">
+      <i class="fa-solid fa-dumbbell mr-2" style="color: var(--orange);"></i>Get<span>Buff'd</span>
+    </a>
+
+    <!-- hamburger menu toggle (only shows up on smaller screens) -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+      <span><i class="fas fa-bars" style="color: var(--white);"></i></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto align-items-lg-center">
+
+        <li class="nav-item">
+          <a class="nav-link" href="index.html"><i class="fas fa-home mr-2"></i>Home</a>
+        </li>
+
+        <!-- Dropdown listing all the main feature pages -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle active" href="#" data-toggle="dropdown">
+            <i class="fas fa-layer-group mr-2"></i>Features
+          </a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="tracker.html"><i class="fas fa-clipboard-list mr-2"></i>Workout Tracker</a>
+            <!-- Highlight the 'Progress' page since we're currently on it -->
+            <a class="dropdown-item active" href="progress.html"><i class="fas fa-chart-line mr-2"></i>Progress Charts</a>
+            <a class="dropdown-item" href="nutrition.html"><i class="fas fa-apple-alt mr-2"></i>Nutrition Planner</a>
+            <div class="dropdown-divider" style="border-color: rgba(255,255,255,0.1);"></div>
+            <a class="dropdown-item" href="profile.htm"><i class="fas fa-user-cog mr-2"></i>My Profile</a>
+          </div>
+        </li>
+
+        <!-- Login button -->
+        <li class="nav-item ml-lg-4 mt-3 mt-lg-0">
+          <a class="btn btn-login w-100" href="login.html"><i class="fas fa-sign-in-alt mr-2"></i>Log In</a>
+        </li>
+
+      </ul>
     </div>
   </div>
-  <!-- ***** Preloader End ***** -->
+</nav>
 
-  <!-- ***** Header Area Start ***** -->
-  <header class="header-area header-sticky">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-12">
-          <nav class="main-nav">
-            <!-- Logo -->
-            <a href="index.html" class="logo">get<em>Buff'd</em></a>
-            <!-- Menu -->
-            <ul class="nav">
-              <li class="scroll-to-section"><a href="index.html">Home</a></li>
-              <li class="dropdown">
-                <a href="#" class="active" data-toggle="dropdown">Features <i class="fa fa-angle-down"></i></a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="tracker.html">Fitness Tracker</a></li>
-                  <li><a class="dropdown-item active-page" href="progress.html">Progress Charts</a></li>
-                  <li><a class="dropdown-item" href="nutrition.html">Nutrition Planner</a></li>
-                  <li><a class="dropdown-item" href="profile.htm">My Profile</a></li>
-                </ul>
-              </li>
-              <li class="main-button"><a href="login.html">Log In</a></li>
-            </ul>
-            <a class="menu-trigger">
-              <span>Menu</span>
-            </a>
-            <!-- Menu End -->
-          </nav>
+<!-- Page hero -->
+<header class="solid-hero text-white text-center shadow-lg beam-orange">
+
+  <!-- dark overlay to ensure our hero text is easy to read -->
+  <div class="hero-overlay"></div>
+
+  <div class="container hero-content py-4">
+    <h6 class="text-uppercase font-weight-bold mb-3" style="letter-spacing: 4px; color: var(--green);">Member Analytics</h6>
+    <h1 class="font-weight-bold mb-3" style="font-family: 'Raleway', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem);">YOUR <span style="color: var(--orange);">PROGRESS</span></h1>
+    <p class="mb-0" style="font-size: 0.95rem; color: rgba(247,247,247,0.7); white-space: nowrap;">Visualise your fitness journey and stay on track with your goals.</p>
+  </div>
+
+</header>
+
+<!-- Quick overview row: 4 cards highlighting key user stats -->
+<section class="custom-section bg-dark-1 beam-green">
+  <div class="container">
+    <div class="row">
+
+      <!-- How many workouts the user has logged in total -->
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card p-4 text-center h-100 card-dark">
+          <div class="card-body d-flex flex-column justify-content-center">
+            <i class="fa-solid fa-trophy fa-3x mb-3" style="color: var(--orange);"></i>
+            <h6 class="text-uppercase font-weight-bold mb-2" style="color: rgba(247,247,247,0.5); font-size: 0.75rem; letter-spacing: 1px;">Total Workouts</h6>
+            <h2 class="font-weight-bold mb-0" style="font-family: 'Raleway', sans-serif; color: var(--green);">12</h2>
+          </div>
         </div>
       </div>
+
+      <!-- Total time spent working out across all sessions -->
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card p-4 text-center h-100 card-dark">
+          <div class="card-body d-flex flex-column justify-content-center">
+            <i class="fa-solid fa-clock fa-3x mb-3" style="color: var(--orange);"></i>
+            <h6 class="text-uppercase font-weight-bold mb-2" style="color: rgba(247,247,247,0.5); font-size: 0.75rem; letter-spacing: 1px;">Total Minutes</h6>
+            <h2 class="font-weight-bold mb-0" style="font-family: 'Raleway', sans-serif; color: var(--green);">480</h2>
+          </div>
+        </div>
+      </div>
+
+      <!-- How many days in a row the user has worked out -->
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card p-4 text-center h-100 card-dark">
+          <div class="card-body d-flex flex-column justify-content-center">
+            <i class="fa-solid fa-fire fa-3x mb-3" style="color: var(--orange);"></i>
+            <h6 class="text-uppercase font-weight-bold mb-2" style="color: rgba(247,247,247,0.5); font-size: 0.75rem; letter-spacing: 1px;">Day Streak</h6>
+            <h2 class="font-weight-bold mb-0" style="font-family: 'Raleway', sans-serif; color: var(--green);">5</h2>
+          </div>
+        </div>
+      </div>
+
+      <!-- The day of the week the user tends to work out the most -->
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card p-4 text-center h-100 card-dark">
+          <div class="card-body d-flex flex-column justify-content-center">
+            <i class="fa-solid fa-calendar-days fa-3x mb-3" style="color: var(--orange);"></i>
+            <h6 class="text-uppercase font-weight-bold mb-2" style="color: rgba(247,247,247,0.5); font-size: 0.75rem; letter-spacing: 1px;">Most Active Day</h6>
+            <h2 class="font-weight-bold mb-0" style="font-family: 'Raleway', sans-serif; color: var(--green);">Wednesday</h2>
+          </div>
+        </div>
+      </div>
+
     </div>
-  </header>
-  <!-- ***** Header Area End ***** -->
+  </div>
+</section>
 
-  <!-- ***** Page Hero Start ***** -->
-  <section class="page-hero">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12 text-center">
-          <h2>Your <em>Progress</em></h2>
-          <p>Visualise your fitness journey and stay on track with your goals.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- ***** Page Hero End ***** -->
+<!-- Charts section — the two main data visualisations -->
+<section class="custom-section bg-dark-2 beam-orange">
+  <div class="container">
 
-  <!-- ***** Stats Cards Start ***** -->
-  <section class="stats-section">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-4 col-md-4 col-sm-12">
-          <div class="stat-card">
-            <i class="fa fa-trophy"></i>
-            <h3>12</h3>
-            <p>Total Workouts</p>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-12">
-          <div class="stat-card">
-            <i class="fa fa-clock-o"></i>
-            <h3>480</h3>
-            <p>Total Minutes</p>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-12">
-          <div class="stat-card">
-            <i class="fa fa-calendar"></i>
-            <h3>Wednesday</h3>
-            <p>Most Active Day</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- ***** Stats Cards End ***** -->
+    <h6 class="text-uppercase font-weight-bold text-center mb-2" style="letter-spacing: 2px; color: rgba(247,247,247,0.5);">Your Analytics</h6>
+    <h2 class="font-weight-bold text-center mb-5 text-white" style="font-family: 'Raleway', sans-serif;">Activity <span style="color: var(--orange);">Overview</span></h2>
 
-  <!-- ***** Charts Section Start ***** -->
-  <section class="charts-section">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6 offset-lg-3 text-center">
-          <div class="section-heading dark-bg">
-            <h2>Activity <em>Overview</em></h2>
-            <img src="assets/images/line-dec.png" alt="">
-            <p>A visual breakdown of your weekly activity and workout types.</p>
-          </div>
-        </div>
-      </div>
-      <div class="row d-flex align-items-stretch">
-        <!-- Line Chart -->
-        <div class="col-lg-6 col-md-6 col-sm-12 d-flex">
-          <div class="chart-card w-100">
-            <h5>Weekly Workout Duration <span>(mins)</span></h5>
+    <!-- Line chart -->
+    <div class="row mb-4">
+      <div class="col-12 d-flex">
+        <div class="card p-4 w-100 card-dark">
+          <h6 class="text-uppercase font-weight-bold mb-1" style="color: rgba(247,247,247,0.5); font-size: 0.75rem; letter-spacing: 1px;">Weekly Duration</h6>
+          <!-- Shows how many minutes the user worked out on each day this week -->
+          <h5 class="font-weight-bold mb-4 text-white" style="font-family: 'Raleway', sans-serif;">Workout Minutes <span style="color: var(--green);">This Week</span></h5>
+          <div class="chart-canvas-wrap">
             <canvas id="weeklyChart"></canvas>
           </div>
         </div>
-        <!-- Doughnut Chart -->
-        <div class="col-lg-6 col-md-6 col-sm-12 d-flex">
-          <div class="chart-card w-100">
-            <h5>Activity <span>Breakdown</span></h5>
+      </div>
+    </div>
+
+    <!-- Bottom row: activity breakdown chart + personal records side by side -->
+    <div class="row d-flex align-items-stretch">
+
+      <!-- Doughnut chart breaking down what types of workouts the user does -->
+      <div class="col-lg-6 mb-4 mb-lg-0 d-flex">
+        <div class="card p-4 w-100 card-dark">
+          <h6 class="text-uppercase font-weight-bold mb-1" style="color: rgba(247,247,247,0.5); font-size: 0.75rem; letter-spacing: 1px;">Breakdown</h6>
+          <h5 class="font-weight-bold mb-4 text-white" style="font-family: 'Raleway', sans-serif;">Activity <span style="color: var(--green);">Distribution</span></h5>
+          <div class="chart-canvas-wrap">
             <canvas id="activityChart"></canvas>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-  <!-- ***** Charts Section End ***** -->
 
-  <!-- ***** Reminders Section Start ***** -->
-  <section class="reminders-section">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-lg-6 col-md-8 col-sm-12">
-          <div class="reminder-card text-center">
-            <i class="fa fa-bell reminder-icon"></i>
-            <h4>Set a <em>Workout Reminder</em></h4>
-            <p>Choose a time and we'll remind you to get moving.</p>
-            <div class="reminder-form">
-              <select id="reminderDelay" class="reminder-select" title="Select reminder delay" aria-label="Select reminder delay">
-                <option value="5000">5 minutes</option>
-                <option value="10000">10 minutes</option>
-                <option value="30000">30 minutes</option>
-                <option value="60000">1 hour</option>
-              </select>
-              <button type="button" id="setReminderBtn" class="reminder-btn">
-                <i class="fa fa-clock-o"></i> Set Reminder
-              </button>
-            </div>
-            <div id="reminderStatus" class="reminder-status reminder-status--hidden">
-              <i class="fa fa-check-circle"></i> Reminder set! We'll notify you shortly.
+      <!-- Static highlights of the user's best recorded sessions -->
+      <div class="col-lg-6 d-flex">
+        <div class="card p-4 w-100 card-dark">
+          <h6 class="text-uppercase font-weight-bold mb-1" style="color: rgba(247,247,247,0.5); font-size: 0.75rem; letter-spacing: 1px;">Records</h6>
+          <h5 class="font-weight-bold mb-4 text-white" style="font-family: 'Raleway', sans-serif;">Personal <span style="color: var(--orange);">Bests</span></h5>
+
+          <!-- Longest single workout session -->
+          <div class="pb-item d-flex align-items-center mb-3">
+            <div class="pb-icon mr-3"><i class="fa-solid fa-stopwatch" style="color: var(--orange); font-size: 1.4rem;"></i></div>
+            <div>
+              <div class="small text-uppercase font-weight-bold" style="color: rgba(247,247,247,0.5); letter-spacing: 1px;">Longest Session</div>
+              <div class="font-weight-bold text-white" style="font-family: 'Raleway', sans-serif; font-size: 1.3rem;">90 <span style="font-size: 0.9rem; color: rgba(247,247,247,0.5);">mins</span></div>
             </div>
           </div>
+
+          <!-- Best consecutive-day streak ever achieved -->
+          <div class="pb-item d-flex align-items-center mb-3">
+            <div class="pb-icon mr-3"><i class="fa-solid fa-fire" style="color: var(--orange); font-size: 1.4rem;"></i></div>
+            <div>
+              <div class="small text-uppercase font-weight-bold" style="color: rgba(247,247,247,0.5); letter-spacing: 1px;">Highest Streak</div>
+              <div class="font-weight-bold text-white" style="font-family: 'Raleway', sans-serif; font-size: 1.3rem;">7 <span style="font-size: 0.9rem; color: rgba(247,247,247,0.5);">days</span></div>
+            </div>
+          </div>
+
+          <!-- The activity type the user does most often -->
+          <div class="pb-item d-flex align-items-center mb-3">
+            <div class="pb-icon mr-3"><i class="fa-solid fa-dumbbell" style="color: var(--green); font-size: 1.4rem;"></i></div>
+            <div>
+              <div class="small text-uppercase font-weight-bold" style="color: rgba(247,247,247,0.5); letter-spacing: 1px;">Top Activity</div>
+              <div class="font-weight-bold text-white" style="font-family: 'Raleway', sans-serif; font-size: 1.3rem;">Running</div>
+            </div>
+          </div>
+
+          <!-- Most total minutes logged in a single week -->
+          <div class="pb-item d-flex align-items-center">
+            <div class="pb-icon mr-3"><i class="fa-solid fa-calendar-check" style="color: var(--green); font-size: 1.4rem;"></i></div>
+            <div>
+              <div class="small text-uppercase font-weight-bold" style="color: rgba(247,247,247,0.5); letter-spacing: 1px;">Best Week</div>
+              <div class="font-weight-bold text-white" style="font-family: 'Raleway', sans-serif; font-size: 1.3rem;">315 <span style="font-size: 0.9rem; color: rgba(247,247,247,0.5);">mins</span></div>
+            </div>
+          </div>
+
         </div>
       </div>
-    </div>
-  </section>
-  <!-- ***** Reminders Section End ***** -->
 
-  <!-- Toast Notification -->
-  <div id="workoutToast" class="toast-notification toast-notification--hidden">
-    <div class="toast-inner">
-      <span class="toast-icon"><i class="fa fa-bell"></i></span>
-      <div class="toast-text">
-        <strong>Time to work out!</strong>
-        <p>Your scheduled reminder is here. Let's get moving!</p>
-      </div>
-      <button type="button" class="toast-close" id="toastCloseBtn" title="Close notification" aria-label="Close notification">
-        <i class="fa fa-times"></i>
-      </button>
     </div>
   </div>
+</section>
 
-  <!-- ***** Footer Start ***** -->
-  <footer>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12 text-center">
-          <p>Copyright &copy; 2025 getBuff'd &mdash; Health &amp; Fitness Tracker</p>
+<!-- Reminder section: lets the user schedule a workout notification -->
+<section class="custom-section bg-dark-1 beam-green">
+  <div class="container">
+
+    <h6 class="text-uppercase font-weight-bold text-center mb-2" style="letter-spacing: 2px; color: rgba(247,247,247,0.5);">Stay Consistent</h6>
+    <h2 class="font-weight-bold text-center mb-5 text-white" style="font-family: 'Raleway', sans-serif;">Set a Workout <span style="color: var(--orange);">Reminder</span></h2>
+
+    <!-- Centred card — col-lg-6 keeps it from stretching too wide on large screens -->
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+        <div class="card-dark p-4 p-lg-5 text-center">
+
+          <i class="fa-solid fa-bell fa-3x mb-3" style="color: var(--orange);"></i>
+          <p class="mb-4" style="color: rgba(247,247,247,0.6);">Choose a delay below and we'll send you a notification when it's time to get moving.</p>
+
+          <!-- Dropdown options (values are in milliseconds for the JS timer) -->
+          <select id="reminderDelay" class="reminder-select w-100 mb-3" title="Select reminder delay" aria-label="Select reminder delay">
+            <option value="900000">15 minutes</option>
+            <option value="1800000">30 minutes</option>
+            <option value="3600000">1 hour</option>
+            <option value="7200000">2 hours</option>
+          </select>
+
+          <button type="button" id="setReminderBtn" class="btn btn-cta btn-block font-weight-bold">
+            <i class="fa-solid fa-clock mr-2"></i>Set Reminder
+          </button>
+
+          <!-- Success message (stays hidden until they set a reminder) -->
+          <div id="reminderStatus" class="reminder-status reminder-status--hidden mt-4">
+            <i class="fa-solid fa-circle-check fa-2x mb-2" style="color: var(--green);"></i>
+            <div class="font-weight-bold mb-1" style="font-size: 1rem; color: var(--white);">You're all set!</div>
+            <div style="font-size: 0.85rem; color: rgba(247,247,247,0.6);">We'll remind you to get moving.</div>
+          </div>
+
         </div>
       </div>
     </div>
-  </footer>
-  <!-- ***** Footer End ***** -->
 
-  <!-- jQuery -->
-  <script src="assets/js/jquery-2.1.0.min.js"></script>
+  </div>
+</section>
 
-  <!-- Bootstrap -->
-  <script src="assets/js/popper.js"></script>
-  <script src="assets/js/bootstrap.min.js"></script>
+<!-- Toast notification that pops up in the corner when the reminder fires -->
+<div id="workoutToast" class="toast-notification toast-notification--hidden">
+  <div class="toast-inner">
+    <span class="toast-icon"><i class="fa-solid fa-bell"></i></span>
+    <div class="toast-text">
+      <strong>Time to work out!</strong>
+      <p>Your scheduled reminder is here. Let's get moving!</p>
+    </div>
+    <!-- Close button dismisses the toast without refreshing the page -->
+    <button type="button" class="toast-close" id="toastCloseBtn" title="Close notification" aria-label="Close notification">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+</div>
 
-  <!-- Plugins -->
-  <script src="assets/js/scrollreveal.min.js"></script>
-  <script src="assets/js/waypoints.min.js"></script>
-  <script src="assets/js/jquery.counterup.min.js"></script>
-  <script src="assets/js/imgfix.min.js"></script>
-  <script src="assets/js/mixitup.js"></script>
-  <script src="assets/js/accordions.js"></script>
+<!-- footer with the brand name -->
+<footer class="bg-dark-1" style="padding: 30px 0;">
+  <div class="container text-center text-white">
+    <h5 class="font-weight-bold mb-2" style="color: var(--orange); font-family: 'Raleway', sans-serif;">GET BUFF'D</h5>
+    <p class="small mb-0" style="color: rgba(247,247,247,0.4); letter-spacing: 1px;">Phase 1 UI Prototype &bull; WIF2003 Web Programming</p>
+  </div>
+</footer>
 
-  <!-- Global Init (handles preloader + sticky nav) -->
-  <script src="assets/js/custom.js"></script>
+<!-- jQuery, Popper and Bootstrap JS — needed for the navbar dropdown to work -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
 
-  <!-- Progress Charts -->
-  <script src="js/chart.js"></script>
+<!-- Initialises the two Chart.js charts -->
+<script src="js/chart.js"></script>
 
-  <!-- Reminders -->
-  <script>
-    var reminderTimer = null;
+<script>
+  // stops double reminders if the user clicks the button twice
+  var reminderTimer = null;
 
-    document.getElementById('setReminderBtn').addEventListener('click', function () {
-      var delay = parseInt(document.getElementById('reminderDelay').value);
-      var status = document.getElementById('reminderStatus');
-      var toast  = document.getElementById('workoutToast');
+  document.getElementById('setReminderBtn').addEventListener('click', function () {
+    // read how long the user wants to wait (value is already in milliseconds)
+    var delay  = parseInt(document.getElementById('reminderDelay').value);
+    var status = document.getElementById('reminderStatus');
+    var toast  = document.getElementById('workoutToast');
 
-      // Cancel any existing timer
-      if (reminderTimer) clearTimeout(reminderTimer);
+    // If there's already a timer running, cancel it before starting a new one
+    if (reminderTimer) clearTimeout(reminderTimer);
 
-      // Hide toast if it's still showing from before
-      toast.classList.add('toast-notification--hidden');
+    // Hide the toast in case it was still visible from a previous reminder
+    toast.classList.add('toast-notification--hidden');
 
-      // Show confirmation message
-      status.classList.remove('reminder-status--hidden');
+    // Show the green confirmation banner straight away so the user knows it worked
+    status.classList.remove('reminder-status--hidden');
 
-      // Fire toast after selected delay
-      reminderTimer = setTimeout(function () {
-        toast.classList.remove('toast-notification--hidden');
-        status.classList.add('reminder-status--hidden');
-      }, delay);
-    });
+    // After the chosen delay, hide the confirmation and show the toast notification
+    reminderTimer = setTimeout(function () {
+      toast.classList.remove('toast-notification--hidden');
+      status.classList.add('reminder-status--hidden');
+    }, delay);
+  });
 
-    document.getElementById('toastCloseBtn').addEventListener('click', function () {
-      document.getElementById('workoutToast').classList.add('toast-notification--hidden');
-    });
-  </script>
-
+  document.getElementById('toastCloseBtn').addEventListener('click', function () {
+    document.getElementById('workoutToast').classList.add('toast-notification--hidden');
+  });
+</script>
 
 </body>
 </html>
