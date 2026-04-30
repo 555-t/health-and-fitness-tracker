@@ -9,10 +9,10 @@ document.addEventListener('DOMContentLoaded', function () {
       datasets: [{
         label: 'Duration (mins)',
         data: [30, 45, 60, 0, 50, 90, 40],
-        borderColor: '#05be62',
-        backgroundColor: 'rgba(5, 190, 98, 0.15)',
+        borderColor: '#5be662',
+        backgroundColor: 'rgba(91, 230, 98, 0.1)',
         borderWidth: 3,
-        pointBackgroundColor: '#05be62',
+        pointBackgroundColor: '#5be662',
         pointRadius: 5,
         fill: true,
         tension: 0.4
@@ -27,18 +27,18 @@ document.addEventListener('DOMContentLoaded', function () {
       scales: {
         y: {
           beginAtZero: true,
-          grid: { color: 'rgba(0,0,0,0.05)' },
-          ticks: { color: '#2b2e35' }
+          grid: { color: 'rgba(255, 255, 255, 0.06)' },
+          ticks: { color: 'rgba(247, 247, 247, 0.6)' }
         },
         x: {
           grid: { display: false },
-          ticks: { color: '#2b2e35' }
+          ticks: { color: 'rgba(247, 247, 247, 0.6)' }
         }
       }
     }
   });
 
-  // --- Doughnut Chart: Activity Breakdown ---
+  // --- Doughnut Chart: Activity Distribution ---
   const activityCtx = document.getElementById('activityChart').getContext('2d');
   new Chart(activityCtx, {
     type: 'doughnut',
@@ -47,14 +47,13 @@ document.addEventListener('DOMContentLoaded', function () {
       datasets: [{
         data: [5, 2, 3, 1, 1],
         backgroundColor: [
-          '#05be62',
+          '#5be662',
           '#ff4d00',
-          '#2b2e35',
+          '#4fc3f7',
           '#f7c948',
-          '#4fc3f7'
+          '#a78bfa'
         ],
-        borderColor: '#f7f7f7',
-        borderWidth: 3
+        borderWidth: 0
       }]
     },
     options: {
@@ -64,9 +63,11 @@ document.addEventListener('DOMContentLoaded', function () {
         legend: {
           position: 'bottom',
           labels: {
-            color: '#2b2e35',
+            color: 'rgba(247, 247, 247, 0.7)',
             padding: 16,
-            font: { size: 13 }
+            font: { size: 13 },
+            usePointStyle: true,
+            pointStyle: 'circle'
           }
         }
       }

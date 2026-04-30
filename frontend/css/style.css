@@ -1,205 +1,196 @@
-/* ===== Progress Page – Custom Styles ===== */
+/* ===================================================
+   Progress Page – Custom Styles
+   Matches design system from index.html
+   =================================================== */
+
+/* --- CSS Variables (matching index.html) --- */
+:root {
+  --black: #2b2e35;
+  --green: #5be662;
+  --orange: #ff4d00;
+  --white: #f7f7f7;
+  --dark-card: #22252b;
+}
+
+/* --- Base --- */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--black);
+  color: var(--white);
+}
 
 /* --- Navbar --- */
-/* Solid dark background at all scroll positions */
-.header-area,
-.background-header {
-  background: #3f4248 !important;
-  box-shadow: none !important;
+.navbar-custom {
+  background-color: rgba(43, 46, 53, 0.98);
+  border-bottom: 2px solid var(--orange);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 }
 
-/* Force all nav text white since we always have a dark navbar */
-.header-area .main-nav .logo,
-.background-header .logo {
-  color: #fff !important;
-}
-
-.header-area .main-nav .nav li a,
-.background-header .main-nav .nav li a {
-  color: #fff !important;
-}
-
-.header-area .main-nav .nav li a.active,
-.background-header .main-nav .nav li a.active,
-.header-area .main-nav .nav li:hover a,
-.background-header .main-nav .nav li:hover a {
-  color: #ed563b !important;
-}
-
-.header-area .container-fluid {
-  padding-left: 30px;
-  padding-right: 30px;
-}
-
-/* --- Page Hero --- */
-.page-hero {
-  background-color: #2b2e35;
-  padding: 120px 0 50px 0;
-  text-align: center;
-}
-
-.page-hero h2 {
-  color: #f7f7f7;
-  font-size: 42px;
-  font-weight: 700;
-  text-transform: uppercase;
+.navbar-custom .navbar-brand {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 900;
+  font-size: 1.8rem;
+  color: var(--white) !important;
   letter-spacing: 1px;
-  margin-bottom: 16px;
-}
-
-.page-hero h2 em {
-  color: #05be62;
-  font-style: normal;
-}
-
-.page-hero p {
-  color: #aaaaaa;
-  font-size: 16px;
-  white-space: nowrap;
-  margin: 0 auto;
-}
-
-@media (max-width: 768px) {
-  .page-hero p {
-    white-space: normal;
-  }
-}
-
-/* --- Stats Cards --- */
-.stats-section {
-  background-color: #f7f7f7;
-  padding: 60px 0;
-}
-
-.stat-card {
-  background-color: #2b2e35;
-  border-radius: 8px;
-  padding: 40px 20px;
-  text-align: center;
-  margin-bottom: 30px;
-  transition: transform 0.3s ease;
-}
-
-.stat-card:hover {
-  transform: translateY(-5px);
-}
-
-.stat-card .fa {
-  font-size: 36px;
-  color: #05be62;
-  margin-bottom: 16px;
-}
-
-.stat-card h3 {
-  color: #05be62;
-  font-size: clamp(20px, 2.5vw, 36px);
-  font-weight: 700;
-  margin-bottom: 8px;
-  word-break: break-word;
-}
-
-.stat-card p {
-  color: #f7f7f7;
-  font-size: 14px;
   text-transform: uppercase;
+}
+
+.navbar-custom .navbar-brand span {
+  color: var(--orange);
+}
+
+.navbar-custom .nav-link {
+  color: var(--white) !important;
+  font-weight: 600;
+  font-size: 0.9rem;
   letter-spacing: 1px;
-  margin: 0;
+  text-transform: uppercase;
+  padding: 8px 16px !important;
+  transition: color 0.3s ease;
 }
 
-/* --- Charts Section --- */
-.charts-section {
-  background-color: #2b2e35;
-  padding: 60px 0;
+.navbar-custom .nav-link:hover,
+.navbar-custom .nav-link.active {
+  color: var(--orange) !important;
 }
 
-.charts-section .section-heading {
-  margin-top: 0;
-  margin-bottom: 30px;
+.navbar-custom .dropdown-menu {
+  background-color: var(--dark-card);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 3px solid var(--orange);
+  border-radius: 0;
 }
 
-.chart-card {
+.navbar-custom .dropdown-item {
+  color: var(--white);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 12px 20px;
+  transition: all 0.2s ease;
+}
+
+.navbar-custom .dropdown-item:hover {
+  background-color: var(--orange);
+  color: var(--white);
+  padding-left: 25px;
+}
+
+.navbar-custom .dropdown-item.active {
+  background-color: transparent;
+  color: var(--orange);
+}
+
+.navbar-custom .btn-login {
+  background-color: transparent;
+  color: var(--orange);
+  border: 2px solid var(--orange);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-radius: 30px;
+  padding: 8px 24px;
+  transition: all 0.3s ease;
+}
+
+.navbar-custom .btn-login:hover {
+  background-color: var(--orange);
+  color: var(--white);
+  box-shadow: 0 0 10px rgba(255, 77, 0, 0.5);
+}
+
+/* --- Hero --- */
+.solid-hero {
+  position: relative;
+  min-height: 40vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: url('../assets/images/training-image-03.jpg') center / cover no-repeat;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(135deg, rgba(26, 28, 33, 0.92) 0%, rgba(43, 46, 53, 0.92) 60%, rgba(30, 33, 24, 0.92) 100%);
+  z-index: 1;
+}
+
+.hero-content {
+  z-index: 2;
   position: relative;
 }
 
-.chart-card canvas {
-  width: 100% !important;
-  height: 300px !important;
-}
+/* --- Section Helpers (matching index.html) --- */
+.bg-dark-1      { background-color: var(--dark-card); }
+.bg-dark-2      { background-color: var(--black); }
+.custom-section { padding: 80px 0; }
+.beam-orange    { border-bottom: 2px solid var(--orange); }
+.beam-green     { border-bottom: 2px solid var(--green); }
 
-.chart-card {
-  background-color: #f7f7f7;
+/* --- Cards --- */
+.card-dark {
+  background-color: var(--black);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 8px;
-  padding: 30px;
-  margin-bottom: 30px;
+  transition: transform 0.3s ease;
 }
 
-.chart-card h5 {
-  color: #2b2e35;
-  font-weight: 700;
-  font-size: 16px;
+.card-dark:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Uniform size for all stat card values, with lining numerals so digits sit on the same baseline */
+.card-dark .card-body h2 {
+  font-variant-numeric: lining-nums;
+  font-size: clamp(1.4rem, 2vw, 2rem);
+  white-space: nowrap;
+}
+
+/* --- CTA Button --- */
+.btn-cta {
+  background-color: var(--orange);
+  color: var(--white);
+  border-radius: 30px;
   text-transform: uppercase;
   letter-spacing: 1px;
-  margin-bottom: 20px;
-}
-
-.chart-card h5 span {
-  color: #05be62;
-}
-
-/* --- Reminders Section --- */
-.reminders-section {
-  background-color: #f7f7f7;
-  padding: 60px 0;
-}
-
-.reminder-card {
-  background-color: #2b2e35;
-  border-radius: 8px;
-  padding: 50px 40px;
-}
-
-.reminder-icon {
-  font-size: 48px;
-  color: #05be62;
-  margin-bottom: 20px;
-  display: block;
-}
-
-.reminder-card h4 {
-  color: #f7f7f7;
-  font-size: 22px;
+  border: 2px solid var(--orange);
+  transition: all 0.3s ease;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 10px;
 }
 
-.reminder-card h4 em {
-  color: #05be62;
-  font-style: normal;
+.btn-cta:hover {
+  background-color: var(--green);
+  border-color: var(--green);
+  color: var(--black);
+  box-shadow: 0 0 15px rgba(91, 230, 98, 0.4);
 }
 
-.reminder-card p {
-  color: #aaaaaa;
-  font-size: 14px;
-  margin-bottom: 30px;
+/* --- Chart Canvas Wrapper --- */
+.chart-canvas-wrap {
+  position: relative;
+  height: 280px;
 }
 
-.reminder-form {
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  flex-wrap: wrap;
+#activityChart {
+  filter: drop-shadow(0px 2px 6px rgba(0, 0, 0, 0.3));
 }
 
+/* --- Reminder Select Dropdown --- */
 .reminder-select {
-  padding: 12px 36px 12px 20px;
-  width: auto;
-  border-radius: 4px;
-  border: 2px solid #05be62;
-  background-color: #3a3f4b;
-  color: #f7f7f7;
-  font-size: 14px;
+  padding: 12px 36px 12px 16px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background-color: rgba(255, 255, 255, 0.07);
+  color: var(--white);
+  font-size: 0.9rem;
   cursor: pointer;
   outline: none;
   -webkit-appearance: none;
@@ -209,35 +200,40 @@
   background-repeat: no-repeat;
   background-position: right 12px center;
   background-size: 16px;
+  transition: border-color 0.3s ease;
 }
 
-.reminder-btn {
-  padding: 12px 28px;
-  background-color: #05be62;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  font-size: 14px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+.reminder-select:focus {
+  border-color: var(--orange);
 }
 
-.reminder-btn:hover {
-  background-color: #04a554;
+.reminder-select option {
+  background-color: var(--dark-card);
+  color: var(--white);
 }
 
+/* --- Reminder Status Banner --- */
 .reminder-status {
-  margin-top: 20px;
-  color: #05be62;
-  font-size: 14px;
-  font-weight: 600;
+  border-left: 4px solid var(--green);
+  background-color: rgba(91, 230, 98, 0.08);
+  border-radius: 6px;
+  padding: 20px;
 }
 
-.reminder-status--hidden {
-  display: none;
+.reminder-status--hidden { display: none; }
+
+/* --- Personal Bests --- */
+.pb-item {
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.pb-item:last-child { border-bottom: none; }
+
+.pb-icon {
+  width: 40px;
+  flex-shrink: 0;
+  text-align: center;
 }
 
 /* --- Toast Notification --- */
@@ -245,8 +241,8 @@
   position: fixed;
   bottom: 30px;
   right: 30px;
-  background-color: #2b2e35;
-  border-left: 4px solid #05be62;
+  background-color: var(--dark-card);
+  border-left: 4px solid var(--orange);
   border-radius: 6px;
   padding: 16px 20px;
   z-index: 9999;
@@ -255,9 +251,7 @@
   animation: slideIn 0.4s ease;
 }
 
-.toast-notification--hidden {
-  display: none;
-}
+.toast-notification--hidden { display: none; }
 
 .toast-inner {
   display: flex;
@@ -267,19 +261,19 @@
 
 .toast-icon {
   font-size: 22px;
-  color: #05be62;
+  color: var(--orange);
   margin-top: 2px;
 }
 
 .toast-text strong {
-  color: #f7f7f7;
+  color: var(--white);
   font-size: 14px;
   display: block;
   margin-bottom: 4px;
 }
 
 .toast-text p {
-  color: #aaaaaa;
+  color: rgba(247, 247, 247, 0.6);
   font-size: 12px;
   margin: 0;
 }
@@ -287,42 +281,18 @@
 .toast-close {
   background: none;
   border: none;
-  color: #aaaaaa;
+  color: rgba(247, 247, 247, 0.5);
   font-size: 14px;
   cursor: pointer;
   margin-left: auto;
   padding: 0;
   line-height: 1;
+  transition: color 0.2s ease;
 }
 
-.toast-close:hover {
-  color: #f7f7f7;
-}
+.toast-close:hover { color: var(--white); }
 
 @keyframes slideIn {
   from { transform: translateX(100%); opacity: 0; }
   to   { transform: translateX(0);    opacity: 1; }
-}
-
-/* --- Dropdown Menu --- */
-.main-nav .dropdown-menu {
-  background-color: #2b2e35;
-  border: none;
-  border-radius: 4px;
-  min-width: 180px;
-}
-
-.main-nav .dropdown-item {
-  color: #f7f7f7;
-  padding: 10px 16px;
-}
-
-.main-nav .dropdown-item:hover,
-.main-nav .dropdown-item:focus {
-  background-color: #05be62;
-  color: #f7f7f7;
-}
-
-.main-nav .dropdown-item.active-page {
-  color: #05be62;
 }
