@@ -80,7 +80,7 @@
 # 🚀 Technologies Used
 
 * HTML5, CSS3, JavaScript
-* Bootstrap 5
+* Bootstrap 4
 * Node.js (Express.js)
 * MongoDB (Mongoose)
 * Chart.js
