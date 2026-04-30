@@ -1,1 +1,328 @@
+/* ===== Progress Page – Custom Styles ===== */
 
+/* --- Navbar --- */
+/* Solid dark background at all scroll positions */
+.header-area,
+.background-header {
+  background: #3f4248 !important;
+  box-shadow: none !important;
+}
+
+/* Force all nav text white since we always have a dark navbar */
+.header-area .main-nav .logo,
+.background-header .logo {
+  color: #fff !important;
+}
+
+.header-area .main-nav .nav li a,
+.background-header .main-nav .nav li a {
+  color: #fff !important;
+}
+
+.header-area .main-nav .nav li a.active,
+.background-header .main-nav .nav li a.active,
+.header-area .main-nav .nav li:hover a,
+.background-header .main-nav .nav li:hover a {
+  color: #ed563b !important;
+}
+
+.header-area .container-fluid {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+/* --- Page Hero --- */
+.page-hero {
+  background-color: #2b2e35;
+  padding: 120px 0 50px 0;
+  text-align: center;
+}
+
+.page-hero h2 {
+  color: #f7f7f7;
+  font-size: 42px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+}
+
+.page-hero h2 em {
+  color: #05be62;
+  font-style: normal;
+}
+
+.page-hero p {
+  color: #aaaaaa;
+  font-size: 16px;
+  white-space: nowrap;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .page-hero p {
+    white-space: normal;
+  }
+}
+
+/* --- Stats Cards --- */
+.stats-section {
+  background-color: #f7f7f7;
+  padding: 60px 0;
+}
+
+.stat-card {
+  background-color: #2b2e35;
+  border-radius: 8px;
+  padding: 40px 20px;
+  text-align: center;
+  margin-bottom: 30px;
+  transition: transform 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+}
+
+.stat-card .fa {
+  font-size: 36px;
+  color: #05be62;
+  margin-bottom: 16px;
+}
+
+.stat-card h3 {
+  color: #05be62;
+  font-size: clamp(20px, 2.5vw, 36px);
+  font-weight: 700;
+  margin-bottom: 8px;
+  word-break: break-word;
+}
+
+.stat-card p {
+  color: #f7f7f7;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0;
+}
+
+/* --- Charts Section --- */
+.charts-section {
+  background-color: #2b2e35;
+  padding: 60px 0;
+}
+
+.charts-section .section-heading {
+  margin-top: 0;
+  margin-bottom: 30px;
+}
+
+.chart-card {
+  position: relative;
+}
+
+.chart-card canvas {
+  width: 100% !important;
+  height: 300px !important;
+}
+
+.chart-card {
+  background-color: #f7f7f7;
+  border-radius: 8px;
+  padding: 30px;
+  margin-bottom: 30px;
+}
+
+.chart-card h5 {
+  color: #2b2e35;
+  font-weight: 700;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+}
+
+.chart-card h5 span {
+  color: #05be62;
+}
+
+/* --- Reminders Section --- */
+.reminders-section {
+  background-color: #f7f7f7;
+  padding: 60px 0;
+}
+
+.reminder-card {
+  background-color: #2b2e35;
+  border-radius: 8px;
+  padding: 50px 40px;
+}
+
+.reminder-icon {
+  font-size: 48px;
+  color: #05be62;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.reminder-card h4 {
+  color: #f7f7f7;
+  font-size: 22px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+.reminder-card h4 em {
+  color: #05be62;
+  font-style: normal;
+}
+
+.reminder-card p {
+  color: #aaaaaa;
+  font-size: 14px;
+  margin-bottom: 30px;
+}
+
+.reminder-form {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.reminder-select {
+  padding: 12px 36px 12px 20px;
+  width: auto;
+  border-radius: 4px;
+  border: 2px solid #05be62;
+  background-color: #3a3f4b;
+  color: #f7f7f7;
+  font-size: 14px;
+  cursor: pointer;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23f7f7f7' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+}
+
+.reminder-btn {
+  padding: 12px 28px;
+  background-color: #05be62;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.reminder-btn:hover {
+  background-color: #04a554;
+}
+
+.reminder-status {
+  margin-top: 20px;
+  color: #05be62;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.reminder-status--hidden {
+  display: none;
+}
+
+/* --- Toast Notification --- */
+.toast-notification {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background-color: #2b2e35;
+  border-left: 4px solid #05be62;
+  border-radius: 6px;
+  padding: 16px 20px;
+  z-index: 9999;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  min-width: 280px;
+  animation: slideIn 0.4s ease;
+}
+
+.toast-notification--hidden {
+  display: none;
+}
+
+.toast-inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.toast-icon {
+  font-size: 22px;
+  color: #05be62;
+  margin-top: 2px;
+}
+
+.toast-text strong {
+  color: #f7f7f7;
+  font-size: 14px;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.toast-text p {
+  color: #aaaaaa;
+  font-size: 12px;
+  margin: 0;
+}
+
+.toast-close {
+  background: none;
+  border: none;
+  color: #aaaaaa;
+  font-size: 14px;
+  cursor: pointer;
+  margin-left: auto;
+  padding: 0;
+  line-height: 1;
+}
+
+.toast-close:hover {
+  color: #f7f7f7;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+
+/* --- Dropdown Menu --- */
+.main-nav .dropdown-menu {
+  background-color: #2b2e35;
+  border: none;
+  border-radius: 4px;
+  min-width: 180px;
+}
+
+.main-nav .dropdown-item {
+  color: #f7f7f7;
+  padding: 10px 16px;
+}
+
+.main-nav .dropdown-item:hover,
+.main-nav .dropdown-item:focus {
+  background-color: #05be62;
+  color: #f7f7f7;
+}
+
+.main-nav .dropdown-item.active-page {
+  color: #05be62;
+}
