@@ -87,7 +87,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 80px 0;
+      padding: 40px 0;
       position: relative;
       overflow: hidden;
       z-index: 2;
@@ -123,13 +123,17 @@
       width: auto;
       max-width: 520px;
       min-width: 320px;
+      min-height: 580px;
       background-color: #ffffff;
       border: 1px solid rgba(34, 37, 43, 0.12);
       border-radius: 28px;
       box-shadow: 0 30px 90px rgba(0, 0, 0, 0.18);
-      padding: 36px 32px;
+      padding: 40px 32px;
       position: relative;
       z-index: 3;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .login-card h2 {
@@ -142,7 +146,11 @@
       color: #4d5869;
       font-size: 0.95rem;
       line-height: 1.6;
-      margin-bottom: 30px;
+      margin-bottom: 28px;
+    }
+
+    .login-card .section-heading {
+      text-align: center;
     }
 
     .login-card .form-group {
@@ -178,7 +186,7 @@
       background: var(--orange);
       border: 1px solid var(--orange);
       padding: 14px;
-      margin-top: 8px;
+      margin-top: 16px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 1px;
@@ -192,7 +200,7 @@
     }
 
     .login-card .auth-info {
-      margin-top: 20px;
+      margin-top: 28px;
       color: rgba(0, 0, 0, 0.5);
       text-align: center;
     }
