@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="assets/css/templatemo-training-studio.css">
+    <link rel="stylesheet" href="css/style.css">
 
     <style>
         :root {
@@ -68,10 +69,6 @@
             background-color: transparent !important;
             color: #ff4d00 !important;
             border: 2px solid #ff4d00 !important;
-            font-weight: 700;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
             border-radius: 30px;
             padding: 8px 24px;
             transition: all 0.3s ease;
@@ -138,7 +135,7 @@
         #workoutForm .btn-success:hover {
             background-color: var(--green);
             border-color: var(--green);
-            color: var(--black);
+            color: #2b2e35;
         }
 
         .table thead th {
@@ -162,22 +159,29 @@
 
 <body>
 
-
-
-
     <nav class="navbar navbar-expand-lg navbar-custom">
         <div class="container">
             <a class="navbar-brand" href="index.html">
                 <i class="fa-solid fa-dumbbell mr-2" style="color: var(--orange);"></i>Get<span>Buff'd</span>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
-                <span class="navbar-toggler-icon"><i class="fas fa-bars"></i></span>
+                <span class="navbar-toggler-icon" style="color: white;"><i class="fas fa-bars"></i></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto align-items-lg-center">
                     <li class="nav-item"><a class="nav-link" href="index.html"><i class="fas fa-home mr-2"></i>Home</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="tracker.html"><i class="fas fa-dumbbell mr-2"></i>Workouts</a></li>
-                    <li class="nav-item"><a class="nav-link" href="nutrition.html"><i class="fas fa-utensils mr-2"></i>Nutrition</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" data-toggle="dropdown">
+                            <i class="fas fa-layer-group mr-2"></i>Features
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item active" href="tracker.html"><i class="fas fa-clipboard-list mr-2"></i>Workout Tracker</a>
+                            <a class="dropdown-item" href="nutrition.html"><i class="fas fa-apple-alt mr-2"></i>Nutrition Planner</a>
+                            <a class="dropdown-item" href="progress.html"><i class="fas fa-chart-line mr-2"></i>Progress Charts</a>
+                            <div class="dropdown-divider" style="border-color: rgba(255,255,255,0.1);"></div>
+                            <a class="dropdown-item" href="profile.html"><i class="fas fa-user-cog mr-2"></i>My Profile</a>
+                        </div>
+                    </li>
                     <li class="nav-item ml-lg-4 mt-3 mt-lg-0">
                         <a class="btn btn-login w-100" href="login.html"><i class="fas fa-sign-in-alt mr-2"></i>Log In</a>
                     </li>
