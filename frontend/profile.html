@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Profile - Get Buff'd</title>
+
+  <!-- Bootstrap 4 -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+  <!--CSS -->
+  <link rel="stylesheet" href="assets/css/templatemo-training-studio.css">
+  <link rel="stylesheet" href="css/style.css"> 
+</head>
+
+<body class="profile-page">
+
+
+  <div class="profile-banner" id="top">
+    <div class="video-overlay header-text">
+      <div class="container mt-5">
+        <h2 class="text-center" style="color: #2b2e36; font-weight: bold;">Profile Management</h2>
+
+        <!-- View Profile Card -->
+        <div class="card p-4 mt-4 view-profile">
+          <div class="d-flex align-items-center">
+            
+            <!-- Avatar -->
+            <img src="assets/images/avatar.jpg" alt="Profile Avatar" 
+                class="rounded-circle mr-4" width="120" height="120">
+
+            <!-- Profile Details -->
+            <div>
+              <h3 style="font-weight: bold;">My Profile</h3>
+              <p><strong>Name:</strong> <span id="viewName">Batrisyia</span></p>
+              <p><strong>Age:</strong> <span id="viewAge">22</span></p>
+              <p><strong>Weight:</strong> <span id="viewWeight">55 kg</span></p>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Actions Card -->
+        <div class="card p-4 mt-4">
+
+          <!-- Update Profile -->
+          <form id="profileForm" class="profile-form">
+            <h3 style="font-weight: bold;">Update Profile</h3>
+
+            <div class="row">
+              <!-- Avatar upload/remove -->
+              <div class="col-md-4 text-center mt-4">
+                <img id="profileAvatar" src="assets/img/avatar.png" alt="Profile Avatar" 
+                    class="rounded-circle mb-2" width="120" height="120">
+
+                <div class="d-flex justify-content-center mb-2">
+                  <!-- Upload button -->
+                  <div class="mr-2">
+                    <label for="uploadAvatar" class="btn btn-primary btn-sm">Upload</label>
+                    <input type="file" id="uploadAvatar" accept="image/*" class="d-none">
+                  </div>
+
+                  <!-- Remove button -->
+                  <div>
+                    <button type="button" class="btn btn-danger btn-sm" id="removeAvatar">Remove</button>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="col-md-8">
+                <!-- Name -->
+                <div class="mb-3">
+                  <label for="name">Name</label>
+                  <input type="text" id="name" class="form-control" placeholder="Enter your name" required>
+                </div>
+
+                <!-- Age -->
+                <div class="mb-3">
+                  <label for="age">Age</label>
+                  <input type="number" id="age" class="form-control" placeholder="Enter your age" required>
+                </div>
+
+                <!-- Weight -->
+                <div class="mb-3">
+                  <label for="weight">Weight</label>
+                  <input type="number" id="weight" class="form-control" placeholder="Enter your weight" required>
+                </div>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-modern w-100 mt-3" id="updateBtn">Update</button>
+          </form>
+
+          <hr>
+
+          <!-- Change Password -->
+          <form id="changePassForm" class="profile-form">
+            <h3 style="font-weight: bold;">Change Password</h3>
+            <input type="password" id="newPassword" class="form-control mb-3" placeholder="New Password" required>
+            <button type="submit" class="btn btn-modern w-100 btn-primary" id="changePassBtn">Change Password</button>
+          </form>
+
+          <hr>
+
+          <!-- Account Options -->
+          <div class="delete-section">
+            <h3 style="font-weight: bold;">Account Options</h3>
+            <div class="d-flex">
+              <button type="button" class="btn btn-modern btn-warning flex-fill mr-2" id="deactivateBtn">Deactivate Account</button>
+              <button type="button" class="btn btn-modern btn-danger flex-fill" id="deleteBtn">Delete Account</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/profile.js"></script>
+</body>
+</html>
