@@ -1,25 +1,31 @@
 /* ===================================================
-   Progress Page – Custom Styles
-   Matches design system from index.html
+   GETBUFF'D - Main Design System
+   Consolidated styles for Profile, Progress, and Dashboard
    =================================================== */
 
-/* --- CSS Variables (matching index.html) --- */
+/* --- CSS Variables --- */
 :root {
   --black: #2b2e35;
   --green: #5be662;
   --orange: #ff4d00;
   --white: #f7f7f7;
   --dark-card: #22252b;
+  --border-color: rgba(255, 255, 255, 0.08);
 }
 
-/* --- Base --- */
-body {
+/* --- Base Reset & Typography --- */
+html, body {
+  min-height: 100%;   
+  margin: 0;
   font-family: 'Poppins', sans-serif;
   background-color: var(--black);
   color: var(--white);
+  scroll-behavior: smooth;
 }
 
-/* --- Navbar --- */
+/* --- Common Components --- */
+
+/* Navbar - Modern sticky design with orange accent */
 .navbar-custom {
   background-color: rgba(43, 46, 53, 0.98);
   border-bottom: 2px solid var(--orange);
@@ -59,7 +65,7 @@ body {
 
 .navbar-custom .dropdown-menu {
   background-color: var(--dark-card);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-color);
   border-top: 3px solid var(--orange);
   border-radius: 0;
 }
@@ -78,11 +84,6 @@ body {
   background-color: var(--orange);
   color: var(--white);
   padding-left: 25px;
-}
-
-.navbar-custom .dropdown-item.active {
-  background-color: transparent;
-  color: var(--orange);
 }
 
 .navbar-custom .btn-login {
@@ -104,7 +105,93 @@ body {
   box-shadow: 0 0 10px rgba(255, 77, 0, 0.5);
 }
 
-/* --- Hero --- */
+/* Modern Buttons */
+.btn-modern {
+  background: var(--orange); 
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  font-weight: 700;
+  border-radius: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.btn-modern:hover {
+  background: var(--green);
+  color: var(--black);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(91, 230, 98, 0.3);
+}
+
+.btn-modern.btn-primary { background: #007bff; }
+.btn-modern.btn-danger { background: #dc3545; }
+.btn-modern.btn-warning { background: #ffc107; color: var(--black); }
+
+/* --- Profile Page Styles --- */
+
+.profile-banner {
+  min-height: calc(100vh - 80px);
+  display: flex;
+  flex-direction: column;
+  padding: 60px 0;
+}
+
+.profile-banner .card {
+  background-color: var(--dark-card);
+  color: var(--white);
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+  max-width: 760px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 40px;
+}
+
+.profile-form .form-control {
+  background-color: rgba(255,255,255,0.05);
+  color: var(--white);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 14px;
+}
+
+.profile-form .form-control:focus {
+  background-color: rgba(255,255,255,0.08);
+  border-color: var(--orange);
+  box-shadow: 0 0 0 0.2rem rgba(255, 77, 0, 0.25);
+}
+
+.view-profile {
+  background-color: var(--dark-card) !important; 
+  border: 1px solid var(--green);
+  border-radius: 20px;
+  padding: 30px;
+}
+
+.view-profile strong {
+  color: var(--orange);
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+.view-profile span {
+    color: var(--white);
+    font-weight: 600;
+    margin-left: 10px;
+}
+
+.view-profile img {
+  border: 3px solid var(--orange);       
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
+  object-fit: cover;
+  border-radius: 50%;            
+}
+
+/* --- Progress Page Styles --- */
+
 .solid-hero {
   position: relative;
   min-height: 40vh;
@@ -122,39 +209,34 @@ body {
   z-index: 1;
 }
 
-.hero-content {
-  z-index: 2;
-  position: relative;
-}
+.hero-content { z-index: 2; position: relative; }
 
-/* --- Section Helpers (matching index.html) --- */
 .bg-dark-1      { background-color: var(--dark-card); }
 .bg-dark-2      { background-color: var(--black); }
 .custom-section { padding: 80px 0; }
 .beam-orange    { border-bottom: 2px solid var(--orange); }
 .beam-green     { border-bottom: 2px solid var(--green); }
 
-/* --- Cards --- */
 .card-dark {
   background-color: var(--black);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 8px;
-  transition: transform 0.3s ease;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  transition: all 0.3s ease;
 }
 
 .card-dark:hover {
   transform: translateY(-5px);
-  border-color: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
 }
 
-/* Uniform size for all stat card values, with lining numerals so digits sit on the same baseline */
 .card-dark .card-body h2 {
   font-variant-numeric: lining-nums;
   font-size: clamp(1.4rem, 2vw, 2rem);
   white-space: nowrap;
+  font-weight: 800;
 }
 
-/* --- CTA Button --- */
 .btn-cta {
   background-color: var(--orange);
   color: var(--white);
@@ -164,6 +246,7 @@ body {
   border: 2px solid var(--orange);
   transition: all 0.3s ease;
   font-weight: 700;
+  padding: 12px 32px;
 }
 
 .btn-cta:hover {
@@ -173,126 +256,49 @@ body {
   box-shadow: 0 0 15px rgba(91, 230, 98, 0.4);
 }
 
-/* --- Chart Canvas Wrapper --- */
-.chart-canvas-wrap {
-  position: relative;
-  height: 280px;
-}
+.chart-canvas-wrap { position: relative; height: 280px; }
+#activityChart { filter: drop-shadow(0px 2px 6px rgba(0, 0, 0, 0.3)); }
 
-#activityChart {
-  filter: drop-shadow(0px 2px 6px rgba(0, 0, 0, 0.3));
-}
-
-/* --- Reminder Select Dropdown --- */
 .reminder-select {
   padding: 12px 36px 12px 16px;
-  border-radius: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
   background-color: rgba(255, 255, 255, 0.07);
   color: var(--white);
-  font-size: 0.9rem;
-  cursor: pointer;
-  outline: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
   background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23f7f7f7' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
   background-repeat: no-repeat;
   background-position: right 12px center;
   background-size: 16px;
-  transition: border-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
-.reminder-select:focus {
-  border-color: var(--orange);
-}
+.reminder-select:focus { border-color: var(--orange); background-color: rgba(255, 255, 255, 0.1); }
 
-.reminder-select option {
-  background-color: var(--dark-card);
-  color: var(--white);
-}
-
-/* --- Reminder Status Banner --- */
 .reminder-status {
   border-left: 4px solid var(--green);
   background-color: rgba(91, 230, 98, 0.08);
-  border-radius: 6px;
+  border-radius: 8px;
   padding: 20px;
 }
 
 .reminder-status--hidden { display: none; }
 
-/* --- Personal Bests --- */
-.pb-item {
-  padding: 12px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.pb-item:last-child { border-bottom: none; }
-
-.pb-icon {
-  width: 40px;
-  flex-shrink: 0;
-  text-align: center;
-}
-
-/* --- Toast Notification --- */
 .toast-notification {
   position: fixed;
   bottom: 30px;
   right: 30px;
   background-color: var(--dark-card);
   border-left: 4px solid var(--orange);
-  border-radius: 6px;
+  border-radius: 8px;
   padding: 16px 20px;
   z-index: 9999;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-  min-width: 280px;
-  animation: slideIn 0.4s ease;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  min-width: 300px;
+  animation: slideIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
-
-.toast-notification--hidden { display: none; }
-
-.toast-inner {
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-}
-
-.toast-icon {
-  font-size: 22px;
-  color: var(--orange);
-  margin-top: 2px;
-}
-
-.toast-text strong {
-  color: var(--white);
-  font-size: 14px;
-  display: block;
-  margin-bottom: 4px;
-}
-
-.toast-text p {
-  color: rgba(247, 247, 247, 0.6);
-  font-size: 12px;
-  margin: 0;
-}
-
-.toast-close {
-  background: none;
-  border: none;
-  color: rgba(247, 247, 247, 0.5);
-  font-size: 14px;
-  cursor: pointer;
-  margin-left: auto;
-  padding: 0;
-  line-height: 1;
-  transition: color 0.2s ease;
-}
-
-.toast-close:hover { color: var(--white); }
 
 @keyframes slideIn {
-  from { transform: translateX(100%); opacity: 0; }
+  from { transform: translateX(120%); opacity: 0; }
   to   { transform: translateX(0);    opacity: 1; }
 }

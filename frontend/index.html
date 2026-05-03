@@ -14,6 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&family=Raleway:wght@400;700;900&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="assets/css/templatemo-training-studio.css">
+    <link rel="stylesheet" href="css/style.css">
 
 <style>
     /* Brand color variables defined using CSS root variables
@@ -35,81 +36,7 @@
 
     /* Custom navbar built on top of Bootstrap navbar
        Bootstrap provides structure while custom CSS provides branding */
-    .navbar-custom {
-        background-color: rgba(43, 46, 53, 0.98);
-        border-bottom: 2px solid var(--orange);
-        position: sticky; /* Keeps navbar visible while scrolling */
-        top: 0;
-        z-index: 1000;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-    }
-     /* Brand logo styling */
-    .navbar-custom .navbar-brand {
-        font-family: 'Raleway', sans-serif;
-        font-weight: 900;
-        font-size: 1.8rem;
-        color: var(--white) !important;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-    }
-    .navbar-custom .navbar-brand span { color: var(--orange); }
-    /* Navigation links styling */
-    .navbar-custom .nav-link {
-        color: var(--white) !important;
-        font-weight: 600;
-        font-size: 0.9rem;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        padding: 8px 16px !important;
-        transition: color 0.3s ease;
-    }
-
-    /* Hover effect improves user interaction feedback */
-    .navbar-custom .nav-link:hover, .navbar-custom .nav-link.active { 
-        color: var(--orange) !important; 
-    }
-    /* Dropdown menu customized from Bootstrap default style */
-    .navbar-custom .dropdown-menu {
-        background-color: var(--dark-card);
-        border: 1px solid rgba(255,255,255,0.1);
-        border-top: 3px solid var(--orange);
-        border-radius: 0;
-    }
-
-    .navbar-custom .dropdown-item {
-        color: var(--white);
-        font-size: 0.85rem;
-        font-weight: 600;
-        letter-spacing: 0.5px;
-        text-transform: uppercase;
-        padding: 12px 20px;
-        transition: all 0.2s ease;
-    }
-
-    .navbar-custom .dropdown-item:hover {
-        background-color: var(--orange);
-        color: var(--white);
-        padding-left: 25px;
-    }
-    /* Login button styled as call-to-action button */
-    .navbar-custom .btn-login {
-        background-color: transparent;
-        color: var(--orange);
-        border: 2px solid var(--orange);
-        font-weight: 700;
-        font-size: 0.85rem;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        border-radius: 30px;
-        padding: 8px 24px;
-        transition: all 0.3s ease;
-    }
-
-    .navbar-custom .btn-login:hover {
-        background-color: var(--orange);
-        color: var(--white);
-        box-shadow: 0 0 10px rgba(255, 77, 0, 0.5);
-    }
+    /* Custom navbar is defined in style.css */
 
     /* ===== HERO SECTION =====
        Main landing section introducing the system */
@@ -241,7 +168,6 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto align-items-lg-center">
                 <li class="nav-item"><a class="nav-link active" href="index.html"><i class="fas fa-home mr-2"></i>Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="about.html"><i class="fas fa-info-circle mr-2"></i>About</a></li>
                 <li class="nav-item dropdown">
                                 <!-- Features dropdown using Bootstrap dropdown component -->
                     <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
@@ -251,7 +177,7 @@
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="tracker.html"><i class="fas fa-clipboard-list mr-2"></i>Workout Tracker</a>
                         <a class="dropdown-item" href="nutrition.html"><i class="fas fa-apple-alt mr-2"></i>Nutrition Planner</a>
-                        <a class="dropdown-item" href="charts.html"><i class="fas fa-chart-line mr-2"></i>Progress Charts</a>
+                        <a class="dropdown-item" href="progress.html"><i class="fas fa-chart-line mr-2"></i>Progress Charts</a>
                         <div class="dropdown-divider" style="border-color: rgba(255,255,255,0.1);"></div>
                         <a class="dropdown-item" href="profile.html"><i class="fas fa-user-cog mr-2"></i>My Profile</a>
                     </div>
@@ -394,7 +320,7 @@
                 <p class="lead mb-4" style="color: rgba(247,247,247,0.6);">
                     Numbers don't lie. Monitor your gains through interactive progress charts and stay on track with smart notifications highlighting your improvement over time.
                 </p>
-                <a href="charts.html" class="btn btn-outline-light btn-lg px-5 font-weight-bold" style="border-radius:30px; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px;">View Analytics</a>
+                <a href="progress.html" class="btn btn-outline-light btn-lg px-5 font-weight-bold" style="border-radius:30px; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px;">View Analytics</a>
             </div>
         </div>
     </div>
