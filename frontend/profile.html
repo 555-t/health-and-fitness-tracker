@@ -74,7 +74,7 @@
 
           <!-- Update Profile -->
           <form id="profileForm" class="profile-form">
-            <h3 style="font-weight: bold;">Update Profile</h3>
+            <h4 style="font-weight: bold;">Update Profile</h4>
 
             <div class="row">
               <!-- Avatar upload/remove -->
@@ -85,13 +85,13 @@
                 <div class="d-flex justify-content-center mb-2">
                   <!-- Upload button -->
                   <div class="mr-2">
-                    <label for="uploadAvatar" class="btn btn-primary btn-sm">Upload</label>
+                    <label for="uploadAvatar" class="btn-modern btn-small btn-blue">Upload</label>
                     <input type="file" id="uploadAvatar" accept="image/*" class="d-none">
                   </div>
 
                   <!-- Remove button -->
                   <div>
-                    <button type="button" class="btn btn-danger btn-sm" id="removeAvatar">Remove</button>
+                    <button type="button" class="btn-modern btn-small btn-red" id="removeAvatar">Remove</button>
                   </div>
                 </div>
 
@@ -118,26 +118,26 @@
               </div>
             </div>
 
-            <button type="submit" class="btn btn-modern w-100 mt-3" id="updateBtn">Update</button>
+            <button type="submit" class="btn-modern btn-orange w-100 mt-3" id="updateBtn">Update</button>
           </form>
 
           <hr>
 
           <!-- Change Password -->
           <form id="changePassForm" class="profile-form">
-            <h3 style="font-weight: bold;">Change Password</h3>
+            <h4 style="font-weight: bold;">Change Password</h4>
             <input type="password" id="newPassword" class="form-control mb-3" placeholder="New Password" required>
-            <button type="submit" class="btn btn-modern w-100 btn-primary" id="changePassBtn">Change Password</button>
+            <button type="submit" class="btn-modern btn-orange w-100 mt-3" id="changePassBtn">Change Password</button>
           </form>
 
           <hr>
 
           <!-- Account Options -->
           <div class="delete-section">
-            <h3 style="font-weight: bold;">Account Options</h3>
+            <h4 style="font-weight: bold;">Account Options</h4>
             <div class="d-flex">
-              <button type="button" class="btn btn-modern btn-warning flex-fill mr-2" id="deactivateBtn">Deactivate Account</button>
-              <button type="button" class="btn btn-modern btn-danger flex-fill" id="deleteBtn">Delete Account</button>
+              <button type="button" class="btn-modern btn-yellow flex-fill mr-2" id="deactivateBtn">Deactivate Account</button>
+              <button type="button" class="btn-modern btn-red flex-fill" id="deleteBtn">Delete Account</button>
             </div>
           </div>
 
