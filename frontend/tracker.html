@@ -154,6 +154,52 @@
             border-radius: 3px;
             font-size: 12px;
         }
+
+        /* ===== PAGE HERO ===== */
+        .page-hero {
+            background: linear-gradient(135deg, #1a1c21 0%, var(--black) 60%, #1e2118 100%);
+            border-bottom: 3px solid var(--orange);
+            padding: 70px 0 50px;
+            text-align: center;
+        }
+
+        .page-hero .overline {
+            font-size: 0.75rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--green);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .page-hero h1 {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 900;
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            line-height: 1.1;
+            color: var(--white);
+        }
+
+        .page-hero h1 em {
+            font-style: normal;
+            color: var(--orange);
+        }
+
+        .page-hero p {
+            color: rgba(247, 247, 247, 0.6);
+            font-size: 0.95rem;
+            margin-top: 14px;
+            max-width: 520px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .divider-line {
+            width: 60px;
+            height: 3px;
+            background: var(--orange);
+            margin: 18px auto 0;
+        }
     </style>
 </head>
 
@@ -190,19 +236,19 @@
         </div>
     </nav>
 
+    <!-- ===== PAGE HERO ===== -->
+    <section class="page-hero">
+        <div class="container">
+            <p class="overline">track your gains</p>
+            <h1>Workout <em>Tracker</em></h1>
+            <p>Keep track of your progress and stay motivated on your fitness journey.</p>
+            <div class="divider-line"></div>
+        </div>
+    </section>
+
     <!-- ***** Main Content Area Start ***** -->
     <section class="section tracker-page" id="workout-tracker">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-6 offset-lg-3">
-                    <div class="section-heading">
-                        <h2>Log Your <em>Workout</em></h2>
-                        <img src="assets/images/line-dec.png" alt="waves">
-                        <p>Keep track of your progress and stay motivated on your fitness journey.</p>
-                    </div>
-                </div>
-            </div>
-
             <div class="row">
                 <!-- Log Workout Form -->
                 <div class="col-md-5">
