@@ -78,7 +78,7 @@
 
   <div class="container hero-content py-4">
     <h6 class="text-uppercase font-weight-bold mb-3" style="letter-spacing: 4px; color: var(--green);">Member Analytics</h6>
-    <h1 class="font-weight-bold mb-3" style="font-family: 'Raleway', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem);">YOUR <span style="color: var(--orange);">PROGRESS</span></h1>
+    <h1 class="mb-3" style="font-family: 'Raleway', sans-serif; font-weight: 900; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.1; color: var(--white);">Your <span style="color: var(--orange);">Progress</span></h1>
     <p class="mb-0" style="font-size: 0.95rem; color: rgba(247,247,247,0.7); white-space: nowrap;">Visualise your fitness journey and stay on track with your goals.</p>
   </div>
 
@@ -87,6 +87,10 @@
 <!-- Quick overview row: 4 cards highlighting key user stats -->
 <section class="custom-section bg-dark-1 beam-green">
   <div class="container">
+
+    <h6 class="text-uppercase font-weight-bold text-center mb-2" style="letter-spacing: 2px; color: rgba(247,247,247,0.5);">This Week</h6>
+    <h2 class="font-weight-bold text-center mb-5 text-white" style="font-family: 'Raleway', sans-serif;">Weekly <span style="color: var(--green);">Recap</span></h2>
+
     <div class="row">
 
       <!-- How many workouts the user has logged in total -->
@@ -236,12 +240,13 @@
           <i class="fa-solid fa-bell fa-3x mb-3" style="color: var(--orange);"></i>
           <p class="mb-4" style="color: rgba(247,247,247,0.6);">Choose a delay below and we'll send you a notification when it's time to get moving.</p>
 
-          <!-- Dropdown options (values are in milliseconds for the JS timer) -->
+          <!-- Demo: all options fire after 10 s so the toast is visible during presentation -->
+          <!-- Production values: 900000 / 1800000 / 3600000 / 7200000 -->
           <select id="reminderDelay" class="reminder-select w-100 mb-3" title="Select reminder delay" aria-label="Select reminder delay">
-            <option value="900000">15 minutes</option>
-            <option value="1800000">30 minutes</option>
-            <option value="3600000">1 hour</option>
-            <option value="7200000">2 hours</option>
+            <option value="10000">15 minutes</option>
+            <option value="10000">30 minutes</option>
+            <option value="10000">1 hour</option>
+            <option value="10000">2 hours</option>
           </select>
 
           <button type="button" id="setReminderBtn" class="btn btn-cta btn-block font-weight-bold">
