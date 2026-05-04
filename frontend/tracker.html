@@ -81,24 +81,32 @@
         }
 
         .tracker-page {
-            padding: 80px 0 40px;
+            padding: 60px 0 40px;
             min-height: calc(100vh - 80px);
-            background: #232d39;
+            background: var(--black);
         }
 
+        /* ===== CARDS (matches nutrition.html buff-card) ===== */
         .card-custom {
-            background: #ffffff;
-            border-radius: 24px;
-            box-shadow: 0 24px 90px rgba(0, 0, 0, 0.12);
-            padding: 36px;
+            background-color: var(--dark-card);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 28px;
             margin-bottom: 30px;
-            border: none;
-            color: #22252b;
+            color: var(--white);
         }
 
         .card-custom h4 {
-            color: #22252b;
-            font-weight: 800;
+            font-family: 'Raleway', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--white);
+            margin-bottom: 16px;
+        }
+
+        .card-custom h4 i {
+            color: var(--orange);
+            margin-right: 8px;
         }
 
         .section-heading h2 {
@@ -116,8 +124,31 @@
         }
 
         #workoutForm label {
-            color: #22252b;
+            color: rgba(247, 247, 247, 0.6);
+            font-size: 0.82rem;
             font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        #workoutForm .form-control {
+            background-color: rgba(255,255,255,0.05);
+            border: 1px solid rgba(91,230,98,0.18);
+            color: var(--white);
+            border-radius: 4px;
+            padding: 10px 14px;
+        }
+
+        #workoutForm .form-control:focus {
+            background-color: rgba(255,255,255,0.08);
+            border-color: var(--orange);
+            color: var(--white);
+            box-shadow: none;
+        }
+
+        #workoutForm .form-control option {
+            background-color: var(--dark-card);
+            color: var(--white);
         }
 
         #workoutForm .btn-success {
@@ -126,25 +157,43 @@
             color: #fff;
             font-weight: 700;
             text-transform: uppercase;
-            font-size: 13px;
-            padding: 12px 25px;
+            font-size: 0.82rem;
+            letter-spacing: 1px;
+            padding: 10px 25px;
+            border-radius: 4px;
             transition: all 0.3s;
-            border-radius: 12px;
         }
 
         #workoutForm .btn-success:hover {
             background-color: var(--green);
             border-color: var(--green);
-            color: #2b2e35;
+            color: var(--black);
+        }
+
+        .table {
+            color: var(--white);
         }
 
         .table thead th {
             border-top: none;
-            background-color: #f7f7f7;
-            color: #232d39;
+            background-color: rgba(255,255,255,0.04);
+            color: rgba(247,247,247,0.5);
             font-weight: 700;
             text-transform: uppercase;
-            font-size: 14px;
+            font-size: 0.72rem;
+            letter-spacing: 1.5px;
+            border-bottom: 1px solid rgba(91,230,98,0.18);
+        }
+
+        .table tbody tr {
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .table tbody td {
+            color: var(--white);
+            font-size: 0.88rem;
+            vertical-align: middle;
+            border-top: none;
         }
 
         .badge-activity {
@@ -257,13 +306,13 @@
                         <form id="workoutForm">
                             <div class="form-group mb-3">
                                 <label for="activity">Activity Type</label>
-                                <select class="form-control" id="activity" required>
-                                    <option value="" selected disabled>Select Activity</option>
-                                    <option value="Running">Running</option>
-                                    <option value="Cycling">Cycling</option>
-                                    <option value="Weightlifting">Weightlifting</option>
-                                    <option value="Yoga">Yoga</option>
-                                    <option value="Swimming">Swimming</option>
+                                <select class="form-control" id="activity" required style="background-color: rgba(255,255,255,0.05); border: 1px solid rgba(91,230,98,0.18); color: var(--white); border-radius: 4px; padding: 10px 14px; appearance: none; -webkit-appearance: none;">
+                                    <option value="" selected disabled style="background-color: var(--dark-card);">Select Activity</option>
+                                    <option value="Running" style="background-color: var(--dark-card);">Running</option>
+                                    <option value="Cycling" style="background-color: var(--dark-card);">Cycling</option>
+                                    <option value="Weightlifting" style="background-color: var(--dark-card);">Weightlifting</option>
+                                    <option value="Yoga" style="background-color: var(--dark-card);">Yoga</option>
+                                    <option value="Swimming" style="background-color: var(--dark-card);">Swimming</option>
                                 </select>
                             </div>
                             <div class="form-group mb-3">
@@ -273,6 +322,10 @@
                             <div class="form-group mb-3">
                                 <label for="date">Date</label>
                                 <input type="date" class="form-control" id="date" required>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="time">Time</label>
+                                <input type="time" class="form-control" id="time" required>
                             </div>
                             <button type="submit" class="btn btn-success w-100 mt-2">Add Workout</button>
                         </form>
@@ -285,15 +338,15 @@
                     <!-- Steps Tracker -->
                     <div class="card-custom mb-4">
                         <div class="d-flex justify-content-between align-items-center mb-4">
-                            <h4 class="mb-0" style="color: black;"><i class="fas fa-shoe-prints" style="color: var(--green);"></i> Daily Steps</h4>
+                            <h4 class="mb-0"><i class="fas fa-shoe-prints" style="color: var(--green);"></i> Daily Steps</h4>
                             <button id="syncApiBtn" class="btn btn-sm btn-outline-light" style="border-radius: 20px; border-color: var(--green); color: var(--green); transition: 0.3s;" onmouseover="this.style.backgroundColor='var(--green)'; this.style.color='black';" onmouseout="this.style.backgroundColor='transparent'; this.style.color='var(--green)';">
                                 <i class="fas fa-sync-alt mr-1"></i> Sync API
                             </button>
                         </div>
                         <div class="row align-items-center mb-3">
                             <div class="col-sm-6">
-                                <h3 id="currentStepsDisplay" style="color: var(--orange); font-weight: 900; font-family: 'Raleway', sans-serif;">0 <span style="font-size: 1rem; color: black;">/ 10,000 steps</span></h3>
-                                <p style="color: black; font-size: 0.85rem; margin-bottom: 0;">Daily Goal Progress</p>
+                                <h3 id="currentStepsDisplay" style="color: var(--orange); font-weight: 900; font-family: 'Raleway', sans-serif;">0 <span style="font-size: 1rem; color: rgba(247,247,247,0.5);">/ 10,000 steps</span></h3>
+                                <p style="color: rgba(247,247,247,0.5); font-size: 0.82rem; margin-bottom: 0;">Daily Goal Progress</p>
                             </div>
                             <div class="col-sm-6 mt-3 mt-sm-0">
                                 <div class="progress" style="height: 12px; background-color: rgba(255,255,255,0.07); border-radius: 6px;">
@@ -303,7 +356,7 @@
                         </div>
                         <form id="stepsForm" class="d-flex align-items-center mt-3" style="gap: 10px;">
                             <input type="number" class="form-control" id="stepsInput" placeholder="Add steps (e.g., 2000)" min="1" required style="max-width: 200px;">
-                            <button type="submit" class="btn btn-outline-light" style="white-space: nowrap; border-color: var(--orange); color: var(--orange); transition: 0.3s;" onmouseover="this.style.backgroundColor='var(--orange)'; this.style.color='black';" onmouseout="this.style.backgroundColor='transparent'; this.style.color='var(--orange)';">Log Steps</button>
+                            <button type="submit" class="btn btn-outline-light" style="white-space: nowrap; border-color: var(--orange); color: var(--orange); transition: 0.3s;" onmouseover="this.style.backgroundColor='var(--orange)'; this.style.color='var(--white)';" onmouseout="this.style.backgroundColor='transparent'; this.style.color='var(--orange)';">Log Steps</button>
                         </form>
                     </div>
 
@@ -315,6 +368,7 @@
                                 <thead>
                                     <tr>
                                         <th>Date</th>
+                                        <th>Time</th>
                                         <th>Activity</th>
                                         <th>Duration</th>
                                         <th>Action</th>
@@ -373,8 +427,9 @@
             const activity = document.getElementById('activity').value;
             const duration = document.getElementById('duration').value;
             const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
 
-            if (!activity || !duration || !date) {
+            if (!activity || !duration || !date || !time) {
                 alert("Please fill in all fields.");
                 return;
             }
@@ -383,7 +438,8 @@
                 id: Date.now(),
                 activity: activity,
                 duration: duration,
-                date: date
+                date: date,
+                time: time
             };
 
             workouts.push(newWorkout);
@@ -404,6 +460,7 @@
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
                     <td>${workout.date}</td>
+                    <td>${workout.time || '—'}</td>
                     <td><span class="badge-activity">${workout.activity}</span></td>
                     <td>${workout.duration} min</td>
                     <td>
@@ -441,7 +498,7 @@
         });
 
         function updateStepsUI() {
-            currentStepsDisplay.innerHTML = `${currentSteps} <span style="font-size: 1rem; color: black;">/ ${goalSteps} steps</span>`;
+            currentStepsDisplay.innerHTML = `${currentSteps} <span style="font-size: 1rem; color: rgba(247,247,247,0.5);">/ ${goalSteps} steps</span>`;
             
             let percentage = (currentSteps / goalSteps) * 100;
             if (percentage > 100) percentage = 100;
