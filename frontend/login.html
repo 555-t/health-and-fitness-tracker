@@ -128,7 +128,7 @@
       border: 1px solid rgba(34, 37, 43, 0.12);
       border-radius: 28px;
       box-shadow: 0 30px 90px rgba(0, 0, 0, 0.18);
-      padding: 40px 32px;
+      padding: 40px 32px; 
       position: relative;
       z-index: 3;
       display: flex;
@@ -136,10 +136,18 @@
       justify-content: center;
     }
 
+    .login-card .section-heading {
+      text-align: center;
+      margin-top: 30px;
+      margin-bottom: 50px;
+    }
+
     .login-card h2 {
       color: #22252b;
       font-weight: 800;
       margin-bottom: 10px;
+      font-size: 2.8rem;
+      line-height: 1.05;
     }
 
     .login-card p.lead {
@@ -149,12 +157,8 @@
       margin-bottom: 28px;
     }
 
-    .login-card .section-heading {
-      text-align: center;
-    }
-
     .login-card .form-group {
-      margin-bottom: 22px;
+      margin-bottom:22px;
     }
 
     .login-card .form-control {
@@ -186,7 +190,7 @@
       background: var(--orange);
       border: 1px solid var(--orange);
       padding: 14px;
-      margin-top: 16px;
+      margin-top: 40px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 1px;
@@ -281,13 +285,35 @@
               <a class="dropdown-item" href="profile.html"><i class="fas fa-user-cog mr-2"></i>My Profile</a>
             </div>
           </li>
-          <li class="nav-item ml-lg-4 mt-3 mt-lg-0">
-            <a class="btn btn-login active w-100" href="login.html"><i class="fas fa-sign-in-alt mr-2"></i>Log In</a>
+          <li class="nav-item ml-lg-4 mt-3 mt-lg-0" id="auth-btn">
+            <a class="btn btn-login active w-100" href="register.html"><i class="fas fa-user-plus mr-2"></i>Register</a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
+<script>
+    function decodeJWT(token) {
+        try {
+            const payload = token.split('.')[1];
+            const decoded = JSON.parse(atob(payload));
+            return decoded;
+        } catch (e) {
+            return null;
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const token = localStorage.getItem('buff_token');
+        const authBtn = document.getElementById('auth-btn');
+        if (token) {
+            const decoded = decodeJWT(token);
+            if (decoded && decoded.name) {
+                authBtn.innerHTML = `<a class="btn btn-login w-100" href="profile.html"><i class="fas fa-user mr-2"></i>Profile - ${decoded.name}</a>`;
+            }
+        }
+    });
+</script>
 
   <video autoplay muted loop playsinline class="bg-video">
         <source src="assets/images/woman-running.mp4" type="video/mp4" />
@@ -297,10 +323,10 @@
   <section class="section auth-page">
     <div class="container">
       <div class="login-card mx-auto">
-        <div class="section-heading text-left">
+        <div class="section-heading text-center">
           <h2>Welcome back</h2>
           <img src="assets/images/line-dec.png" alt="decoration">
-          <p class="lead">Log in with your email and password to continue your training journey.</p>
+          <p class="lead text-left">Log in with your email and password to continue your training journey.</p>
         </div>
         <form id="loginForm">
           <div class="form-group">
@@ -323,17 +349,45 @@
   <script src="assets/js/popper.js"></script>
   <script src="assets/js/bootstrap.min.js"></script>
   <script>
-    document.getElementById('loginForm').addEventListener('submit', function(event) {
+    document.getElementById('loginForm').addEventListener('submit', async function(event) {
       event.preventDefault();
-      var email = document.getElementById('loginEmail').value.trim();
-      var password = document.getElementById('loginPassword').value.trim();
-      var messageEl = document.getElementById('loginMessage');
+      const email = document.getElementById('loginEmail').value.trim();
+      const password = document.getElementById('loginPassword').value.trim();
+      const messageEl = document.getElementById('loginMessage');
+
       if (!email || !password) {
         messageEl.innerHTML = '<span style="color:#f04d4d; font-weight:600;">Please enter both email and password.</span>';
         return;
       }
-      messageEl.innerHTML = '<span style="color:#5be662; font-weight:600;">Logging you in... If you do not have an account, register first.</span>';
-      document.getElementById('loginForm').reset();
+
+      messageEl.innerHTML = '<span style="color:#5be662; font-weight:600;">Logging you in...</span>';
+
+      try {
+        const response = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email, password }),
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          messageEl.innerHTML = `<span style="color:#f04d4d; font-weight:600;">${data.message || 'Login failed.'}</span>`;
+          return;
+        }
+
+        localStorage.setItem('buff_token', data.token);
+        messageEl.innerHTML = `<span style="color:#5be662; font-weight:600;">${data.message} Redirecting...</span>`;
+        document.getElementById('loginForm').reset();
+        setTimeout(() => {
+          window.location.href = 'profile.html';
+        }, 800);
+      } catch (error) {
+        console.error(error);
+        messageEl.innerHTML = '<span style="color:#f04d4d; font-weight:600;">Server error. Please try again later.</span>';
+      }
     });
   </script>
 </body>
