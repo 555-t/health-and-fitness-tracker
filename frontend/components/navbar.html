@@ -130,21 +130,20 @@
     function decodeJWT(token) {
         try {
             const payload = token.split('.')[1];
-            const decoded = JSON.parse(atob(payload));
-            return decoded;
-        } catch (e) {
-            return null;
-        }
+            return JSON.parse(atob(payload));
+        } catch (e) { return null; }
     }
 
     document.addEventListener('DOMContentLoaded', function() {
         const token = localStorage.getItem('buff_token');
         const authBtn = document.getElementById('auth-btn');
-        if (token) {
+        
+        if (token && authBtn) {
             const decoded = decodeJWT(token);
-            if (decoded && decoded.name) {
-                authBtn.innerHTML = `<a class="btn btn-login w-100" href="profile.html"><i class="fas fa-user mr-2"></i>Profile - ${decoded.name}</a>`;
-            }
+            let displayName = (decoded && decoded.name) ? decoded.name : "Member";
+            
+            // Swap Log In for Sign Out
+            authBtn.innerHTML = `<a class="btn btn-login w-100" href="#" onclick="localStorage.removeItem('buff_token'); location.reload();"><i class="fas fa-sign-out-alt mr-2"></i>Sign Out</a>`;
         }
     });
 </script>
