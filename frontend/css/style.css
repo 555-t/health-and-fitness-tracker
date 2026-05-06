@@ -298,7 +298,36 @@ html, body {
   animation: slideIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
+.toast-text strong {
+  color: var(--white);
+  font-size: 14px;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.toast-text p {
+  color: rgba(247, 247, 247, 0.6);
+  font-size: 12px;
+  margin: 0;
+}
+
+.toast-close {
+  background: none;
+  border: none;
+  color: rgba(247, 247, 247, 0.5);
+  font-size: 14px;
+  cursor: pointer;
+  margin-left: auto;
+  padding: 6px;
+  line-height: 1;
+  transition: color 0.2s ease;
+}
+
+.toast-close:hover {
+  color: var(--white);
+}
+
 @keyframes slideIn {
   from { transform: translateX(120%); opacity: 0; }
-  to   { transform: translateX(0);    opacity: 1; }
+  to   { transform: translateX(0); opacity: 1; }
 }
