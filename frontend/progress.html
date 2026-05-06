@@ -74,9 +74,10 @@
   <div class="hero-overlay"></div>
 
   <div class="container hero-content py-4">
-    <h6 class="text-uppercase font-weight-bold mb-3" style="letter-spacing: 4px; color: var(--green);">Member Analytics</h6>
-    <h1 class="mb-3" style="font-family: 'Raleway', sans-serif; font-weight: 900; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.1; color: var(--white);">Your <span style="color: var(--orange);">Progress</span></h1>
-    <p class="mb-0" style="font-size: 0.95rem; color: rgba(247,247,247,0.7); white-space: nowrap;">Visualise your fitness journey and stay on track with your goals.</p>
+    <p class="overline">Member Analytics</p>
+    <h1>Your <em>Progress</em></h1>
+    <p class="hero-desc">Visualise your fitness journey and stay on track with your goals.</p>
+    <div class="divider-line"></div>
   </div>
 
 </header>
@@ -239,12 +240,18 @@
 
           <!-- Demo: all options fire after 10 s so the toast is visible during presentation -->
           <!-- Production values: 900000 / 1800000 / 3600000 / 7200000 -->
-          <select id="reminderDelay" class="reminder-select w-100 mb-3" title="Select reminder delay" aria-label="Select reminder delay">
-            <option value="10000">15 minutes</option>
-            <option value="10000">30 minutes</option>
-            <option value="10000">1 hour</option>
-            <option value="10000">2 hours</option>
-          </select>
+          <div class="dropdown w-100 mb-3">
+            <button class="btn reminder-select w-100 text-left" type="button" id="reminderDropdownBtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: var(--white);">
+              15 minutes
+            </button>
+            <div class="dropdown-menu w-100 custom-dropdown-menu" aria-labelledby="reminderDropdownBtn">
+              <a class="dropdown-item delay-option" href="#" data-value="10000">15 minutes</a>
+              <a class="dropdown-item delay-option" href="#" data-value="10000">30 minutes</a>
+              <a class="dropdown-item delay-option" href="#" data-value="10000">1 hour</a>
+              <a class="dropdown-item delay-option" href="#" data-value="10000">2 hours</a>
+            </div>
+          </div>
+          <input type="hidden" id="reminderDelay" value="10000">
 
           <button type="button" id="setReminderBtn" class="btn btn-cta btn-block font-weight-bold">
             <i class="fa-solid fa-clock mr-2"></i>Set Reminder
@@ -296,6 +303,18 @@
 <script src="js/chart.js"></script>
 
 <script>
+  // Handle custom dropdown selection
+  var delayOptions = document.querySelectorAll('.delay-option');
+  if (delayOptions.length > 0) {
+    delayOptions.forEach(function(option) {
+      option.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById('reminderDropdownBtn').textContent = this.textContent;
+        document.getElementById('reminderDelay').value = this.getAttribute('data-value');
+      });
+    });
+  }
+
   // stops double reminders if the user clicks the button twice
   var reminderTimer = null;
 
