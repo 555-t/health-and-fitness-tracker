@@ -1,1 +1,8 @@
+# Ignore dependencies
 node_modules/
+
+# Ignore lockfiles (optional — usually package-lock.json should be committed)
+package-lock.json
+
+# Ignore package metadata (usually package.json should NOT be ignored)
+package.json
