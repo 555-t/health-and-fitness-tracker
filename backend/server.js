@@ -5,6 +5,8 @@ const path = require('path');
 require('dotenv').config();
 
 const authRoutes = require('./routes/authRoutes');
+const trackerRoutes = require('./routes/trackerRoutes')
+const stepsRoutes = require('./routes/stepsRoutes'); 
 
 const app = express();
 app.use(cors());
@@ -15,13 +17,22 @@ const PORT = process.env.PORT || 5000;
 
 app.use('/api/auth', authRoutes);
 app.use(express.static(path.join(__dirname, '../frontend')));
+app.use('/api', trackerRoutes); 
+app.use('/api', stepsRoutes);
 
 mongoose
   .connect(MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(() => console.log('MongoDB connected'))
+  .then(() => {
+    console.log('MongoDB connected');
+
+    app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+    });
+})
+
   .catch((error) => {
     console.error('MongoDB connection error:', error);
     process.exit(1);
@@ -31,7 +42,4 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/index.html'));
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
 
