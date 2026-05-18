@@ -1,52 +1,53 @@
-const express = require("express");
+const express = require('express');
+const Workout = require('../models/Workout.js');
+const { sessions } = require('./authRoutes');
+
 const router = express.Router();
-const Workout = require("../models/Workout");
-const auth = require("../middleware/auth");
 
+/* GET USER FROM SESSION */
+function getUser(req) {
+  const sessionId = req.headers['x-session-id'];
+  if (!sessionId) return null;
+  return sessions.get(sessionId);
+}
 
-// ===================== POST WORKOUT =====================
-router.post("/workout", auth, async (req, res) => {
+/* CREATE WORKOUT */
+router.post('/workouts', async (req, res) => {
   try {
-    const { activity, duration, date, time } = req.body;
+    const user = getUser(req);
 
-  const workout = new Workout({
-    userId: req.user.id,
-    activity,
-    duration,
-    date,
-    time
-  });
+    if (!user) {
+      return res.status(401).json({ message: "Not logged in" });
+    }
 
-  await workout.save();
-    res.json({ message: "Workout saved" });
-
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-// ===================== GET WORKOUTS =====================
-router.get("/workout", auth, async (req, res) => {
-  try {
-    const workouts = await Workout.find({ userId: req.user.id }).sort({ _id: -1 });
-  res.json(workouts);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-// ===================== DELETE WORKOUT =====================
-router.delete("/workout/:id",auth, async (req, res) => {
-  try {
-    await Workout.findOneAndDelete({
-        _id: req.params.id,
-        userId: req.user.id
+    const workout = await Workout.create({
+      userId: user.userId,
+      activity: req.body.activity,
+      duration: req.body.duration,
+      calories: req.body.calories || 0,
+      steps: req.body.steps || 0,
+      date: req.body.date,
+      time: req.body.time
     });
-    res.json({ message: "Workout deleted" });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+
+    res.json(workout);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 });
 
-// ===================== EXPORT ROUTER =====================
+/* GET WORKOUTS */
+router.get('/workouts', async (req, res) => {
+  try {
+    const user = getUser(req);
+    if (!user) return res.status(401).json({ message: "Not logged in" });
+
+    const data = await Workout.find({ userId: user.userId });
+    res.json(data);
+
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 module.exports = router;

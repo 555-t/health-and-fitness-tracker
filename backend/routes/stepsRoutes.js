@@ -1,61 +1,46 @@
-const express = require("express");
-const router = express.Router(); 
-const Steps = require("../models/Steps");
-const auth = require("../middleware/auth");
+const express = require('express');
+const Steps = require('../models/Steps');
+const { sessions } = require('./authRoutes');
 
-// helper: get today as YYYY-MM-DD
-function getToday() {
-  return new Date().toISOString().split("T")[0];
+const router = express.Router();
+
+function getUser(req) {
+  const sessionId = req.headers['x-session-id'];
+  if (!sessionId) return null;
+  return sessions.get(sessionId);
 }
 
-// ===================== ADD / UPDATE STEPS =====================
-router.post("/steps", auth, async (req, res) => {
+/* ADD STEPS */
+router.post('/', async (req, res) => {
   try {
-    const { steps } = req.body;
-  const today = getToday();
+    const user = getUser(req);
+    if (!user) return res.status(401).json({ message: "Not logged in" });
 
-  let record = await Steps.findOne({
-    userId: req.user.id,
-    date: today
-  });
+    const { date, steps } = req.body;
 
-  if (!record) {
-    record = new Steps({
-      userId: req.user.id,
-      date: today,
-      steps
-    });
-  } else {
-    record.steps += steps;
-  }
+    const updated = await Steps.findOneAndUpdate(
+      { userId: user.userId, date },
+      { $inc: { steps } },
+      { upsert: true, new: true }
+    );
 
-  await record.save();
-
-  res.json({
-    totalSteps: record.steps
-  });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.json(updated);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 });
 
-// ===================== GET TODAY STEPS =====================
-router.get("/steps/today",auth, async (req, res) => {
+/* GET STEPS */
+router.get('/', async (req, res) => {
   try {
-    const today = getToday();
+    const user = getUser(req);
+    if (!user) return res.status(401).json({ message: "Not logged in" });
 
-  const record = await Steps.findOne({
-    userId: req.user.id,
-    date: today
-  });
+    const data = await Steps.find({ userId: user.userId });
+    res.json(data);
 
-  res.json({
-    steps: record ? record.steps : 0,
-    date: today
-  });
-
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 });
 

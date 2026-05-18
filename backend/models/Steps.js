@@ -10,13 +10,14 @@ const stepsSchema = new mongoose.Schema({
 
   date: {
     type: String,
-    required: true,
-    unique: true // only 1 record per day
+    required: true
   },
   steps: {
     type: Number,
     default: 0
   }
 });
+
+stepsSchema.index({ userId: 1, date: 1 }, { unique: true });
 
 module.exports = mongoose.model("Steps", stepsSchema);

@@ -1,162 +1,199 @@
-console.log("tracker.js loaded");
-const API_URL = "http://localhost:5000/api/workout";
-const STEPS_API = "http://localhost:5000/api/steps";
-const token = localStorage.getItem("token");
-
-function authHeader() {
-    return {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`
-    };
+/* =========================
+   SESSION HELPERS
+========================= */
+function getSessionId() {
+  return localStorage.getItem('buff_session');
 }
 
-if (!token) {
-    alert("Please log in first");
-    window.location.href = "login.html";
-}
+/* =========================
+   WORKOUT FORM
+========================= */
+const workoutForm = document.getElementById('workoutForm');
 
-// ===================== LOAD ON PAGE START =====================
-document.addEventListener("DOMContentLoaded", () => {
-    loadWorkouts();
-});
-
-// ===================== LOAD WORKOUTS =====================
-async function loadWorkouts() {
-    try {
-        const res = await fetch(API_URL, {
-            headers: authHeader()
-        });
-
-        const data = await res.json();
-        renderWorkouts(data);
-    } catch (error) {
-        console.error("Error loading workouts:", error);
-    }
-}
-
-// ===================== ADD WORKOUT =====================
-document.getElementById("workoutForm").addEventListener("submit", async function (e) {
+if (workoutForm) {
+  workoutForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const activity = document.getElementById("activity").value;
-    const duration = document.getElementById("duration").value;
-    const date = document.getElementById("date").value;
-    const time = document.getElementById("time").value;
+    const sessionId = getSessionId();
 
-    const workout = {
-        activity,
-        duration,
-        date,
-        time
+    if (!sessionId) {
+      alert("Not logged in");
+      return;
+    }
+
+    const body = {
+      activity: document.getElementById('activity').value,
+      duration: Number(document.getElementById('duration').value),
+      date: document.getElementById('date').value,
+      time: document.getElementById('time').value,
     };
 
+    console.log("Sending workout:", body);
+
     try {
-        await fetch(API_URL, {
-            method: "POST",
-            headers: authHeader(),
-            body: JSON.stringify(workout)
-        });
-        this.reset();
-        loadWorkouts();
+      const res = await fetch('http://localhost:5000/api/tracker/workouts', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-session-id': sessionId
+        },
+        body: JSON.stringify(body),
+      });
 
-    } catch (error) {
-        console.error("Error adding workout:", error);
-    }
-});
+      const data = await res.json();
 
-// ===================== RENDER TABLE =====================
-function renderWorkouts(workouts) {
-    const tableBody = document.getElementById("workoutTableBody");
-    const emptyState = document.getElementById("emptyState");
-
-    tableBody.innerHTML = "";
-
-    if (!workouts || workouts.length === 0) {
-        emptyState.style.display = "block";
+      if (!res.ok) {
+        console.error("Workout error:", data);
+        alert(data.message || "Failed to add workout");
         return;
-    } else {
-        emptyState.style.display = "none";
+      }
+
+      console.log("Saved workout:", data);
+      alert("Workout added!");
+      loadWorkouts();
+
+      workoutForm.reset();
+
+    } catch (err) {
+      console.error("Network error:", err);
+      alert("Cannot connect to server");
     }
-
-    workouts.forEach(workout => {
-        const row = document.createElement("tr");
-
-        row.innerHTML = `
-            <td>${workout.date}</td>
-            <td>${workout.time}</td>
-            <td><span class="badge-activity">${workout.activity}</span></td>
-            <td>${workout.duration} min</td>
-            <td>
-                <button class="btn btn-sm btn-danger" onclick="deleteWorkout('${workout._id}')">
-                    <i class="fa fa-trash"></i>
-                </button>
-            </td>
-        `;
-
-        tableBody.appendChild(row);
-    });
+  });
 }
 
-// ===================== DELETE WORKOUT =====================
-async function deleteWorkout(id) {
-    try {
-        await fetch(`${API_URL}/${id}`, {
-            method: "DELETE",
-            headers: authHeader()
-        });
-        loadWorkouts();
+/* =========================
+   STEPS FORM
+========================= */
+const stepsForm = document.getElementById('stepsForm');
 
-    } catch (error) {
-        console.error("Error deleting workout:", error);
-    }
-} 
-
-const stepsForm = document.getElementById("stepsForm");
-const stepsInput = document.getElementById("stepsInput");
-const currentStepsDisplay = document.getElementById("currentStepsDisplay");
-const stepsProgressBar = document.getElementById("stepsProgressBar");
-
-const goalSteps = 10000;
-
-// LOAD TODAY STEPS
-document.addEventListener("DOMContentLoaded", loadTodaySteps);
-
-async function loadTodaySteps() {
-    const res = await fetch(`${STEPS_API}/today`, {
-        headers: authHeader()
-    });
-    const data = await res.json();
-
-    updateUI(data.steps);
-}
-
-// ADD STEPS
-stepsForm.addEventListener("submit", async (e) => {
+if (stepsForm) {
+  stepsForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const steps = parseInt(stepsInput.value);
+    const sessionId = getSessionId();
 
-    if (!steps || steps <= 0) return;
+    if (!sessionId) {
+      alert("Not logged in");
+      return;
+    }
 
-    const res = await fetch(STEPS_API, {
-        method: "POST",
-        headers: authHeader(),
-        body: JSON.stringify({ steps })
-    });
-    const data = await res.json();
+    const steps = Number(document.getElementById('stepsInput').value);
 
-    updateUI(data.totalSteps);
+    if (!steps || steps <= 0) {
+      alert("Enter valid steps");
+      return;
+    }
 
-    stepsForm.reset();
-});
+    try {
+      const res = await fetch('http://localhost:5000/api/steps', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-session-id': sessionId
+        },
+        body: JSON.stringify({
+          steps,
+          date: new Date().toISOString().split('T')[0],
+        }),
+      });
 
-// UPDATE UI
-function updateUI(currentSteps) {
-    currentStepsDisplay.innerHTML =
-        `${currentSteps} <span style="font-size:1rem; color:rgba(247,247,247,0.5)">/ ${goalSteps} steps</span>`;
+      const data = await res.json();
 
-    let percent = (currentSteps / goalSteps) * 100;
-    if (percent > 100) percent = 100;
+      if (!res.ok) {
+        console.error("Steps error:", data);
+        alert(data.message || "Failed to update steps");
+        return;
+      }
 
-    stepsProgressBar.style.width = percent + "%";
+      console.log("Steps updated:", data);
+      alert("Steps updated!");
+      loadSteps();
+
+      stepsForm.reset();
+
+    } catch (err) {
+      console.error("Network error:", err);
+      alert("Cannot connect to server");
+    }
+  });
 }
+
+/* =========================
+   INITIAL DATA LOAD
+========================= */
+async function loadWorkouts() {
+  const sessionId = getSessionId();
+  if (!sessionId) return;
+  try {
+    const res = await fetch('http://localhost:5000/api/tracker/workouts', {
+      headers: { 'x-session-id': sessionId }
+    });
+    if (!res.ok) return;
+    const data = await res.json();
+    const tbody = document.getElementById('workoutTableBody');
+    const emptyState = document.getElementById('emptyState');
+    if (!tbody || !emptyState) return;
+
+    tbody.innerHTML = '';
+    if (data.length === 0) {
+      emptyState.style.display = 'block';
+    } else {
+      emptyState.style.display = 'none';
+      data.forEach(workout => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${workout.date}</td>
+          <td>${workout.time}</td>
+          <td><span class="badge badge-activity">${workout.activity}</span></td>
+          <td>${workout.duration} min</td>
+          <td></td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+  } catch (err) {
+    console.error("Error loading workouts", err);
+  }
+}
+
+async function loadSteps() {
+  const sessionId = getSessionId();
+  if (!sessionId) return;
+  try {
+    const res = await fetch('http://localhost:5000/api/steps', {
+      headers: { 'x-session-id': sessionId }
+    });
+    if (!res.ok) return;
+    const data = await res.json();
+    
+    // Get today's local date string formatted as YYYY-MM-DD
+    const tzOffset = (new Date()).getTimezoneOffset() * 60000;
+    const today = (new Date(Date.now() - tzOffset)).toISOString().split('T')[0];
+    
+    const todayStepsObj = data.find(s => s.date === today);
+    const steps = todayStepsObj ? todayStepsObj.steps : 0;
+    updateStepsUI(steps);
+  } catch (err) {
+    console.error("Error loading steps", err);
+  }
+}
+
+function updateStepsUI(steps) {
+  const display = document.getElementById('currentStepsDisplay');
+  const bar = document.getElementById('stepsProgressBar');
+  if (display) {
+    display.innerHTML = `${steps.toLocaleString()} <span style="font-size: 1rem; color: rgba(247,247,247,0.5);">/ 10,000 steps</span>`;
+  }
+  if (bar) {
+    const pct = Math.min((steps / 10000) * 100, 100);
+    bar.style.width = `${pct}%`;
+  }
+}
+
+// Call on load
+document.addEventListener('DOMContentLoaded', () => {
+  if (document.getElementById('workoutTableBody')) {
+    loadWorkouts();
+    loadSteps();
+  }
+});
