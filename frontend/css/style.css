@@ -1,1 +1,454 @@
+/* ===================================================
+   GETBUFF'D - Main Design System
+   Consolidated styles for Profile, Progress, and Dashboard
+   =================================================== */
 
+/* --- CSS Variables --- */
+:root {
+  --black: #2b2e35;
+  --green: #5be662;
+  --orange: #ff4d00;
+  --white: #f7f7f7;
+  --dark-card: #22252b;
+  --border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* --- Base Reset & Typography --- */
+html,
+body {
+  min-height: 100%;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--black);
+  color: var(--white);
+  color-scheme: dark;
+  scroll-behavior: smooth;
+}
+
+/* --- Common Components --- */
+
+/* Navbar - Modern sticky design with orange accent */
+.navbar-custom {
+  background-color: rgba(43, 46, 53, 0.98);
+  border-bottom: 2px solid var(--orange);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.navbar-custom .navbar-brand {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 900;
+  font-size: 1.8rem;
+  color: var(--white) !important;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.navbar-custom .navbar-brand span {
+  color: var(--orange);
+}
+
+.navbar-custom .nav-link {
+  color: var(--white) !important;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 8px 16px !important;
+  transition: color 0.3s ease;
+}
+
+.navbar-custom .nav-link:hover,
+.navbar-custom .nav-link.active {
+  color: var(--orange) !important;
+}
+
+.navbar-custom .dropdown-menu {
+  background-color: var(--dark-card);
+  border: 1px solid var(--border-color);
+  border-top: 3px solid var(--orange);
+  border-radius: 0;
+}
+
+.navbar-custom .dropdown-item {
+  color: var(--white);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 12px 20px;
+  transition: all 0.2s ease;
+}
+
+.navbar-custom .dropdown-item:hover {
+  background-color: var(--orange);
+  color: var(--white);
+  padding-left: 25px;
+}
+
+.navbar-custom .btn-login {
+  background-color: transparent;
+  color: var(--orange);
+  border: 2px solid var(--orange);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-radius: 30px;
+  padding: 8px 24px;
+  transition: all 0.3s ease;
+}
+
+.navbar-custom .btn-login:hover {
+  background-color: var(--orange);
+  color: var(--white);
+  box-shadow: 0 0 10px rgba(255, 77, 0, 0.5);
+}
+
+/* Modern Buttons */
+.btn-modern {
+  background: var(--orange);
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  font-weight: 700;
+  border-radius: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.btn-modern:hover {
+  background: var(--green);
+  color: var(--black);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(91, 230, 98, 0.3);
+}
+
+.btn-modern.btn-primary {
+  background: #007bff;
+}
+
+.btn-modern.btn-danger {
+  background: #dc3545;
+}
+
+.btn-modern.btn-warning {
+  background: #ffc107;
+  color: var(--black);
+}
+
+/* --- Profile Page Styles --- */
+
+.profile-banner {
+  min-height: calc(100vh - 80px);
+  display: flex;
+  flex-direction: column;
+  padding: 60px 0;
+}
+
+.profile-banner .card {
+  background-color: var(--dark-card);
+  color: var(--white);
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  max-width: 760px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 40px;
+}
+
+.profile-form .form-control {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--white);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 14px;
+}
+
+.profile-form .form-control:focus {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: var(--orange);
+  box-shadow: 0 0 0 0.2rem rgba(255, 77, 0, 0.25);
+}
+
+.view-profile {
+  background-color: var(--dark-card) !important;
+  border: 1px solid var(--green);
+  border-radius: 20px;
+  padding: 30px;
+}
+
+.view-profile strong {
+  color: var(--orange);
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+.view-profile span {
+  color: var(--white);
+  font-weight: 600;
+  margin-left: 10px;
+}
+
+.view-profile img {
+  border: 3px solid var(--orange);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* --- Progress Page Styles --- */
+
+.solid-hero {
+  min-height: 40vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1a1c21 0%, var(--black) 60%, #1e2118 100%);
+  border-bottom: 3px solid var(--orange);
+}
+
+.hero-overlay {
+  display: none;
+}
+
+.hero-content {
+  position: relative;
+}
+
+.solid-hero .overline {
+  font-size: 0.75rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--green);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.solid-hero h1 {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 900;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  line-height: 1.1;
+  color: var(--white);
+  margin-bottom: 0;
+}
+
+.solid-hero h1 em {
+  font-style: normal;
+  color: var(--orange);
+}
+
+.solid-hero p.hero-desc {
+  color: rgba(247, 247, 247, 0.6);
+  font-size: 0.95rem;
+  margin-top: 14px;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.divider-line {
+  width: 60px;
+  height: 3px;
+  background: var(--orange);
+  margin: 18px auto 0;
+}
+
+.bg-dark-1 {
+  background-color: var(--dark-card);
+}
+
+.bg-dark-2 {
+  background-color: var(--black);
+}
+
+.custom-section {
+  padding: 80px 0;
+}
+
+.beam-orange {
+  border-bottom: 2px solid var(--orange);
+}
+
+.beam-green {
+  border-bottom: 2px solid var(--green);
+}
+
+.card-dark {
+  background-color: var(--black);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.card-dark:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.card-dark .card-body h2 {
+  font-variant-numeric: lining-nums;
+  font-size: clamp(1.4rem, 2vw, 2rem);
+  white-space: nowrap;
+  font-weight: 800;
+}
+
+.btn-cta {
+  background-color: var(--orange);
+  color: var(--white);
+  border-radius: 30px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border: 2px solid var(--orange);
+  transition: all 0.3s ease;
+  font-weight: 700;
+  padding: 12px 32px;
+}
+
+.btn-cta:hover {
+  background-color: var(--green);
+  border-color: var(--green);
+  color: var(--black);
+  box-shadow: 0 0 15px rgba(91, 230, 98, 0.4);
+}
+
+.chart-canvas-wrap {
+  position: relative;
+  height: 280px;
+}
+
+#activityChart {
+  filter: drop-shadow(0px 2px 6px rgba(0, 0, 0, 0.3));
+}
+
+.reminder-select {
+  padding: 12px 36px 12px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background-color: rgba(255, 255, 255, 0.07);
+  color: var(--white);
+  color-scheme: dark;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23f7f7f7' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.reminder-select:focus {
+  border-color: var(--orange);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.custom-dropdown-menu {
+  background-color: var(--dark-card) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 8px !important;
+  padding: 5px 0 !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.custom-dropdown-menu .dropdown-item {
+  color: var(--white) !important;
+  padding: 10px 20px;
+  transition: all 0.2s ease;
+}
+
+.custom-dropdown-menu .dropdown-item:hover,
+.custom-dropdown-menu .dropdown-item:focus {
+  background-color: var(--orange) !important;
+  color: var(--white) !important;
+  outline: none;
+}
+
+
+
+.reminder-status {
+  border-left: 4px solid var(--green);
+  background-color: rgba(91, 230, 98, 0.08);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.reminder-status--hidden {
+  display: none;
+}
+
+.toast-notification {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background-color: var(--dark-card);
+  border-left: 4px solid var(--orange);
+  border-radius: 8px;
+  padding: 16px 20px;
+  z-index: 9999;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  min-width: 300px;
+  animation: slideIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.toast-notification--hidden {
+  display: none;
+}
+
+.toast-inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.toast-icon {
+  font-size: 22px;
+  color: var(--orange);
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.toast-text strong {
+  color: var(--white);
+  font-size: 14px;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.toast-text p {
+  color: rgba(247, 247, 247, 0.6);
+  font-size: 12px;
+  margin: 0;
+}
+
+.toast-close {
+  background: none;
+  border: none;
+  color: rgba(247, 247, 247, 0.5);
+  font-size: 14px;
+  cursor: pointer;
+  margin-left: auto;
+  padding: 6px;
+  line-height: 1;
+  transition: color 0.2s ease;
+}
+
+.toast-close:hover {
+  color: var(--white);
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(120%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
