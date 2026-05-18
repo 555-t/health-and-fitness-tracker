@@ -1,16 +1,39 @@
 const express = require('express');
+const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
 const router = express.Router();
-const JWT_SECRET = process.env.JWT_SECRET || 'getbuffd-secret';
 
-function createToken(user) {
-  return jwt.sign({ id: user._id, email: user.email }, JWT_SECRET, {
-    expiresIn: '7d',
-  });
+// Simple in-memory sessions.
+// NOTE: This is not persisted; server restart clears sessions.
+const sessions = new Map(); // sessionId -> { userId, name, email }
+
+function base64UrlEncode(obj) {
+  const json = JSON.stringify(obj);
+  return Buffer.from(json)
+    .toString('base64')
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_')
+    .replace(/=+$/g, '');
 }
+
+// Returns a JWT-shaped token so existing frontend (decodeJWT) can read payload.name.
+// But it is NOT a signed JWT and we do not verify it on the backend.
+function createFrontendToken(session) {
+  const header = { alg: 'none', typ: 'JWT' };
+  const payload = { id: session.userId, email: session.email, name: session.name };
+  // Signature is intentionally dummy.
+  return `${base64UrlEncode(header)}.${base64UrlEncode(payload)}.signature`;
+}
+
+function createSessionForUser(user) {
+  const sessionId = crypto.randomBytes(24).toString('hex');
+  const session = { userId: String(user._id), name: user.name, email: user.email };
+  sessions.set(sessionId, session);
+  return { sessionId, session };
+}
+
 
 router.post('/register', async (req, res) => {
   try {
@@ -33,7 +56,8 @@ router.post('/register', async (req, res) => {
       password: hashedPassword,
     });
 
-    const token = createToken(user);
+    const { sessionId, session } = createSessionForUser(user);
+    const token = createFrontendToken(session);
 
     return res.status(201).json({
       message: 'Registration successful.',
@@ -42,8 +66,11 @@ router.post('/register', async (req, res) => {
         name: user.name,
         email: user.email,
       },
+      // Keep same response shape expected by frontend.
       token,
+      sessionId,
     });
+
   } catch (error) {
     console.error('Register error:', error);
     return res.status(500).json({ message: 'Unable to create account. Please try again later.' });
@@ -68,7 +95,8 @@ router.post('/login', async (req, res) => {
       return res.status(401).json({ message: 'Invalid credentials.' });
     }
 
-    const token = createToken(user);
+    const { sessionId, session } = createSessionForUser(user);
+    const token = createFrontendToken(session);
     return res.status(200).json({
       message: 'Login successful.',
       user: {
@@ -77,7 +105,9 @@ router.post('/login', async (req, res) => {
         email: user.email,
       },
       token,
+      sessionId,
     });
+
   } catch (error) {
     console.error('Login error:', error);
     return res.status(500).json({ message: 'Unable to log in. Please try again later.' });
