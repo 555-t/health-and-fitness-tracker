@@ -378,41 +378,29 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
 <!-- ===== AUTHENTICATION STATE SCRIPT ===== -->
 <script>
-    // 1. Decode the token to extract user info
-    function decodeJWT(token) {
-        try {
-            const payload = token.split('.')[1];
-            const decoded = JSON.parse(atob(payload));
-            return decoded;
-        } catch (e) {
-            return null;
-        }
-    }
-
     document.addEventListener('DOMContentLoaded', function() {
         // TO TEST: Uncomment the line below to force a logged-in state, comment it with // to test logged-out state :) 
         // also comment out the line during live demo to test out sign out feature and stay signed out,
         //  make sure to save the file after uncommenting/commenting to see changes during testing :)
-        localStorage.setItem('buff_token', 'fake.' + btoa(JSON.stringify({name: "Name"})) + '.fake');
+// localStorage.setItem('buff_token', 'fake.' + btoa(JSON.stringify({name: "Name"})) + '.fake');
         
-        // 2. Check if the user is logged in
-        const token = localStorage.getItem('buff_token');
+// 2. Check if the user is logged in
+const token = localStorage.getItem('buff_token');
+            const sessionId = localStorage.getItem('buff_sessionId');
         
         if (token) {
-            // Default to "Member" if no name is found in the token 
-            let userName = "Member"; 
-            const decoded = decodeJWT(token);
-            
-            // If a name exists in the token, use it
-            if (decoded && decoded.name) {
-                userName = decoded.name;
-            }
+            // Simple auth: rely on localStorage.buff_user (no token decoding)
+            let userName = 'Member';
 
-            // 3. Change the Navbar Button to "Sign Out"
             const authBtn = document.getElementById('auth-btn');
             if (authBtn) {
-                authBtn.innerHTML = `<a class="btn btn-login w-100" href="#" onclick="localStorage.removeItem('buff_token'); location.reload();"><i class="fas fa-sign-out-alt mr-2"></i>Sign Out</a>`;
+                authBtn.innerHTML = `<a class="btn btn-login w-100" href="#" onclick="localStorage.removeItem('buff_token'); localStorage.removeItem('buff_sessionId'); localStorage.removeItem('buff_user'); location.reload();"><i class="fas fa-sign-out-alt mr-2"></i>Sign Out</a>`;
             }
+
+            const user = JSON.parse(localStorage.getItem('buff_user') || 'null');
+            if (user && user.name) userName = user.name;
+
+
 
             // 4. Change Hero Section to "Welcome Back"
             const heroArea = document.getElementById('heroAuthArea');

@@ -127,22 +127,13 @@
     </div>
 </nav>
 <script>
-    function decodeJWT(token) {
-        try {
-            const payload = token.split('.')[1];
-            return JSON.parse(atob(payload));
-        } catch (e) { return null; }
-    }
-
     document.addEventListener('DOMContentLoaded', function() {
-        const token = localStorage.getItem('buff_token');
+        const user = JSON.parse(localStorage.getItem('buff_user') || 'null');
         const authBtn = document.getElementById('auth-btn');
         
-        if (token && authBtn) {
-            const decoded = decodeJWT(token);
-            let displayName = (decoded && decoded.name) ? decoded.name : "Member";
-            
-            // Swap Log In for Sign Out
+        if (user && user.name && authBtn) {
+
+            // Swap Log In for Sign Out (no token decoding)
             authBtn.innerHTML = `<a class="btn btn-login w-100" href="#" onclick="localStorage.removeItem('buff_token'); location.reload();"><i class="fas fa-sign-out-alt mr-2"></i>Sign Out</a>`;
         }
     });
