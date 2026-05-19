@@ -126,11 +126,11 @@
 
 // --- GLOBAL AUTHENTICATION STATE (Navbar Update) ---
 document.addEventListener('DOMContentLoaded', function() {
-    const token = localStorage.getItem('buff_token');
-    if (token) {
+    const session = localStorage.getItem('buff_session');
+    if (session) {
         const authBtn = document.getElementById('auth-btn');
         if (authBtn) {
-            authBtn.innerHTML = `<a class="btn btn-login w-100" href="#" onclick="localStorage.removeItem('buff_token'); localStorage.removeItem('buff_session'); localStorage.removeItem('buff_sessionId'); localStorage.removeItem('buff_user'); window.location.href = 'index.html';"><i class="fas fa-sign-out-alt mr-2"></i>Sign Out</a>`;
+            authBtn.innerHTML = `<a class="btn btn-login w-100" href="#" onclick="localStorage.removeItem('buff_token'); localStorage.removeItem('buff_session'); localStorage.removeItem('buff_user'); window.location.href = 'index.html';"><i class="fas fa-sign-out-alt mr-2"></i>Sign Out</a>`;
         }
     }
 });

@@ -303,9 +303,9 @@
       }
 
     document.addEventListener('DOMContentLoaded', function() {
-        const token = localStorage.getItem('buff_token');
+        const session = localStorage.getItem('buff_session');
         const authBtn = document.getElementById('auth-btn');
-        if (token && authBtn) {
+        if (session && authBtn) {
             authBtn.innerHTML = `<a class="btn btn-login w-100" href="profile.html"><i class="fas fa-user mr-2"></i>Profile</a>`;
         }
     });
@@ -390,6 +390,7 @@
         }
 
         localStorage.setItem('buff_token', data.token);
+        localStorage.setItem('buff_session', data.sessionId);
         localStorage.setItem('buff_user', JSON.stringify(data.user || {name}));
 
         messageEl.innerHTML = `<span style="color:#5be662; font-weight:600;">${data.message} Redirecting...</span>`;

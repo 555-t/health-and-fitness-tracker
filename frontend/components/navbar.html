@@ -128,13 +128,14 @@
 </nav>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        const session = localStorage.getItem('buff_session');
         const user = JSON.parse(localStorage.getItem('buff_user') || 'null');
         const authBtn = document.getElementById('auth-btn');
         
-        if (user && user.name && authBtn) {
+        if (session && user && user.name && authBtn) {
 
             // Swap Log In for Sign Out (no token decoding)
-            authBtn.innerHTML = `<a class="btn btn-login w-100" href="#" onclick="localStorage.removeItem('buff_token'); location.reload();"><i class="fas fa-sign-out-alt mr-2"></i>Sign Out</a>`;
+            authBtn.innerHTML = `<a class="btn btn-login w-100" href="#" onclick="localStorage.removeItem('buff_token'); localStorage.removeItem('buff_session'); localStorage.removeItem('buff_user'); location.reload();"><i class="fas fa-sign-out-alt mr-2"></i>Sign Out</a>`;
         }
     });
 </script>
