@@ -36,6 +36,7 @@
 * authRoutes.js → Authentication routes
 * profileRoutes.js → Profile routes
 * trackerRoutes.js → Workout routes
+* stepsRoutes.js
 
 ### /models
 
