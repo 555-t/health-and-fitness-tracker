@@ -41,6 +41,7 @@
 
 * User.js → User schema
 * Workout.js → Workout schema
+* Steps.js (New) -> Steps schema
 
 ---
 
