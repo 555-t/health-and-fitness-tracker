@@ -32,7 +32,6 @@ const authRoutes = require('./routes/authRoutes');
 const trackerRoutes = require('./routes/trackerRoutes');
 const stepsRoutes = require('./routes/stepsRoutes');
 const nutritionRoutes = require('./routes/nutritionRoutes');
-const nutritionRoutes = require('./routes/nutritionRoutes');
 
 console.log("trackerRoutes type:", typeof trackerRoutes);
 console.log("stepsRoutes type:", typeof stepsRoutes);
@@ -40,7 +39,6 @@ console.log("stepsRoutes type:", typeof stepsRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/tracker', trackerRoutes);
 app.use('/api/steps', stepsRoutes);
-app.use('/api/nutrition', nutritionRoutes);
 app.use('/api/nutrition', nutritionRoutes);
 
 /* =========================
