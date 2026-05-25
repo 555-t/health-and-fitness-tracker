@@ -1,4 +1,5 @@
 // backend/server.js
+//require("node:dns").setServers(["1.1.1.1", "8.8.8.8"]);
 require("dotenv").config();
 
 const express = require('express');
@@ -6,6 +7,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
 require('dotenv').config();
+
 
 const app = express();
 
@@ -28,8 +30,7 @@ app.use((req, res, next) => {
 const authRoutes = require('./routes/authRoutes');
 const trackerRoutes = require('./routes/trackerRoutes');
 const stepsRoutes = require('./routes/stepsRoutes');
-
-
+const nutritionRoutes = require('./routes/nutritionRoutes');
 
 console.log("trackerRoutes type:", typeof trackerRoutes);
 console.log("stepsRoutes type:", typeof stepsRoutes);
@@ -37,6 +38,7 @@ console.log("stepsRoutes type:", typeof stepsRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/tracker', trackerRoutes);
 app.use('/api/steps', stepsRoutes);
+app.use('/api/nutrition', nutritionRoutes);
 
 /* =========================
    STATIC FRONTEND
