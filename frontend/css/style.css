@@ -232,6 +232,21 @@ body {
   border-radius: 50%;
 }
 
+.gender-select {
+    color: white !important;
+    background-color: #2b2e36 !important;
+    height: 44px;
+    padding: 6px 12px;
+    font-size: 15px;
+    line-height: 1.5;
+    border: 1px solid #444;
+}
+
+.gender-select option {
+    color: black;
+    background-color: white;
+}
+
 /*Progress Page Styles*/
 
 .solid-hero {
