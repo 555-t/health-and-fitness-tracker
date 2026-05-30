@@ -14,6 +14,8 @@ const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/getbuffd';
 const PORT = process.env.PORT || 5000;
 
 app.use('/api/auth', authRoutes);
+app.use('/api/progress', require('./routes/progressRoutes'));
+app.use('/api/reminders', require('./routes/reminderRoutes'));
 app.use(express.static(path.join(__dirname, '../frontend')));
 
 mongoose
