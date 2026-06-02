@@ -10,20 +10,13 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const path = require('path');
 
-
-/* =========================
-   ROUTES
-========================= */
-const authRoutes = require('./routes/authRoutes');
-const trackerRoutes = require('./routes/trackerRoutes');
-const stepsRoutes = require('./routes/stepsRoutes');
+const authRoutes      = require('./routes/authRoutes');
+const trackerRoutes   = require('./routes/trackerRoutes');
+const stepsRoutes     = require('./routes/stepsRoutes');
 const nutritionRoutes = require('./routes/nutritionRoutes');
-const profileRoutes = require("./routes/profileRoutes");
-
-
-console.log("trackerRoutes type:", typeof trackerRoutes);
-console.log("stepsRoutes type:", typeof stepsRoutes);
-
+const profileRoutes   = require('./routes/profileRoutes');
+const progressRoutes  = require('./routes/progressRoutes');
+const reminderRoutes  = require('./routes/reminderRoutes');
 
 const app = express();
 
@@ -33,27 +26,22 @@ app.use((req, res, next) => {
   console.log(req.method, req.url);
   next();
 });
-app.use('/api/auth', authRoutes);
-app.use('/api/tracker', trackerRoutes);
-app.use('/api/steps', stepsRoutes);
+
+app.use('/api/auth',      authRoutes);
+app.use('/api/tracker',   trackerRoutes);
+app.use('/api/steps',     stepsRoutes);
 app.use('/api/nutrition', nutritionRoutes);
-app.use("/api/profile", profileRoutes);
+app.use('/api/profile',   profileRoutes);
+app.use('/api/progress',  progressRoutes);
+app.use('/api/reminders', reminderRoutes);
 
-
-/* =========================
-   STATIC FRONTEND
-========================= */
 app.use(express.static(path.join(__dirname, '../frontend')));
 
-/* =========================
-   DATABASE
-========================= */
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/getbuffd';
 
 mongoose.connect(MONGO_URI)
   .then(() => {
     console.log('MongoDB connected');
-
     app.listen(5000, () => {
       console.log('Server running on http://localhost:5000');
     });
@@ -63,9 +51,6 @@ mongoose.connect(MONGO_URI)
     process.exit(1);
   });
 
-/* =========================
-   FRONTEND ROUTE FALLBACK
-========================= */
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/index.html'));
 });
