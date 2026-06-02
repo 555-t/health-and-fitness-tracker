@@ -50,13 +50,12 @@ const userSchema = new mongoose.Schema({
     type: Number,
     default: null
   },
-  
+
   gender: {
     type: String,
-    enum: ["male", "female", "other"],
     default: null
   },
-  
+ 
   bio: {
     type: String,
     maxlength: [500, "Bio cannot exceed 500 characters"],
@@ -77,19 +76,6 @@ const userSchema = new mongoose.Schema({
     timestamps: true //automatically manage createdAt and updatedAt
 }
 );
-
-//hash password before saving
-userSchema.pre("save", async function () {
-
-  //only hash if password modified
-  if (!this.isModified("password")) {
-    return;
-  }
-
-  const salt = await bcrypt.genSalt(10);
-  this.password = await bcrypt.hash(this.password, salt);
-
-});
 
 //method to compare password
 userSchema.methods.matchPassword = async function(enteredPassword) {

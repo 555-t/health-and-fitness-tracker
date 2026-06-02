@@ -1,7 +1,21 @@
 const API_URL = "http://localhost:5000/api/profile";
 
-//get current user ID from localStorage (set during login)
-let currentUserId = localStorage.getItem("userId");
+//get current session from localStorage (set during login)
+let currentSession = localStorage.getItem("buff_session");
+let currentUserId = null;
+
+// Extract userId from buff_user object
+const buffUser = localStorage.getItem("buff_user");
+if (buffUser) {
+  try {
+    const user = JSON.parse(buffUser);
+    if (user && user.id) {
+      currentUserId = user.id;
+    }
+  } catch (err) {
+    console.error("Error parsing buff_user:", err);
+  }
+}
 
 //temporary storage for avatar
 let pendingAvatar = "";
@@ -9,7 +23,7 @@ let pendingAvatar = "";
 //load profile on page load
 document.addEventListener("DOMContentLoaded", function () {
 
-  if (currentUserId) {
+  if (currentSession && currentUserId) {
     loadProfile();
   } else {
     console.warn("User not logged in. Redirecting to login...");
@@ -376,7 +390,8 @@ document.getElementById("deleteBtn")?.addEventListener("click", async function (
 
       alert("Account deleted successfully. Redirecting to login...");
 
-      localStorage.removeItem("userId");
+      localStorage.removeItem("buff_session");
+      localStorage.removeItem("buff_user");
 
       setTimeout(() => {
         window.location.href = "login.html";
@@ -427,7 +442,8 @@ document.getElementById("deactivateBtn")?.addEventListener("click", async functi
 
       alert("Account deactivated successfully!");
 
-      localStorage.removeItem("userId");
+      localStorage.removeItem("buff_session");
+      localStorage.removeItem("buff_user");
 
       setTimeout(() => {
         window.location.href = "login.html";

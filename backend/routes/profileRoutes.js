@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
-
+const bcrypt = require("bcryptjs");
 //input validation helper function
 const validateProfileUpdate = (name, age, weight, height, gender, bio) => {
   const errors = [];
@@ -137,7 +137,7 @@ router.put("/:userId", async (req, res) => {
     user.height = Number(height);
     }
 
-    if (gender) {
+    if (gender !== undefined && gender !== null && gender !== "") {
     user.gender = gender.toLowerCase();
     }
 
@@ -229,7 +229,6 @@ router.put("/:userId/change-password", async (req, res) => {
     const { userId } = req.params;
     const { currentPassword, newPassword, confirmPassword } = req.body;
 
-    //validate input
     if (!currentPassword || !newPassword || !confirmPassword) {
       return res.status(400).json({
         success: false,
@@ -251,7 +250,6 @@ router.put("/:userId/change-password", async (req, res) => {
       });
     }
 
-    //get user with password
     const user = await User.findById(userId).select("+password");
     if (!user) {
       return res.status(404).json({
@@ -260,7 +258,6 @@ router.put("/:userId/change-password", async (req, res) => {
       });
     }
 
-    //verify current password
     const isPasswordValid = await user.matchPassword(currentPassword);
     if (!isPasswordValid) {
       return res.status(401).json({
@@ -269,18 +266,19 @@ router.put("/:userId/change-password", async (req, res) => {
       });
     }
 
-    //update password
-    user.password = newPassword;
+    // ✅ SAME HASHING STYLE AS REGISTER
+    user.password = await bcrypt.hash(newPassword, 12);
+
     await user.save();
 
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       message: "Password changed successfully"
     });
 
   } catch (error) {
     console.error("Change password error:", error);
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: "Error changing password",
       error: error.message

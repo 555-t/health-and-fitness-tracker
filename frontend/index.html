@@ -379,12 +379,7 @@
 <!-- ===== AUTHENTICATION STATE SCRIPT ===== -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // TO TEST: Uncomment the line below to force a logged-in state, comment it with // to test logged-out state :) 
-        // also comment out the line during live demo to test out sign out feature and stay signed out,
-        //  make sure to save the file after uncommenting/commenting to see changes during testing :)
-// localStorage.setItem('buff_token', 'fake.' + btoa(JSON.stringify({name: "Name"})) + '.fake');
-        
-// 2. Check if the user is logged in
+        // Check if the user is logged in
         const session = localStorage.getItem('buff_session');
         
         if (session) {
@@ -393,7 +388,7 @@
 
             const authBtn = document.getElementById('auth-btn');
             if (authBtn) {
-                authBtn.innerHTML = `<a class="btn btn-login w-100" href="#" onclick="localStorage.removeItem('buff_token'); localStorage.removeItem('buff_session'); localStorage.removeItem('buff_user'); location.reload();"><i class="fas fa-sign-out-alt mr-2"></i>Sign Out</a>`;
+                authBtn.innerHTML = `<a class="btn btn-login w-100" href="#" onclick="localStorage.removeItem('buff_session'); localStorage.removeItem('buff_user'); location.reload();"><i class="fas fa-sign-out-alt mr-2"></i>Sign Out</a>`;
             }
 
             const user = JSON.parse(localStorage.getItem('buff_user') || 'null');

@@ -10,6 +10,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const path = require('path');
 
+
 /* =========================
    ROUTES
 ========================= */
@@ -37,10 +38,6 @@ app.use('/api/tracker', trackerRoutes);
 app.use('/api/steps', stepsRoutes);
 app.use('/api/nutrition', nutritionRoutes);
 app.use("/api/profile", profileRoutes);
-
-mongoose.connect(process.env.MONGO_URI)
-.then(() => console.log("MongoDB Connected"))
-.catch(err => console.log(err));
 
 
 /* =========================
