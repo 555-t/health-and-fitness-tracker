@@ -1,14 +1,23 @@
 const express = require('express');
 const router = express.Router();
 const Workout = require('../models/Workout');
-const auth = require('../middleware/auth');
+const { sessions } = require('./authRoutes');
 
 const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
+function getUser(req) {
+  const sessionId = req.headers['x-session-id'];
+  if (!sessionId) return null;
+  return sessions.get(sessionId);
+}
+
 // GET /api/progress/summary
-router.get('/summary', auth, async (req, res) => {
+router.get('/summary', async (req, res) => {
   try {
-    const workouts = await Workout.find({ userId: req.userId }).lean();
+    const user = getUser(req);
+    if (!user) return res.status(401).json({ message: 'Not logged in' });
+
+    const workouts = await Workout.find({ userId: user.userId }).lean();
 
     if (workouts.length === 0) {
       return res.json({ hasData: false });

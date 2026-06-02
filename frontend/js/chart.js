@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', async function () {
 
-  var token = localStorage.getItem('buff_token');
+  var sessionId = localStorage.getItem('buff_session');
   var unitStyle = 'font-size:0.9rem;color:rgba(247,247,247,0.5);';
 
   var lockLg = '<i class="fa-solid fa-lock" style="font-size:1.4rem;color:rgba(247,247,247,0.2);"></i>';
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', async function () {
   }
 
   // not logged in — show locked gate
-  if (!token) {
+  if (!sessionId) {
     document.getElementById('statTotalWorkouts').innerHTML = lockLg;
     document.getElementById('statTotalMinutes').innerHTML  = lockLg;
     document.getElementById('statDayStreak').innerHTML     = lockLg;
@@ -59,16 +59,18 @@ document.addEventListener('DOMContentLoaded', async function () {
   var response;
   try {
     response = await fetch('/api/progress/summary', {
-      headers: { 'Authorization': 'Bearer ' + token }
+      headers: { 'x-session-id': sessionId }
     });
   } catch (err) {
     console.error('Network error loading progress data:', err);
     return;
   }
 
-  // token expired — clear it and show locked gate
+  // session expired — clear it and show locked gate
   if (response.status === 401) {
+    localStorage.removeItem('buff_session');
     localStorage.removeItem('buff_token');
+    localStorage.removeItem('buff_user');
     document.getElementById('statTotalWorkouts').innerHTML = lockLg;
     document.getElementById('statTotalMinutes').innerHTML  = lockLg;
     document.getElementById('statDayStreak').innerHTML     = lockLg;
