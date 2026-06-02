@@ -36,11 +36,13 @@
 * authRoutes.js → Authentication routes
 * profileRoutes.js → Profile routes
 * trackerRoutes.js → Workout routes
+* stepsRoutes.js
 
 ### /models
 
 * User.js → User schema
 * Workout.js → Workout schema
+* Steps.js (New) -> Steps schema
 
 ---
 

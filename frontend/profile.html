@@ -36,7 +36,7 @@
                         <a class="dropdown-item active" href="profile.html"><i class="fas fa-user-cog mr-2"></i>My Profile</a>
                     </div>
                 </li>
-                <li class="nav-item ml-lg-4 mt-3 mt-lg-0">
+                <li class="nav-item ml-lg-4 mt-3 mt-lg-0" id="auth-btn">
                     <a class="btn btn-login w-100" href="login.html"><i class="fas fa-sign-in-alt mr-2"></i>Log In</a>
                 </li>
             </ul>
@@ -64,6 +64,8 @@
               <p><strong>Name:</strong> <span id="viewName">Batrisyia</span></p>
               <p><strong>Age:</strong> <span id="viewAge">22</span></p>
               <p><strong>Weight:</strong> <span id="viewWeight">55 kg</span></p>
+              <p><strong>Height:</strong> <span id="viewHeight">N/A</span></p>
+              <p><strong>Gender:</strong> <span id="viewGender">N/A</span></p>
             </div>
 
           </div>
@@ -74,7 +76,7 @@
 
           <!-- Update Profile -->
           <form id="profileForm" class="profile-form">
-            <h3 style="font-weight: bold;">Update Profile</h3>
+            <h4 style="font-weight: bold;">Update Profile</h4>
 
             <div class="row">
               <!-- Avatar upload/remove -->
@@ -85,13 +87,13 @@
                 <div class="d-flex justify-content-center mb-2">
                   <!-- Upload button -->
                   <div class="mr-2">
-                    <label for="uploadAvatar" class="btn btn-primary btn-sm">Upload</label>
+                    <label for="uploadAvatar" class="btn-modern btn-small btn-blue">Upload</label>
                     <input type="file" id="uploadAvatar" accept="image/*" class="d-none">
                   </div>
 
                   <!-- Remove button -->
                   <div>
-                    <button type="button" class="btn btn-danger btn-sm" id="removeAvatar">Remove</button>
+                    <button type="button" class="btn-modern btn-small btn-red" id="removeAvatar">Remove</button>
                   </div>
                 </div>
 
@@ -112,32 +114,64 @@
 
                 <!-- Weight -->
                 <div class="mb-3">
-                  <label for="weight">Weight</label>
-                  <input type="number" id="weight" class="form-control" placeholder="Enter your weight" required>
+                  <label for="weight">Weight (kg)</label>
+                  <input type="number" id="weight" class="form-control" placeholder="Enter your weight">
+                </div>
+
+                <!-- Height -->
+                <div class="mb-3">
+                  <label for="height">Height (cm)</label>
+                  <input type="number" id="height" class="form-control" placeholder="Enter your height">
+                </div>
+
+                <!-- Gender -->
+                <div class="mb-3">
+                  <label for="gender">Gender</label>
+                  <select id="gender" class="form-control gender-select">
+                    <option value="">Select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                  </select>
                 </div>
               </div>
             </div>
 
-            <button type="submit" class="btn btn-modern w-100 mt-3" id="updateBtn">Update</button>
+            <button type="submit" class="btn-modern btn-orange w-100 mt-3" id="updateBtn">Update</button>
           </form>
 
           <hr>
 
           <!-- Change Password -->
           <form id="changePassForm" class="profile-form">
-            <h3 style="font-weight: bold;">Change Password</h3>
-            <input type="password" id="newPassword" class="form-control mb-3" placeholder="New Password" required>
-            <button type="submit" class="btn btn-modern w-100 btn-primary" id="changePassBtn">Change Password</button>
+            <h4 style="font-weight: bold;">Change Password</h4>
+            
+            <div class="mb-3">
+              <label for="oldPassword">Old Password</label>
+              <input type="password" id="oldPassword" class="form-control" placeholder="Enter your current password" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="newPasswordField">New Password</label>
+              <input type="password" id="newPasswordField" class="form-control" placeholder="Enter your new password" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="confirmPasswordField">Confirm New Password</label>
+              <input type="password" id="confirmPasswordField" class="form-control" placeholder="Confirm your new password" required>
+            </div>
+
+            <button type="submit" class="btn-modern btn-orange w-100 mt-3">Change Password</button>
           </form>
 
           <hr>
 
           <!-- Account Options -->
           <div class="delete-section">
-            <h3 style="font-weight: bold;">Account Options</h3>
+            <h4 style="font-weight: bold;">Account Options</h4>
             <div class="d-flex">
-              <button type="button" class="btn btn-modern btn-warning flex-fill mr-2" id="deactivateBtn">Deactivate Account</button>
-              <button type="button" class="btn btn-modern btn-danger flex-fill" id="deleteBtn">Delete Account</button>
+              <button type="button" class="btn-modern btn-yellow flex-fill mr-2" id="deactivateBtn">Deactivate Account</button>
+              <button type="button" class="btn-modern btn-red flex-fill" id="deleteBtn">Delete Account</button>
             </div>
           </div>
 
@@ -150,5 +184,6 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
   <script src="js/profile.js"></script>
+  <script src="js/auth-status.js"></script>
 </body>
 </html>

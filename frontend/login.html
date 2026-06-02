@@ -302,18 +302,16 @@
             return null;
         }
     }
-
+    
     document.addEventListener('DOMContentLoaded', function() {
-        const token = localStorage.getItem('buff_token');
+        const session = localStorage.getItem('buff_session');
         const authBtn = document.getElementById('auth-btn');
-        if (token) {
-            const decoded = decodeJWT(token);
-            if (decoded && decoded.name) {
-                authBtn.innerHTML = `<a class="btn btn-login w-100" href="profile.html"><i class="fas fa-user mr-2"></i>Profile - ${decoded.name}</a>`;
-            }
+        if (session && authBtn) {
+            authBtn.innerHTML = `<a class="btn btn-login w-100" href="profile.html"><i class="fas fa-user mr-2"></i>Profile</a>`;
         }
     });
 </script>
+
 
   <video autoplay muted loop playsinline class="bg-video">
         <source src="assets/images/woman-running.mp4" type="video/mp4" />
@@ -349,46 +347,152 @@
   <script src="assets/js/popper.js"></script>
   <script src="assets/js/bootstrap.min.js"></script>
   <script>
-    document.getElementById('loginForm').addEventListener('submit', async function(event) {
-      event.preventDefault();
-      const email = document.getElementById('loginEmail').value.trim();
-      const password = document.getElementById('loginPassword').value.trim();
-      const messageEl = document.getElementById('loginMessage');
+    
+document.addEventListener('DOMContentLoaded', function () {
 
-      if (!email || !password) {
-        messageEl.innerHTML = '<span style="color:#f04d4d; font-weight:600;">Please enter both email and password.</span>';
-        return;
-      }
+    // =========================
+    // Navbar Authentication UI
+    // =========================
+    const session = localStorage.getItem('buff_session');
+    const userData = localStorage.getItem('buff_user');
+    const authBtn = document.getElementById('auth-btn');
 
-      messageEl.innerHTML = '<span style="color:#5be662; font-weight:600;">Logging you in...</span>';
+    if (session && authBtn) {
 
-      try {
-        const response = await fetch('/api/auth/login', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ email, password }),
-        });
+        let userName = 'Profile';
 
-        const data = await response.json();
+        try {
+            const user = JSON.parse(userData);
 
-        if (!response.ok) {
-          messageEl.innerHTML = `<span style="color:#f04d4d; font-weight:600;">${data.message || 'Login failed.'}</span>`;
-          return;
+            if (user && user.name) {
+                userName = user.name;
+            }
+
+        } catch (err) {
+            console.error('User parse error:', err);
         }
 
-        localStorage.setItem('buff_token', data.token);
-        messageEl.innerHTML = `<span style="color:#5be662; font-weight:600;">${data.message} Redirecting...</span>`;
-        document.getElementById('loginForm').reset();
-        setTimeout(() => {
-          window.location.href = 'profile.html';
-        }, 800);
-      } catch (error) {
-        console.error(error);
-        messageEl.innerHTML = '<span style="color:#f04d4d; font-weight:600;">Server error. Please try again later.</span>';
-      }
+        authBtn.innerHTML = `
+            <a class="btn btn-login w-100" href="profile.html">
+                <i class="fas fa-user mr-2"></i>${userName}
+            </a>
+        `;
+    }
+
+    // =========================
+    // Login Form
+    // =========================
+    const loginForm = document.getElementById('loginForm');
+
+    loginForm.addEventListener('submit', async function (event) {
+
+        event.preventDefault();
+
+        const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+        const password = document.getElementById('loginPassword').value.trim();
+        const messageEl = document.getElementById('loginMessage');
+
+        // Validation
+        if (!email || !password) {
+
+            messageEl.innerHTML = `
+                <span style="color:#f04d4d; font-weight:600;">
+                    Please enter both email and password.
+                </span>
+            `;
+
+            return;
+        }
+
+        // Loading message
+        messageEl.innerHTML = `
+            <span style="color:#5be662; font-weight:600;">
+                Logging you in...
+            </span>
+        `;
+
+        try {
+
+            // IMPORTANT:
+            // Make sure backend is running on port 5000
+            const response = await fetch('http://localhost:5000/api/auth/login', {
+
+                method: 'POST',
+
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+
+                body: JSON.stringify({
+                    email: email,
+                    password: password
+                })
+
+            });
+
+            // Check if response is JSON
+            const contentType = response.headers.get('content-type');
+
+            if (!contentType || !contentType.includes('application/json')) {
+
+                throw new Error('Server did not return JSON');
+            }
+
+            const data = await response.json();
+
+            // Login failed
+            if (!response.ok) {
+
+                messageEl.innerHTML = `
+                    <span style="color:#f04d4d; font-weight:600;">
+                        ${data.message || 'Login failed'}
+                    </span>
+                `;
+
+                return;
+            }
+
+            //Save session ID
+            localStorage.setItem('buff_session', data.sessionId);
+
+            // Save user info
+            localStorage.setItem(
+                'buff_user',
+                JSON.stringify(data.user)
+            );
+
+            // Success message
+            messageEl.innerHTML = `
+                <span style="color:#5be662; font-weight:600;">
+                    Login successful! Redirecting...
+                </span>
+            `;
+
+            // Reset form
+            loginForm.reset();
+
+            // Redirect
+            setTimeout(() => {
+
+                window.location.href = 'profile.html';
+
+            }, 1000);
+
+        } catch (error) {
+
+            console.error('LOGIN ERROR:', error);
+
+            messageEl.innerHTML = `
+                <span style="color:#f04d4d; font-weight:600;">
+                    Cannot connect to backend server.
+                </span>
+            `;
+        }
+
     });
+
+});
+</script>
   </script>
 </body>
 

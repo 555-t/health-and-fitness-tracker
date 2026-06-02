@@ -1,39 +1,56 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
+require("dotenv").config();
+const dns = require("dns");
+try {
+  dns.setServers(["8.8.8.8", "1.1.1.1"]);
+} catch (e) {
+  console.warn("Could not set DNS servers:", e.message);
+}
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
 const path = require('path');
-require('dotenv').config();
 
-const authRoutes = require('./routes/authRoutes');
+const authRoutes      = require('./routes/authRoutes');
+const trackerRoutes   = require('./routes/trackerRoutes');
+const stepsRoutes     = require('./routes/stepsRoutes');
+const nutritionRoutes = require('./routes/nutritionRoutes');
+const profileRoutes   = require('./routes/profileRoutes');
+const progressRoutes  = require('./routes/progressRoutes');
+const reminderRoutes  = require('./routes/reminderRoutes');
 
 const app = express();
+
 app.use(cors());
 app.use(express.json());
+app.use((req, res, next) => {
+  console.log(req.method, req.url);
+  next();
+});
 
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/getbuffd';
-const PORT = process.env.PORT || 5000;
+app.use('/api/auth',      authRoutes);
+app.use('/api/tracker',   trackerRoutes);
+app.use('/api/steps',     stepsRoutes);
+app.use('/api/nutrition', nutritionRoutes);
+app.use('/api/profile',   profileRoutes);
+app.use('/api/progress',  progressRoutes);
+app.use('/api/reminders', reminderRoutes);
 
-app.use('/api/auth', authRoutes);
-app.use('/api/progress', require('./routes/progressRoutes'));
-app.use('/api/reminders', require('./routes/reminderRoutes'));
 app.use(express.static(path.join(__dirname, '../frontend')));
 
-mongoose
-  .connect(MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/getbuffd';
+
+mongoose.connect(MONGO_URI)
+  .then(() => {
+    console.log('MongoDB connected');
+    app.listen(5000, () => {
+      console.log('Server running on http://localhost:5000');
+    });
   })
-  .then(() => console.log('MongoDB connected'))
-  .catch((error) => {
-    console.error('MongoDB connection error:', error);
+  .catch((err) => {
+    console.error('MongoDB connection error:', err);
     process.exit(1);
   });
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/index.html'));
 });
-
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
-

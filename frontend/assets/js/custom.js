@@ -123,3 +123,14 @@
 
 
 })(window.jQuery);
+
+// --- GLOBAL AUTHENTICATION STATE (Navbar Update) ---
+document.addEventListener('DOMContentLoaded', function() {
+    const session = localStorage.getItem('buff_session');
+    if (session) {
+        const authBtn = document.getElementById('auth-btn');
+        if (authBtn) {
+            authBtn.innerHTML = `<a class="btn btn-login w-100" href="#" onclick="localStorage.removeItem('buff_session'); localStorage.removeItem('buff_user'); location.reload();"><i class="fas fa-sign-out-alt mr-2"></i>Sign Out</a>`;
+        }
+    }
+});
