@@ -357,7 +357,7 @@
     document.getElementById('registerForm').addEventListener('submit', async function(event) {
       event.preventDefault();
       const name = document.getElementById('registerName').value.trim();
-      const email = document.getElementById('registerEmail').value.trim();
+      const email = document.getElementById('registerEmail').value.trim().toLowerCase();
       const password = document.getElementById('registerPassword').value.trim();
       const confirmPassword = document.getElementById('confirmPassword').value.trim();
       const messageEl = document.getElementById('registerMessage');
@@ -389,7 +389,6 @@
           return;
         }
 
-        localStorage.setItem('buff_token', data.token);
         localStorage.setItem('buff_session', data.sessionId);
         localStorage.setItem('buff_user', JSON.stringify(data.user || {name}));
 

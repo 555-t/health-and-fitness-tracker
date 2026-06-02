@@ -1201,9 +1201,8 @@
         //  API HELPERS (MongoDB)
         // =====================================================================
         async function saveToStorage() {
-            const token = localStorage.getItem('buff_token');
             const session = localStorage.getItem('buff_session');
-            if (!token || !session) return; // Not logged in
+            if (!session) return; // Not logged in
 
             const today = getTodayStr();
             try {
@@ -1211,7 +1210,6 @@
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`,
                         'x-session-id': session
                     },
                     body: JSON.stringify({
@@ -1227,15 +1225,13 @@
         }
 
         async function loadFromStorage() {
-            const token = localStorage.getItem('buff_token');
             const session = localStorage.getItem('buff_session');
-            if (!token || !session) return; // Not logged in
+            if (!session) return; // Not logged in
 
             const today = getTodayStr();
             try {
                 const res = await fetch(`/api/nutrition/${today}`, {
                     headers: {
-                        'Authorization': `Bearer ${token}`,
                         'x-session-id': session
                     }
                 });
