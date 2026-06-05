@@ -388,7 +388,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         event.preventDefault();
 
-        const email = document.getElementById('loginEmail').value.trim();
+        const email = document.getElementById('loginEmail').value.trim().toLowerCase();
         const password = document.getElementById('loginPassword').value.trim();
         const messageEl = document.getElementById('loginMessage');
 
@@ -451,9 +451,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 return;
             }
-
-            // Save token
-            localStorage.setItem('buff_token', data.token);
 
             //Save session ID
             localStorage.setItem('buff_session', data.sessionId);

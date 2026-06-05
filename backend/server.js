@@ -1,22 +1,28 @@
-// backend/server.js
-//require("node:dns").setServers(["1.1.1.1", "8.8.8.8"]);
 require("dotenv").config();
 
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-const path = require('path');
-require('dotenv').config();
+const dns = require("dns");
+try {
+  dns.setServers(["8.8.8.8", "1.1.1.1"]);
+} catch (e) {
+  console.warn("Could not set DNS servers:", e.message);
+}
 
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
+const path = require("path");
 
+const authRoutes = require("./routes/authRoutes");
+const trackerRoutes = require("./routes/trackerRoutes");
+const stepsRoutes = require("./routes/stepsRoutes");
+const nutritionRoutes = require("./routes/nutritionRoutes");
+const profileRoutes = require("./routes/profileRoutes");
+const progressRoutes = require("./routes/progressRoutes");
+const reminderRoutes = require("./routes/reminderRoutes");
 
 const app = express();
 
-/* =========================
-   MIDDLEWARE
-========================= */
-
-
+// Middleware
 app.use(cors());
 app.use(express.json());
 
@@ -25,48 +31,37 @@ app.use((req, res, next) => {
   next();
 });
 
-/* =========================
-   ROUTES
-========================= */
-const authRoutes = require('./routes/authRoutes');
-const trackerRoutes = require('./routes/trackerRoutes');
-const stepsRoutes = require('./routes/stepsRoutes');
-const nutritionRoutes = require('./routes/nutritionRoutes');
+// API Routes
+app.use("/api/auth", authRoutes);
+app.use("/api/tracker", trackerRoutes);
+app.use("/api/steps", stepsRoutes);
+app.use("/api/nutrition", nutritionRoutes);
+app.use("/api/profile", profileRoutes);
+app.use("/api/progress", progressRoutes);
+app.use("/api/reminders", reminderRoutes);
 
-console.log("trackerRoutes type:", typeof trackerRoutes);
-console.log("stepsRoutes type:", typeof stepsRoutes);
+// Serve frontend static files
+app.use(express.static(path.join(__dirname, "../frontend")));
 
-app.use('/api/auth', authRoutes);
-app.use('/api/tracker', trackerRoutes);
-app.use('/api/steps', stepsRoutes);
-app.use('/api/nutrition', nutritionRoutes);
+// SPA catch-all route (Express 5 compatible)
+app.get('/{*splat}', (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/index.html"));
+});
 
-/* =========================
-   STATIC FRONTEND
-========================= */
-app.use(express.static(path.join(__dirname, '../frontend')));
+// MongoDB connection
+const MONGO_URI =
+  process.env.MONGO_URI || "mongodb://127.0.0.1:27017/getbuffd";
 
-/* =========================
-   DATABASE
-========================= */
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/getbuffd';
-
-mongoose.connect(MONGO_URI)
+mongoose
+  .connect(MONGO_URI)
   .then(() => {
-    console.log('MongoDB connected');
+    console.log("MongoDB connected");
 
     app.listen(5000, () => {
-      console.log('Server running on http://localhost:5000');
+      console.log("Server running on http://localhost:5000");
     });
   })
   .catch((err) => {
-    console.error('MongoDB connection error:', err);
+    console.error("MongoDB connection error:", err);
     process.exit(1);
   });
-
-/* =========================
-   FRONTEND ROUTE FALLBACK
-========================= */
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/index.html'));
-});
