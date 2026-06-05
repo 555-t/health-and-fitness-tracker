@@ -152,30 +152,22 @@
 </head>
 
 <body>
-<!-- ===== NAVIGATION BAR =====
-     Built using Bootstrap navbar for responsiveness
-     Provides navigation to main system features -->
 <nav class="navbar navbar-expand-lg navbar-custom">
     <div class="container">
-            <!-- Brand logo and homepage link -->
-        <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="index.html">
             <i class="fa-solid fa-dumbbell mr-2" style="color: var(--orange);"></i>Get<span>Buff'd</span>
         </a>
-    <!-- Mobile hamburger menu toggle -->
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
             <span class="navbar-toggler-icon" style="color: white;"><i class="fas fa-bars"></i></span>
         </button>
-    <!-- Navigation links -->
-        <div class="collapse navbar-collapse" id="navbarNav">
+    <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto align-items-lg-center">
                 <li class="nav-item"><a class="nav-link active" href="index.html"><i class="fas fa-home mr-2"></i>Home</a></li>
                 <li class="nav-item dropdown">
-                                <!-- Features dropdown using Bootstrap dropdown component -->
-                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
                         <i class="fas fa-layer-group mr-2"></i>Features
                     </a>
-                <!-- Feature links -->
-                    <div class="dropdown-menu">
+                <div class="dropdown-menu">
                         <a class="dropdown-item" href="tracker.html"><i class="fas fa-clipboard-list mr-2"></i>Workout Tracker</a>
                         <a class="dropdown-item" href="nutrition.html"><i class="fas fa-apple-alt mr-2"></i>Nutrition Planner</a>
                         <a class="dropdown-item" href="progress.html"><i class="fas fa-chart-line mr-2"></i>Progress Charts</a>
@@ -190,14 +182,10 @@
         </div>
     </div>
 </nav>
-<!-- ===== HERO SECTION =====
-     Landing banner introducing the platform -->
 <header class="solid-hero text-white text-center shadow-lg beam-orange">
-        <!-- Autoplay background fitness video -->
-    <video autoplay muted loop id="bg-video">
+        <video autoplay muted loop id="bg-video">
         <source src="assets/images/gym-video.mp4" type="video/mp4" />
     </video>
-    <!-- Overlay improves contrast for readability -->
     <div class="video-overlay header-text"></div>
 
     <div class="container hero-content">
@@ -209,38 +197,30 @@
         </div>
     </div>
 </header>
-<!-- ===== DASHBOARD SUMMARY =====
-     Displays user fitness statistics using Bootstrap cards, 3 simple summary cards (currently in prototype mode, ) -->
 <section id="dashboard" class="custom-section bg-dark-1 beam-green">
     <div class="container" style="position: relative;">
         <h2 class="font-weight-bold text-center mb-5 text-white" style="font-family: 'Raleway', sans-serif;">Daily Dashboard Summary</h2>
         
-        <!-- LOCKED OVERLAY (Visible by default) -->
         <div id="lockedOverlay" class="d-flex flex-column align-items-center justify-content-center w-100" style="position: absolute; top: 80px; left: 0; height: 100%; z-index: 10;">
             <i class="fas fa-lock fa-3x mb-3 text-white"></i>
             <h4 class="text-white font-weight-bold" style="font-family: 'Raleway', sans-serif;">Dashboard Locked</h4>
             <p style="color: rgba(247,247,247,0.6);">Please log in to view your daily statistics.</p>
         </div>
 
-        <!-- THE CARDS (Blurred by default) -->
         <div class="row" id="dashboardCards" style="filter: blur(6px); opacity: 0.4; pointer-events: none; transition: all 0.5s ease;">
             
-    <!-- Active Minutes Card -->
-    <!-- Bootstrap card used to present activity progress clearly -->
-            <div class="col-md-4 mb-4">
+    <div class="col-md-4 mb-4">
                 <div class="card p-4 text-center h-100 card-dark">
                     <div class="card-body d-flex flex-column justify-content-center">
                         <i class="fa-solid fa-stopwatch fa-3x mb-3" style="color:var(--orange);"></i>
                         <h6 class="text-uppercase font-weight-bold" style="color: rgba(247,247,247,0.5);">Active Minutes</h6>
-                        <h2 class="font-weight-bold mt-2" style="font-family: 'Raleway', sans-serif;">45 <span style="font-size: 1rem; color: rgba(247,247,247,0.5);">min</span></h2>
+                        <h2 id="active-minutes-display" class="font-weight-bold mt-2" style="font-family: 'Raleway', sans-serif;">0 <span style="font-size: 1rem; color: rgba(247,247,247,0.5);">min</span></h2>
                         <p class="small mt-2 mb-0" style="color: var(--green);"><i class="fas fa-fire mr-1"></i>Great pace today!</p>
                     </div>
                 </div>
             
             </div>
-    <!-- Calories Card -->
-    <!-- Custom circular progress for visualization -->
-            <div class="col-md-4 mb-4">
+    <div class="col-md-4 mb-4">
                 <div class="card p-4 text-center h-100 card-dark">
                     <div class="card-body d-flex flex-column justify-content-center align-items-center">
                         <i class="fa-solid fa-utensils fa-2x mb-3" style="color:var(--green);"></i>
@@ -248,25 +228,23 @@
                         <div class="calorie-ring-wrap mt-2">
                             <svg viewBox="0 0 140 140">
                                 <circle cx="70" cy="70" r="58" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="12"></circle>
-                                <circle cx="70" cy="70" r="58" fill="none" stroke="var(--green)" stroke-width="12" stroke-dasharray="364.4" stroke-dashoffset="273.3" stroke-linecap="round"></circle>
+                                <circle id="calorie-progress-circle" cx="70" cy="70" r="58" fill="none" stroke="var(--green)" stroke-width="12" stroke-dasharray="364.4" stroke-dashoffset="364.4" stroke-linecap="round"></circle>
                             </svg>
                             <div class="calorie-ring-text">
-                                <div class="num">450</div>
-                                <div class="lbl">/ 2000</div>
+                                <div id="calorie-number-display" class="num">0</div>
+                                <div class="lbl">/ <span id="calorie-goal-display">2000</span></div>  
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-    <!-- Last Workout Card -->
-    <!-- Displays most recent activity information -->
-            <div class="col-md-4 mb-4">
+    <div class="col-md-4 mb-4">
                 <div class="card p-4 text-center h-100 card-dark">
                     <div class="card-body d-flex flex-column justify-content-center">
                         <i class="fa-solid fa-calendar-check fa-3x mb-3 text-info"></i>
                         <h6 class="text-uppercase font-weight-bold" style="color: rgba(247,247,247,0.5);">Last Workout</h6>
-                        <h2 class="font-weight-bold h4 mt-2" style="font-family: 'Raleway', sans-serif;">Weightlifting</h2>
-                        <p class="small mt-2 mb-0" style="color: rgba(247,247,247,0.4);">Today at 10:00 AM</p>
+                        <h2 id="last-workout-display" class="font-weight-bold h4 mt-2" style="font-family: 'Raleway', sans-serif;">None</h2>
+                        <p id="last-workout-time" class="small mt-2 mb-0" style="color: rgba(247,247,247,0.4);">Let's get moving!</p>
                     </div>
                 </div>
             </div>
@@ -274,18 +252,12 @@
         </div>
     </div>
 </section>
-<!-- ===== FEATURES INTRO SECTION =====
-     Intro to the features available in the website -->
 <section class="custom-section bg-dark-2 text-center beam-orange" id="features">
     <div class="container py-2">
         <h6 class="text-uppercase font-weight-bold mb-2" style="letter-spacing: 2px; color: rgba(247,247,247,0.5);">What We Offer</h6>
         <h2 class="display-4 font-weight-bold mb-0 text-white" style="font-family: 'Raleway', sans-serif;">Explore Our <span style="color:var(--orange);">Features</span></h2>
     </div>
 </section>
-<!-- Feature sections follow same pattern:
-     Bootstrap grid used for responsive layout
-     Image + description used to explain functionality -->
-
 <section class="custom-section bg-dark-1 text-white beam-green">
     <div class="container">
         <div class="row align-items-center">
@@ -353,8 +325,6 @@
         </div>
     </div>
 </section>
-<!-- ===== CALL TO ACTION SECTION =====
-     Encourages users to register -->
 <section class="custom-section text-center text-white beam-green" style="background: linear-gradient(rgba(34, 37, 43, 0.88), rgba(34, 37, 43, 0.88)), url('assets/images/cta-bg.jpg') center/cover fixed;">
     <div class="container py-5">
         <h2 class="display-4 font-weight-bold mb-3" style="font-family: 'Raleway', sans-serif;">WHAT ARE YOU WAITING FOR?</h2>
@@ -362,8 +332,6 @@
         <a href="register.html" class="btn btn-cta btn-lg px-5 font-weight-bold shadow-lg" style="font-size: 1.1rem; padding: 15px 40px;">SIGN UP TODAY</a>
     </div>
 </section>
-<!-- ===== FOOTER =====
-     Displays project information -->
 <footer class="bg-dark-1" style="padding: 30px 0;">
     <div class="container text-center text-white">
         <h5 class="font-weight-bold mb-2" style="color:var(--orange); font-family: 'Raleway', sans-serif;">GET BUFF'D</h5>
@@ -371,8 +339,6 @@
     </div>
 </footer>
 
-<!-- ===== JAVASCRIPT DEPENDENCIES =====
-     Required for Bootstrap interactive components -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
@@ -391,32 +357,9 @@
                 authBtn.innerHTML = `<a class="btn btn-login w-100" href="#" onclick="localStorage.removeItem('buff_session'); localStorage.removeItem('buff_user'); location.reload();"><i class="fas fa-sign-out-alt mr-2"></i>Sign Out</a>`;
             }
 
-            const user = JSON.parse(localStorage.getItem('buff_user') || 'null');
-            if (user && user.name) userName = user.name;
+    }    
+});
 
-
-
-            // 4. Change Hero Section to "Welcome Back"
-            const heroArea = document.getElementById('heroAuthArea');
-            if (heroArea) {
-                heroArea.innerHTML = `<h3 class="font-weight-bold text-white mb-0" style="font-family: 'Raleway', sans-serif;">Welcome back, <span style="color:var(--green);">${userName}</span>!</h3>`;
-            }
-
-            // 5. UNLOCK THE DASHBOARD
-            const overlay = document.getElementById('lockedOverlay');
-            if (overlay) {
-                overlay.classList.remove('d-flex');
-                overlay.style.display = 'none'; 
-            }
-            
-            const cards = document.getElementById('dashboardCards');
-            if (cards) {
-                cards.style.filter = 'none';
-                cards.style.opacity = '1';
-                cards.style.pointerEvents = 'auto';
-            }
-        }
-    });
 </script>
 </body>
 </html>
