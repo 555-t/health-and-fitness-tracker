@@ -3,8 +3,4 @@ node_modules/
 backend/node_modules
 frontend/node_modules
 
-<<<<<<< HEAD
 backend/.env
-=======
-backend/.env
->>>>>>> d2666e40c2762899c6192d39c6f4f37bcd42d709
