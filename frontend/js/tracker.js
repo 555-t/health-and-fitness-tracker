@@ -31,7 +31,7 @@ if (workoutForm) {
     console.log("Sending workout:", body);
 
     try {
-      const res = await fetch('http://localhost:5000/api/tracker/workouts', {
+      const res = await fetch('/api/tracker/workouts', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -85,7 +85,7 @@ if (stepsForm) {
     }
 
     try {
-      const res = await fetch('http://localhost:5000/api/steps', {
+      const res = await await fetch('/api/steps', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
