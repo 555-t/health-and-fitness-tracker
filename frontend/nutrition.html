@@ -655,33 +655,6 @@
             color: var(--white);
         }
 
-        /* ===== TOAST ===== */
-        .buff-toast {
-            position: fixed;
-            bottom: 28px;
-            right: 28px;
-            background: var(--dark-card);
-            border-left: 4px solid var(--green);
-            color: var(--white);
-            padding: 14px 20px;
-            border-radius: 4px;
-            font-size: 0.84rem;
-            font-weight: 600;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-            z-index: 9999;
-            transform: translateX(120%);
-            transition: transform .3s ease;
-            max-width: 280px;
-        }
-
-        .buff-toast.show {
-            transform: translateX(0);
-        }
-
-        .buff-toast.error {
-            border-left-color: var(--orange);
-        }
-
         /* ===== GOAL CARD ===== */
         .goal-display {
             background: rgba(255, 77, 0, 0.06);
@@ -1139,10 +1112,8 @@
         </div>
     </footer>
 
-    <!-- TOAST -->
-    <div class="buff-toast" id="buffToast"></div>
-
     <!-- Scripts -->
+    <script src="js/notify.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.bundle.min.js"></script>
 
@@ -1197,12 +1168,16 @@
             activeFilter: "all",
         };
 
+        function isLoggedIn() {
+            return !!localStorage.getItem('buff_session');
+        }
+
         // =====================================================================
         //  API HELPERS (MongoDB)
         // =====================================================================
         async function saveToStorage() {
             const session = localStorage.getItem('buff_session');
-            if (!session) return; // Not logged in
+            if (!session) return; // Guest check already handled upstream
 
             const today = getTodayStr();
             try {
@@ -1293,6 +1268,7 @@
         //  GOAL
         // =====================================================================
         function setGoal() {
+            if (!isLoggedIn()) { showGuestModal("Oh no! Log in to save your progress!"); return; }
             const cal = parseInt(document.getElementById("calGoalInput").value) || 2000;
             const prot = parseInt(document.getElementById("protGoal").value) || 150;
             const carb = parseInt(document.getElementById("carbGoal").value) || 200;
@@ -1307,6 +1283,7 @@
         //  BURNED CALORIES
         // =====================================================================
         function updateBurned() {
+            if (!isLoggedIn()) { showGuestModal("Oh no! Log in to save your progress!"); return; }
             const val = parseInt(document.getElementById("burnedInput").value) || 0;
             state.burned = val;
             saveToStorage();
@@ -1317,6 +1294,7 @@
         //  ADD FROM SUGGESTION
         // =====================================================================
         function addMealToLog(id) {
+            if (!isLoggedIn()) { showGuestModal("Oh no! Log in to save your progress!"); return; }
             const meal = MEALS_DB.find(m => m.id === id);
             if (!meal) return;
             state.log.push({
@@ -1333,6 +1311,7 @@
         //  ADD MANUAL
         // =====================================================================
         function addManualFood() {
+            if (!isLoggedIn()) { showGuestModal("Oh no! Log in to save your progress!"); return; }
             const name = document.getElementById("manualName").value.trim();
             const cal = parseInt(document.getElementById("manualCal").value) || 0;
             const serving = parseInt(document.getElementById("manualServing").value) || 100;
@@ -1358,6 +1337,7 @@
         //  REMOVE
         // =====================================================================
         function removeEntry(i) {
+            if (!isLoggedIn()) { showGuestModal("Oh no! Log in to save your progress!"); return; }
             state.log.splice(i, 1);
             saveToStorage();
             renderLog();
@@ -1365,6 +1345,7 @@
         }
 
         function clearLog() {
+            if (!isLoggedIn()) { showGuestModal("Oh no! Log in to save your progress!"); return; }
             if (state.log.length === 0) return;
             if (!confirm("Clear today's entire food log?")) return;
             state.log = [];
@@ -1512,19 +1493,6 @@
             if (!manualOpen) toggleManualForm();
             document.getElementById("manualLogCard").scrollIntoView({ behavior: "smooth", block: "start" });
             setTimeout(() => document.getElementById("manualName").focus(), 400);
-        }
-
-        // =====================================================================
-        //  TOAST
-        // =====================================================================
-        let toastTimer;
-        function showToast(msg, isError = false) {
-            const t = document.getElementById("buffToast");
-            t.textContent = msg;
-            t.className = "buff-toast" + (isError ? " error" : "");
-            t.classList.add("show");
-            clearTimeout(toastTimer);
-            toastTimer = setTimeout(() => t.classList.remove("show"), 2800);
         }
 
         // =====================================================================

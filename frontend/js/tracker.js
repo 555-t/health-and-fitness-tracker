@@ -17,7 +17,7 @@ if (workoutForm) {
     const sessionId = getSessionId();
 
     if (!sessionId) {
-      alert("Not logged in");
+      showGuestModal("Oh no! Log in to save your progress!");
       return;
     }
 
@@ -44,19 +44,19 @@ if (workoutForm) {
 
       if (!res.ok) {
         console.error("Workout error:", data);
-        alert(data.message || "Failed to add workout");
+        showToast(data.message || "Failed to add workout", true);
         return;
       }
 
       console.log("Saved workout:", data);
-      alert("Workout added!");
+      showToast("✅ Workout added!");
       loadWorkouts();
 
       workoutForm.reset();
 
     } catch (err) {
       console.error("Network error:", err);
-      alert("Cannot connect to server");
+      showToast("Cannot connect to server", true);
     }
   });
 }
@@ -73,19 +73,19 @@ if (stepsForm) {
     const sessionId = getSessionId();
 
     if (!sessionId) {
-      alert("Not logged in");
+      showGuestModal("Oh no! Log in to save your progress!");
       return;
     }
 
     const steps = Number(document.getElementById('stepsInput').value);
 
     if (!steps || steps <= 0) {
-      alert("Enter valid steps");
+      showToast("⚠️ Please enter a valid step count", true);
       return;
     }
 
     try {
-      const res = await await fetch('/api/steps', {
+      const res = await fetch('/api/steps', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -101,19 +101,19 @@ if (stepsForm) {
 
       if (!res.ok) {
         console.error("Steps error:", data);
-        alert(data.message || "Failed to update steps");
+        showToast(data.message || "Failed to update steps", true);
         return;
       }
 
       console.log("Steps updated:", data);
-      alert("Steps updated!");
+      showToast("✅ Steps updated!");
       loadSteps();
 
       stepsForm.reset();
 
     } catch (err) {
       console.error("Network error:", err);
-      alert("Cannot connect to server");
+      showToast("Cannot connect to server", true);
     }
   });
 }
@@ -165,11 +165,11 @@ async function loadSteps() {
     });
     if (!res.ok) return;
     const data = await res.json();
-    
+
     // Get today's local date string formatted as YYYY-MM-DD
     const tzOffset = (new Date()).getTimezoneOffset() * 60000;
     const today = (new Date(Date.now() - tzOffset)).toISOString().split('T')[0];
-    
+
     const todayStepsObj = data.find(s => s.date === today);
     const steps = todayStepsObj ? todayStepsObj.steps : 0;
     updateStepsUI(steps);
