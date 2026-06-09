@@ -51,7 +51,8 @@ app.get('/{*splat}', (req, res) => {
 // MongoDB connection
 const MONGO_URI =
   process.env.MONGO_URI || "mongodb://127.0.0.1:27017/getbuffd";
-
+console.log("Using URI:", MONGO_URI);
+console.log("Connected DB:", mongoose.connection.name);
 mongoose
   .connect(MONGO_URI)
   .then(() => {

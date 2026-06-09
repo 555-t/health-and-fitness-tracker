@@ -1,5 +1,4 @@
-const API_URL = "http://localhost:5000/api/profile";
-
+const API_URL = "/api/profile";
 //get current session from localStorage (set during login)
 let currentSession = localStorage.getItem("buff_session");
 let currentUserId = null;
