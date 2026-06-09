@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // ==========================================
                 // --- Fetch Workouts (Active Minutes) ---
                 // ==========================================
-                const workoutResponse = await fetch('http://localhost:5000/api/tracker/workouts', {
+                const workoutResponse = await fetch('/api/tracker/workouts',  {
                     method: 'GET',
                     headers: { 'x-session-id': session }
                 });
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // ==========================================
                 // --- Fetch Nutrition (Calories) ---
                 // ==========================================
-                const nutritionResponse = await fetch(`http://localhost:5000/api/nutrition/${today}`, {
+                const nutritionResponse = await fetch(`/api/nutrition/${today}`, {
                     method: 'GET',
                     headers: { 'x-session-id': session }
                 });
