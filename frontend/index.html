@@ -325,8 +325,7 @@
         </div>
     </div>
 </section>
-<section class="custom-section text-center text-white beam-green" style="background: linear-gradient(rgba(34, 37, 43, 0.88), rgba(34, 37, 43, 0.88)), url('assets/images/cta-bg.jpg') center/cover fixed;">
-    <div class="container py-5">
+<section id="signup-cta" class="custom-section text-center text-white beam-green" style="background: linear-gradient(rgba(34, 37, 43, 0.88), rgba(34, 37, 43, 0.88)), url('assets/images/cta-bg.jpg') center/cover fixed;">    <div class="container py-5">
         <h2 class="display-4 font-weight-bold mb-3" style="font-family: 'Raleway', sans-serif;">WHAT ARE YOU WAITING FOR?</h2>
         <p class="lead mb-5 mx-auto" style="max-width: 600px; color: rgba(247,247,247,0.7);">Stop thinking and start doing. Join Get Buff'd today and transform your fitness journey.</p>
         <a href="register.html" class="btn btn-cta btn-lg px-5 font-weight-bold shadow-lg" style="font-size: 1.1rem; padding: 15px 40px;">SIGN UP TODAY</a>
@@ -335,7 +334,7 @@
 <footer class="bg-dark-1" style="padding: 30px 0;">
     <div class="container text-center text-white">
         <h5 class="font-weight-bold mb-2" style="color:var(--orange); font-family: 'Raleway', sans-serif;">GET BUFF'D</h5>
-        <p class="small mb-0" style="color: rgba(247,247,247,0.4); letter-spacing: 1px;">Phase 1 UI Prototype &bull; WIF2003 Web Programming</p>
+        <p class="small mb-0" style="color: rgba(247,247,247,0.4); letter-spacing: 1px;">Phase 2 Prototype &bull; WIF2003 Web Programming</p>
     </div>
 </footer>
 
@@ -353,6 +352,11 @@
             const authBtn = document.getElementById('auth-btn');
             if (authBtn) {
                 authBtn.innerHTML = `<a class="btn btn-login w-100" href="#" onclick="localStorage.removeItem('buff_session'); localStorage.removeItem('buff_user'); location.reload();"><i class="fas fa-sign-out-alt mr-2"></i>Sign Out</a>`;
+            }
+
+            const signupCTA = document.getElementById('signup-cta');
+            if (signupCTA) {
+                signupCTA.style.display = 'none';
             }
 
     }    
