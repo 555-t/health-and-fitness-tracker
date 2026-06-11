@@ -43,29 +43,38 @@ app.use("/api/reminders", reminderRoutes);
 // Serve frontend static files
 app.use(express.static(path.join(__dirname, "../frontend")));
 
-// SPA catch-all route (Express 5 compatible)
+// Unknown API routes
+app.use('/api', (req, res) => {
+  res.status(404).json({
+    error: 'API route not found'
+  });
+});
+
+// SPA catch-all
 app.get('/{*splat}', (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend/index.html"));
+  res.sendFile(path.join(__dirname, '../frontend/index.html'));
 });
 
 // MongoDB connection
 const MONGO_URI =
   process.env.MONGO_URI || "mongodb://127.0.0.1:27017/getbuffd";
-console.log("Using URI:", MONGO_URI);
-mongoose
-  .connect(MONGO_URI)
-  .then(() => {
-    console.log("MongoDB connected");
-    console.log("Connected DB:", mongoose.connection.name);
 
+if (require.main === module) {
+  console.log("Using URI:", MONGO_URI);
+  mongoose
+    .connect(MONGO_URI)
+    .then(() => {
+      console.log("MongoDB connected");
+      console.log("Connected DB:", mongoose.connection.name);
 
-    app.listen(5000, () => {
-      console.log("Server running on http://localhost:5000");
+      app.listen(5000, () => {
+        console.log("Server running on http://localhost:5000");
+      });
+    })
+    .catch((err) => {
+      console.error("MongoDB connection error:", err);
+      process.exit(1);
     });
-  })
-  .catch((err) => {
-    console.error("MongoDB connection error:", err);
-    process.exit(1);
-  });
+}
 
-  module.exports = { app }; // export app for testing purposes
+module.exports = { app }; // export app for testing purposes
