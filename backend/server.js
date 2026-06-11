@@ -52,11 +52,12 @@ app.get('/{*splat}', (req, res) => {
 const MONGO_URI =
   process.env.MONGO_URI || "mongodb://127.0.0.1:27017/getbuffd";
 console.log("Using URI:", MONGO_URI);
-console.log("Connected DB:", mongoose.connection.name);
 mongoose
   .connect(MONGO_URI)
   .then(() => {
     console.log("MongoDB connected");
+    console.log("Connected DB:", mongoose.connection.name);
+
 
     app.listen(5000, () => {
       console.log("Server running on http://localhost:5000");
