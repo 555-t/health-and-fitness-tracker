@@ -377,3 +377,4 @@ router.put("/:userId/deactivate", async (req, res) => {
 });
 
 module.exports = router;
+module.exports.validateProfileUpdate = validateProfileUpdate;
