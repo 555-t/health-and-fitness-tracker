@@ -66,3 +66,5 @@ mongoose
     console.error("MongoDB connection error:", err);
     process.exit(1);
   });
+
+  module.exports = { app }; // export app for testing purposes

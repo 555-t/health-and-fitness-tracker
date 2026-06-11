@@ -1,7 +1,8 @@
 {
   "scripts": {
-  "start-backend": "node backend/server.js",
-  "dev-backend": "nodemon backend/server.js"
+    "start-backend": "node backend/server.js",
+    "dev-backend": "nodemon backend/server.js",
+    "test": "jest --verbose --testEnvironment node"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",
@@ -12,6 +13,13 @@
     "mongoose": "^8.24.0"
   },
   "devDependencies": {
-    "nodemon": "^3.1.14"
+    "jest": "^30.4.2",
+    "mongodb-memory-server": "^10.4.3",
+    "nodemon": "^3.1.14",
+    "supertest": "^7.2.2"
+  },
+  "jest": {
+    "testMatch": ["**/backend/__tests__/**/*.test.js"],
+    "testTimeout": 30000
   }
 }
