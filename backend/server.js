@@ -1,4 +1,4 @@
-require("dotenv").config();
+require("dotenv").config({ override: true });
 
 const dns = require("dns");
 try {
@@ -51,21 +51,23 @@ app.get('/{*splat}', (req, res) => {
 // MongoDB connection
 const MONGO_URI =
   process.env.MONGO_URI || "mongodb://127.0.0.1:27017/getbuffd";
-console.log("Using URI:", MONGO_URI);
-mongoose
-  .connect(MONGO_URI)
-  .then(() => {
-    console.log("MongoDB connected");
-    console.log("Connected DB:", mongoose.connection.name);
 
+if (require.main === module) {
+  console.log("Using URI:", MONGO_URI);
+  mongoose
+    .connect(MONGO_URI)
+    .then(() => {
+      console.log("MongoDB connected");
+      console.log("Connected DB:", mongoose.connection.name);
 
-    app.listen(5000, () => {
-      console.log("Server running on http://localhost:5000");
+      app.listen(5000, () => {
+        console.log("Server running on http://localhost:5000");
+      });
+    })
+    .catch((err) => {
+      console.error("MongoDB connection error:", err);
+      process.exit(1);
     });
-  })
-  .catch((err) => {
-    console.error("MongoDB connection error:", err);
-    process.exit(1);
-  });
+}
 
-  module.exports = { app }; // export app for testing purposes
+module.exports = { app }; // export app for testing purposes
