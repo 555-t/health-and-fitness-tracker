@@ -10,6 +10,7 @@
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "jsonwebtoken": "^9.0.3",
+    "mongodb": "^7.3.0",
     "mongoose": "^8.24.0"
   },
   "devDependencies": {
@@ -19,7 +20,9 @@
     "supertest": "^7.2.2"
   },
   "jest": {
-    "testMatch": ["**/backend/__tests__/**/*.test.js"],
+    "testMatch": [
+      "**/backend/__tests__/**/*.test.js"
+    ],
     "testTimeout": 30000
   }
 }

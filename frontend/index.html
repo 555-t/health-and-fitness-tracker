@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
 
@@ -11,362 +12,464 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&family=Raleway:wght@400;700;900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&family=Raleway:wght@400;700;900&display=swap"
+        rel="stylesheet">
 
     <link rel="stylesheet" href="assets/css/templatemo-training-studio.css">
     <link rel="stylesheet" href="css/style.css">
 
-<style>
-    /* Brand color variables defined using CSS root variables
+    <style>
+        /* Brand color variables defined using CSS root variables
        Allows easy theme color changes across entire website */
-    :root {
-        --black: #2b2e35;
-        --green: #5be662;
-        --orange: #ff4d00;
-        --white: #f7f7f7;
-        --dark-card: #22252b;
-    }
+        :root {
+            --black: #2b2e35;
+            --green: #5be662;
+            --orange: #ff4d00;
+            --white: #f7f7f7;
+            --dark-card: #22252b;
+        }
 
-    /* Base body styling */
-    body {
-        font-family: 'Poppins', sans-serif;
-        background-color: var(--black);
-        color: var(--white);
-    }
+        /* Base body styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--black);
+            color: var(--white);
+        }
 
-    /* Custom navbar built on top of Bootstrap navbar
+        /* Custom navbar built on top of Bootstrap navbar
        Bootstrap provides structure while custom CSS provides branding */
-    /* Custom navbar is defined in style.css */
+        /* Custom navbar is defined in style.css */
 
-    /* ===== HERO SECTION =====
+        /* ===== HERO SECTION =====
        Main landing section introducing the system */
-    .solid-hero {
-        position: relative;
-        height: 75vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden; 
-    }
+        .solid-hero {
+            position: relative;
+            height: 75vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
 
-    /* Background fitness video for visual engagement (video is from assets, can be changed if needed)*/
-    #bg-video {
-        position: absolute;
-        top: 0; left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover; /* Ensures video fills screen nicely */
-        z-index: 0;
-    }
+        /* Background fitness video for visual engagement (video is from assets, can be changed if needed)*/
+        #bg-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Ensures video fills screen nicely */
+            z-index: 0;
+        }
 
-    /* Dark overlay improves text readability over video */
-    .video-overlay {
-        position: absolute;
-        top: 0; left: 0; width: 100%; height: 100%;
-        background: linear-gradient(135deg, rgba(26,28,33,0.85) 0%, rgba(43,46,53,0.85) 60%, rgba(30,33,24,0.85) 100%);
-        z-index: 1;
-        display: block !important;
-    }
+        /* Dark overlay improves text readability over video */
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(26, 28, 33, 0.85) 0%, rgba(43, 46, 53, 0.85) 60%, rgba(30, 33, 24, 0.85) 100%);
+            z-index: 1;
+            display: block !important;
+        }
 
-    .hero-content { z-index: 2; position: relative; }
+        .hero-content {
+            z-index: 2;
+            position: relative;
+        }
 
-    /* Call-to-action button encouraging registration */
-    .btn-cta {
-        background-color: var(--orange);
-        color: var(--white);
-        border-radius: 30px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        border: 2px solid var(--orange);
-        transition: all 0.3s ease;
-    }
+        /* Call-to-action button encouraging registration */
+        .btn-cta {
+            background-color: var(--orange);
+            color: var(--white);
+            border-radius: 30px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 2px solid var(--orange);
+            transition: all 0.3s ease;
+        }
 
-    .btn-cta:hover {
-        background-color: var(--green);
-        border-color: var(--green);
-        color: var(--black);
-        box-shadow: 0 0 15px rgba(91, 230, 98, 0.4);
-    }
+        .btn-cta:hover {
+            background-color: var(--green);
+            border-color: var(--green);
+            color: var(--black);
+            box-shadow: 0 0 15px rgba(91, 230, 98, 0.4);
+        }
 
-    /* Section background helpers used to alternate dark sections visually */
-    .bg-dark-1 { background-color: var(--dark-card); }
-    .bg-dark-2 { background-color: var(--black); }
+        /* Section background helpers used to alternate dark sections visually */
+        .bg-dark-1 {
+            background-color: var(--dark-card);
+        }
 
-    /* colored divider beams between sections for a pop of color  */
-    .beam-orange { border-bottom: 2px solid var(--orange); }
-    .beam-green { border-bottom: 2px solid var(--green); }
+        .bg-dark-2 {
+            background-color: var(--black);
+        }
 
-    /* Standard spacing used for all major sections */
-    .custom-section { padding: 80px 0; }
+        /* colored divider beams between sections for a pop of color  */
+        .beam-orange {
+            border-bottom: 2px solid var(--orange);
+        }
 
-    /* Dashboard cards based on Bootstrap card component
+        .beam-green {
+            border-bottom: 2px solid var(--green);
+        }
+
+        /* Standard spacing used for all major sections */
+        .custom-section {
+            padding: 80px 0;
+        }
+
+        /* Dashboard cards based on Bootstrap card component
        Used for clean UI grouping of statistics */
-    .card-dark {
-        background-color: var(--black);
-        border: 1px solid rgba(255,255,255,0.05);
-        border-radius: 8px;
-        transition: transform 0.3s ease;
-    }
+        .card-dark {
+            background-color: var(--black);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
 
-    /* Small hover animation for visual interactivity */
-    .card-dark:hover {
-        transform: translateY(-5px);
-        border-color: rgba(255,255,255,0.15);
-    }
+        /* Small hover animation for visual interactivity */
+        .card-dark:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
 
-    /* Feature images styled for presentation*/
-    .feature-img {
-        border-radius: 15px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-        border: 1px solid rgba(255,255,255,0.05);
-        transition: transform 0.4s ease, box-shadow 0.4s ease;
-        max-height: 400px;
-        object-fit: cover;
-        width: 100%;
-    }
+        /* Feature images styled for presentation*/
+        .feature-img {
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            max-height: 400px;
+            object-fit: cover;
+            width: 100%;
+        }
 
-    .feature-img:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 15px 40px rgba(255, 77, 0, 0.25);
-    }
+        .feature-img:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(255, 77, 0, 0.25);
+        }
 
-    /* Large icon size utility class */
-    .icon-10x { font-size: 8em; }
+        /* Large icon size utility class */
+        .icon-10x {
+            font-size: 8em;
+        }
 
-    /* ===== CALORIE RING =====
+        /* ===== CALORIE RING =====
        Custom SVG circular progress indicator */
-    .calorie-ring-wrap { position: relative; width: 100px; height: 100px; margin: 0 auto; }
+        .calorie-ring-wrap {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            margin: 0 auto;
+        }
 
-    /* Rotates circle so progress starts from top instead of right */
-    .calorie-ring-wrap svg { transform: rotate(-90deg); width: 100%; height: 100%; }
+        /* Rotates circle so progress starts from top instead of right */
+        .calorie-ring-wrap svg {
+            transform: rotate(-90deg);
+            width: 100%;
+            height: 100%;
+        }
 
-    /* Centered calorie text inside SVG ring */
-    .calorie-ring-text {
-        position: absolute; inset: 0; display: flex; flex-direction: column; 
-        align-items: center; justify-content: center;
-    }
-    .calorie-ring-text .num { font-family: 'Raleway', sans-serif; font-size: 1.4rem; font-weight: 900; color: var(--white); line-height: 1; }
-    .calorie-ring-text .lbl { font-size: 0.6rem; letter-spacing: 1px; text-transform: uppercase; color: rgba(247, 247, 247, 0.45); margin-top: 2px; }
+        /* Centered calorie text inside SVG ring */
+        .calorie-ring-text {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
 
-</style>
+        .calorie-ring-text .num {
+            font-family: 'Raleway', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: var(--white);
+            line-height: 1;
+        }
+
+        .calorie-ring-text .lbl {
+            font-size: 0.6rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: rgba(247, 247, 247, 0.45);
+            margin-top: 2px;
+        }
+    </style>
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg navbar-custom">
-    <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container">
             <a class="navbar-brand" href="index.html">
-            <i class="fa-solid fa-dumbbell mr-2" style="color: var(--orange);"></i>Get<span>Buff'd</span>
-        </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
-            <span class="navbar-toggler-icon" style="color: white;"><i class="fas fa-bars"></i></span>
-        </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto align-items-lg-center">
-                <li class="nav-item"><a class="nav-link active" href="index.html"><i class="fas fa-home mr-2"></i>Home</a></li>
-                <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
-                        <i class="fas fa-layer-group mr-2"></i>Features
-                    </a>
-                <div class="dropdown-menu">
-                        <a class="dropdown-item" href="tracker.html"><i class="fas fa-clipboard-list mr-2"></i>Workout Tracker</a>
-                        <a class="dropdown-item" href="nutrition.html"><i class="fas fa-apple-alt mr-2"></i>Nutrition Planner</a>
-                        <a class="dropdown-item" href="progress.html"><i class="fas fa-chart-line mr-2"></i>Progress Charts</a>
-                        <div class="dropdown-divider" style="border-color: rgba(255,255,255,0.1);"></div>
-                        <a class="dropdown-item" href="profile.html"><i class="fas fa-user-cog mr-2"></i>My Profile</a>
-                    </div>
-                </li>
-                <li class="nav-item ml-lg-4 mt-3 mt-lg-0" id="auth-btn">
-                    <a class="btn btn-login w-100" href="login.html"><i class="fas fa-sign-in-alt mr-2"></i>Log In</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-<header class="solid-hero text-white text-center shadow-lg beam-orange">
-        <video autoplay muted loop id="bg-video">
-        <source src="assets/images/gym-video.mp4" type="video/mp4" />
-    </video>
-    <div class="video-overlay header-text"></div>
-
-    <div class="container hero-content">
-        <h6 class="text-uppercase mb-3 font-weight-bold" style="letter-spacing: 4px; color: var(--green);">Unleash Your Potential</h6>
-        <h1 class="font-weight-bold mb-4" style="font-family: 'Raleway', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem);">LEVEL UP YOUR <span style="color:var(--orange);">FITNESS</span></h1>
-        <p class="lead mb-5 mx-auto" style="opacity: 1; max-width: 600px;">Your complete hub for tracking, planning, and achieving.</p>
-        <div id="heroAuthArea">
-            <a href="register.html" class="btn btn-cta btn-lg px-5 font-weight-bold shadow">BECOME A MEMBER</a>
-        </div>
-    </div>
-</header>
-<section id="dashboard" class="custom-section bg-dark-1 beam-green">
-    <div class="container" style="position: relative;">
-        <h2 class="font-weight-bold text-center mb-5 text-white" style="font-family: 'Raleway', sans-serif;">Daily Dashboard Summary</h2>
-        
-        <div id="lockedOverlay" class="d-flex flex-column align-items-center justify-content-center w-100" style="position: absolute; top: 80px; left: 0; height: 100%; z-index: 10;">
-            <i class="fas fa-lock fa-3x mb-3 text-white"></i>
-            <h4 class="text-white font-weight-bold" style="font-family: 'Raleway', sans-serif;">Dashboard Locked</h4>
-            <p style="color: rgba(247,247,247,0.6);">Please log in to view your daily statistics.</p>
-        </div>
-
-        <div class="row" id="dashboardCards" style="filter: blur(6px); opacity: 0.4; pointer-events: none; transition: all 0.5s ease;">
-            
-    <div class="col-md-4 mb-4">
-                <div class="card p-4 text-center h-100 card-dark">
-                    <div class="card-body d-flex flex-column justify-content-center">
-                        <i class="fa-solid fa-stopwatch fa-3x mb-3" style="color:var(--orange);"></i>
-                        <h6 class="text-uppercase font-weight-bold" style="color: rgba(247,247,247,0.5);">Active Minutes</h6>
-                        <h2 id="active-minutes-display" class="font-weight-bold mt-2" style="font-family: 'Raleway', sans-serif;">0 <span style="font-size: 1rem; color: rgba(247,247,247,0.5);">min</span></h2>
-                        <p class="small mt-2 mb-0" style="color: var(--green);"><i class="fas fa-fire mr-1"></i>Great pace today!</p>
-                    </div>
-                </div>
-            
+                <i class="fa-solid fa-dumbbell mr-2" style="color: var(--orange);"></i>Get<span>Buff'd</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+                <span class="navbar-toggler-icon" style="color: white;"><i class="fas fa-bars"></i></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link active" href="index.html"><i
+                                class="fas fa-home mr-2"></i>Home</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                            <i class="fas fa-layer-group mr-2"></i>Features
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="tracker.html"><i
+                                    class="fas fa-clipboard-list mr-2"></i>Workout Tracker</a>
+                            <a class="dropdown-item" href="nutrition.html"><i
+                                    class="fas fa-apple-alt mr-2"></i>Nutrition Planner</a>
+                            <a class="dropdown-item" href="progress.html"><i class="fas fa-chart-line mr-2"></i>Progress
+                                Charts</a>
+                            <div class="dropdown-divider" style="border-color: rgba(255,255,255,0.1);"></div>
+                            <a class="dropdown-item" href="profile.html"><i class="fas fa-user-cog mr-2"></i>My
+                                Profile</a>
+                        </div>
+                    </li>
+                    <li class="nav-item ml-lg-4 mt-3 mt-lg-0" id="auth-btn">
+                        <a class="btn btn-login w-100" href="login.html"><i class="fas fa-sign-in-alt mr-2"></i>Log
+                            In</a>
+                    </li>
+                </ul>
             </div>
-    <div class="col-md-4 mb-4">
-                <div class="card p-4 text-center h-100 card-dark">
-                    <div class="card-body d-flex flex-column justify-content-center align-items-center">
-                        <i class="fa-solid fa-utensils fa-2x mb-3" style="color:var(--green);"></i>
-                        <h6 class="text-uppercase font-weight-bold mb-3" style="color: rgba(247,247,247,0.5);">Calories Consumed</h6>
-                        <div class="calorie-ring-wrap mt-2">
-                            <svg viewBox="0 0 140 140">
-                                <circle cx="70" cy="70" r="58" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="12"></circle>
-                                <circle id="calorie-progress-circle" cx="70" cy="70" r="58" fill="none" stroke="var(--green)" stroke-width="12" stroke-dasharray="364.4" stroke-dashoffset="364.4" stroke-linecap="round"></circle>
-                            </svg>
-                            <div class="calorie-ring-text">
-                                <div id="calorie-number-display" class="num">0</div>
-                                <div class="lbl">/ <span id="calorie-goal-display">2000</span></div>  
+        </div>
+    </nav>
+    <header class="solid-hero text-white text-center shadow-lg beam-orange">
+        <video autoplay muted loop id="bg-video">
+            <source src="assets/images/gym-video.mp4" type="video/mp4" />
+        </video>
+        <div class="video-overlay header-text"></div>
+
+        <div class="container hero-content">
+            <h6 class="text-uppercase mb-3 font-weight-bold" style="letter-spacing: 4px; color: var(--green);">Unleash
+                Your Potential</h6>
+            <h1 class="font-weight-bold mb-4"
+                style="font-family: 'Raleway', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem);">LEVEL UP YOUR <span
+                    style="color:var(--orange);">FITNESS</span></h1>
+            <p class="lead mb-5 mx-auto" style="opacity: 1; max-width: 600px;">Your complete hub for tracking, planning,
+                and achieving.</p>
+            <div id="heroAuthArea">
+                <a href="register.html" class="btn btn-cta btn-lg px-5 font-weight-bold shadow">BECOME A MEMBER</a>
+            </div>
+        </div>
+    </header>
+    <section id="dashboard" class="custom-section bg-dark-1 beam-green">
+        <div class="container" style="position: relative;">
+            <h2 class="font-weight-bold text-center mb-5 text-white" style="font-family: 'Raleway', sans-serif;">Daily
+                Dashboard Summary</h2>
+
+            <div id="lockedOverlay" class="d-flex flex-column align-items-center justify-content-center w-100"
+                style="position: absolute; top: 80px; left: 0; height: 100%; z-index: 10;">
+                <i class="fas fa-lock fa-3x mb-3 text-white"></i>
+                <h4 class="text-white font-weight-bold" style="font-family: 'Raleway', sans-serif;">Dashboard Locked
+                </h4>
+                <p style="color: rgba(247,247,247,0.6);">Please log in to view your daily statistics.</p>
+            </div>
+
+            <div class="row" id="dashboardCards"
+                style="filter: blur(6px); opacity: 0.4; pointer-events: none; transition: all 0.5s ease;">
+
+                <div class="col-md-4 mb-4">
+                    <div class="card p-4 text-center h-100 card-dark">
+                        <div class="card-body d-flex flex-column justify-content-center">
+                            <i class="fa-solid fa-stopwatch fa-3x mb-3" style="color:var(--orange);"></i>
+                            <h6 class="text-uppercase font-weight-bold" style="color: rgba(247,247,247,0.5);">Active
+                                Minutes</h6>
+                            <h2 id="active-minutes-display" class="font-weight-bold mt-2"
+                                style="font-family: 'Raleway', sans-serif;">0 <span
+                                    style="font-size: 1rem; color: rgba(247,247,247,0.5);">min</span></h2>
+                            <p class="small mt-2 mb-0" style="color: var(--green);"><i
+                                    class="fas fa-fire mr-1"></i>Great pace today!</p>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card p-4 text-center h-100 card-dark">
+                        <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                            <i class="fa-solid fa-utensils fa-2x mb-3" style="color:var(--green);"></i>
+                            <h6 class="text-uppercase font-weight-bold mb-3" style="color: rgba(247,247,247,0.5);">
+                                Calories Consumed</h6>
+                            <div class="calorie-ring-wrap mt-2">
+                                <svg viewBox="0 0 140 140">
+                                    <circle cx="70" cy="70" r="58" fill="none" stroke="rgba(255,255,255,0.07)"
+                                        stroke-width="12"></circle>
+                                    <circle id="calorie-progress-circle" cx="70" cy="70" r="58" fill="none"
+                                        stroke="var(--green)" stroke-width="12" stroke-dasharray="364.4"
+                                        stroke-dashoffset="364.4" stroke-linecap="round"></circle>
+                                </svg>
+                                <div class="calorie-ring-text">
+                                    <div id="calorie-number-display" class="num">0</div>
+                                    <div class="lbl">/ <span id="calorie-goal-display">2000</span></div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-    <div class="col-md-4 mb-4">
-                <div class="card p-4 text-center h-100 card-dark">
-                    <div class="card-body d-flex flex-column justify-content-center">
-                        <i class="fa-solid fa-calendar-check fa-3x mb-3 text-info"></i>
-                        <h6 class="text-uppercase font-weight-bold" style="color: rgba(247,247,247,0.5);">Last Workout</h6>
-                        <h2 id="last-workout-display" class="font-weight-bold h4 mt-2" style="font-family: 'Raleway', sans-serif;">None</h2>
-                        <p id="last-workout-time" class="small mt-2 mb-0" style="color: rgba(247,247,247,0.4);">Let's get moving!</p>
+                <div class="col-md-4 mb-4">
+                    <div class="card p-4 text-center h-100 card-dark">
+                        <div class="card-body d-flex flex-column justify-content-center">
+                            <i class="fa-solid fa-calendar-check fa-3x mb-3 text-info"></i>
+                            <h6 class="text-uppercase font-weight-bold" style="color: rgba(247,247,247,0.5);">Last
+                                Workout</h6>
+                            <h2 id="last-workout-display" class="font-weight-bold h4 mt-2"
+                                style="font-family: 'Raleway', sans-serif;">None</h2>
+                            <p id="last-workout-time" class="small mt-2 mb-0" style="color: rgba(247,247,247,0.4);">
+                                Let's get moving!</p>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-        </div>
-    </div>
-</section>
-<section class="custom-section bg-dark-2 text-center beam-orange" id="features">
-    <div class="container py-2">
-        <h6 class="text-uppercase font-weight-bold mb-2" style="letter-spacing: 2px; color: rgba(247,247,247,0.5);">What We Offer</h6>
-        <h2 class="display-4 font-weight-bold mb-0 text-white" style="font-family: 'Raleway', sans-serif;">Explore Our <span style="color:var(--orange);">Features</span></h2>
-    </div>
-</section>
-<section class="custom-section bg-dark-1 text-white beam-green">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-6 mb-4 mb-lg-0">
-                <img src="assets/images/training-image-01.jpg" alt="Workout Tracker" class="img-fluid feature-img">
-            </div>
-            <div class="col-lg-6 pl-lg-5">
-                <h2 class="display-4 font-weight-bold mb-3" style="font-family: 'Raleway', sans-serif;">Workout Tracker</h2>
-                <p class="lead mb-4" style="color: rgba(247,247,247,0.6);">
-                    Log your daily exercises with precision. Record activity types, durations, and dates, and view your complete workout history in an easy-to-read format.
-                </p>
-                <a href="tracker.html" class="btn btn-outline-light btn-lg px-5 font-weight-bold" style="border-radius:30px; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px;">Open Tracker</a>
             </div>
         </div>
-    </div>
-</section>
-
-<section class="custom-section bg-dark-2 text-white beam-orange">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-6 order-lg-1 pr-lg-5">
-                <h2 class="display-4 font-weight-bold mb-3" style="font-family: 'Raleway', sans-serif;">Nutrition Planner</h2>
-                <p class="lead mb-4" style="color: rgba(247,247,247,0.6);">
-                    Take control of your diet. Analyze your daily intake, plan meals effectively, and use our built-in calculator to find meal suggestions tailored to your goals.
-                </p>
-                <a href="nutrition.html" class="btn btn-outline-light btn-lg px-5 font-weight-bold" style="border-radius:30px; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px;">Start Planning</a>
-            </div>
-            <div class="col-lg-6 order-lg-2 mt-4 mt-lg-0 text-center">
-                <i class="fa-solid fa-apple-whole icon-10x" style="color:var(--orange); text-shadow: 0 0 40px rgba(255, 77, 0, 0.4);"></i>
+    </section>
+    <section class="custom-section bg-dark-2 text-center beam-orange" id="features">
+        <div class="container py-2">
+            <h6 class="text-uppercase font-weight-bold mb-2" style="letter-spacing: 2px; color: rgba(247,247,247,0.5);">
+                What We Offer</h6>
+            <h2 class="display-4 font-weight-bold mb-0 text-white" style="font-family: 'Raleway', sans-serif;">Explore
+                Our <span style="color:var(--orange);">Features</span></h2>
+        </div>
+    </section>
+    <section class="custom-section bg-dark-1 text-white beam-green">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <img src="assets/images/training-image-01.jpg" alt="Workout Tracker" class="img-fluid feature-img">
+                </div>
+                <div class="col-lg-6 pl-lg-5">
+                    <h2 class="display-4 font-weight-bold mb-3" style="font-family: 'Raleway', sans-serif;">Workout
+                        Tracker</h2>
+                    <p class="lead mb-4" style="color: rgba(247,247,247,0.6);">
+                        Log your daily exercises with precision. Record activity types, durations, and dates, and view
+                        your complete workout history in an easy-to-read format.
+                    </p>
+                    <a href="tracker.html" class="btn btn-outline-light btn-lg px-5 font-weight-bold"
+                        style="border-radius:30px; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px;">Open
+                        Tracker</a>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<section class="custom-section bg-dark-1 text-white beam-green">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-6 mb-4 mb-lg-0">
-                <img src="assets/images/training-image-03.jpg" alt="Progress Charts" class="img-fluid feature-img">
-            </div>
-            <div class="col-lg-6 pl-lg-5">
-                <h2 class="display-4 font-weight-bold mb-3" style="font-family: 'Raleway', sans-serif;">Visual Progress</h2>
-                <p class="lead mb-4" style="color: rgba(247,247,247,0.6);">
-                    Numbers don't lie. Monitor your gains through interactive progress charts and stay on track with smart notifications highlighting your improvement over time.
-                </p>
-                <a href="progress.html" class="btn btn-outline-light btn-lg px-5 font-weight-bold" style="border-radius:30px; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px;">View Analytics</a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="custom-section bg-dark-2 text-white beam-orange">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-6 order-lg-1 pr-lg-5">
-                <h2 class="display-4 font-weight-bold mb-3" style="font-family: 'Raleway', sans-serif;">Profile Management</h2>
-                <p class="lead mb-4" style="color: rgba(247,247,247,0.6);">
-                    Your personal hub. Keep your data up to date, adjust your fitness goals, manage your account settings securely, and customize your experience.
-                </p>
-                <a href="profile.html" class="btn btn-outline-light btn-lg px-5 font-weight-bold" style="border-radius:30px; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px;">Edit Profile</a>
-            </div>
-            <div class="col-lg-6 order-lg-2 mt-4 mt-lg-0 text-center">
-                <i class="fa-solid fa-user-gear icon-10x" style="color:var(--green); text-shadow: 0 0 40px rgba(91, 230, 98, 0.4);"></i>
+    <section class="custom-section bg-dark-2 text-white beam-orange">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 order-lg-1 pr-lg-5">
+                    <h2 class="display-4 font-weight-bold mb-3" style="font-family: 'Raleway', sans-serif;">Nutrition
+                        Planner</h2>
+                    <p class="lead mb-4" style="color: rgba(247,247,247,0.6);">
+                        Take control of your diet. Analyze your daily intake, plan meals effectively, and use our
+                        built-in calculator to find meal suggestions tailored to your goals.
+                    </p>
+                    <a href="nutrition.html" class="btn btn-outline-light btn-lg px-5 font-weight-bold"
+                        style="border-radius:30px; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px;">Start
+                        Planning</a>
+                </div>
+                <div class="col-lg-6 order-lg-2 mt-4 mt-lg-0 text-center">
+                    <i class="fa-solid fa-apple-whole icon-10x"
+                        style="color:var(--orange); text-shadow: 0 0 40px rgba(255, 77, 0, 0.4);"></i>
+                </div>
             </div>
         </div>
-    </div>
-</section>
-<section id="signup-cta" class="custom-section text-center text-white beam-green" style="background: linear-gradient(rgba(34, 37, 43, 0.88), rgba(34, 37, 43, 0.88)), url('assets/images/cta-bg.jpg') center/cover fixed;">    <div class="container py-5">
-        <h2 class="display-4 font-weight-bold mb-3" style="font-family: 'Raleway', sans-serif;">WHAT ARE YOU WAITING FOR?</h2>
-        <p class="lead mb-5 mx-auto" style="max-width: 600px; color: rgba(247,247,247,0.7);">Stop thinking and start doing. Join Get Buff'd today and transform your fitness journey.</p>
-        <a href="register.html" class="btn btn-cta btn-lg px-5 font-weight-bold shadow-lg" style="font-size: 1.1rem; padding: 15px 40px;">SIGN UP TODAY</a>
-    </div>
-</section>
-<footer class="bg-dark-1" style="padding: 30px 0;">
-    <div class="container text-center text-white">
-        <h5 class="font-weight-bold mb-2" style="color:var(--orange); font-family: 'Raleway', sans-serif;">GET BUFF'D</h5>
-        <p class="small mb-0" style="color: rgba(247,247,247,0.4); letter-spacing: 1px;">Phase 2 Prototype &bull; WIF2003 Web Programming</p>
-    </div>
-</footer>
+    </section>
 
+    <section class="custom-section bg-dark-1 text-white beam-green">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <img src="assets/images/training-image-03.jpg" alt="Progress Charts" class="img-fluid feature-img">
+                </div>
+                <div class="col-lg-6 pl-lg-5">
+                    <h2 class="display-4 font-weight-bold mb-3" style="font-family: 'Raleway', sans-serif;">Visual
+                        Progress</h2>
+                    <p class="lead mb-4" style="color: rgba(247,247,247,0.6);">
+                        Numbers don't lie. Monitor your gains through interactive progress charts and stay on track with
+                        smart notifications highlighting your improvement over time.
+                    </p>
+                    <a href="progress.html" class="btn btn-outline-light btn-lg px-5 font-weight-bold"
+                        style="border-radius:30px; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px;">View
+                        Analytics</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<!-- ===== AUTHENTICATION STATE SCRIPT ===== -->
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Check if the user is logged in
-        const session = localStorage.getItem('buff_session');
-        
-        if (session) {
-            // Simple auth: rely on localStorage.buff_user (no token decoding)
-            let userName = 'Member';
+    <section class="custom-section bg-dark-2 text-white beam-orange">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 order-lg-1 pr-lg-5">
+                    <h2 class="display-4 font-weight-bold mb-3" style="font-family: 'Raleway', sans-serif;">Profile
+                        Management</h2>
+                    <p class="lead mb-4" style="color: rgba(247,247,247,0.6);">
+                        Your personal hub. Keep your data up to date, adjust your fitness goals, manage your account
+                        settings securely, and customize your experience.
+                    </p>
+                    <a href="profile.html" class="btn btn-outline-light btn-lg px-5 font-weight-bold"
+                        style="border-radius:30px; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px;">Edit
+                        Profile</a>
+                </div>
+                <div class="col-lg-6 order-lg-2 mt-4 mt-lg-0 text-center">
+                    <i class="fa-solid fa-user-gear icon-10x"
+                        style="color:var(--green); text-shadow: 0 0 40px rgba(91, 230, 98, 0.4);"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="signup-cta" class="custom-section text-center text-white beam-green"
+        style="background: linear-gradient(rgba(34, 37, 43, 0.88), rgba(34, 37, 43, 0.88)), url('assets/images/cta-bg.jpg') center/cover fixed;">
+        <div class="container py-5">
+            <h2 class="display-4 font-weight-bold mb-3" style="font-family: 'Raleway', sans-serif;">WHAT ARE YOU WAITING
+                FOR?</h2>
+            <p class="lead mb-5 mx-auto" style="max-width: 600px; color: rgba(247,247,247,0.7);">Stop thinking and start
+                doing. Join Get Buff'd today and transform your fitness journey.</p>
+            <a href="register.html" class="btn btn-cta btn-lg px-5 font-weight-bold shadow-lg"
+                style="font-size: 1.1rem; padding: 15px 40px;">SIGN UP TODAY</a>
+        </div>
+    </section>
+    <footer class="bg-dark-1" style="padding: 30px 0;">
+        <div class="container text-center text-white">
+            <h5 class="font-weight-bold mb-2" style="color:var(--orange); font-family: 'Raleway', sans-serif;">GET
+                BUFF'D</h5>
+            <p class="small mb-0" style="color: rgba(247,247,247,0.4); letter-spacing: 1px;">Phase 2 Prototype &bull;
+                WIF2003 Web Programming</p>
+        </div>
+    </footer>
 
-            const authBtn = document.getElementById('auth-btn');
-            if (authBtn) {
-                authBtn.innerHTML = `<a class="btn btn-login w-100" href="#" onclick="localStorage.removeItem('buff_session'); localStorage.removeItem('buff_user'); location.reload();"><i class="fas fa-sign-out-alt mr-2"></i>Sign Out</a>`;
+    <!-- ===== AUTHENTICATION STATE SCRIPT ===== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Check if the user is logged in
+            const session = localStorage.getItem('buff_session');
+
+            if (session) {
+                // Simple auth: rely on localStorage.buff_user (no token decoding)
+                let userName = 'Member';
+
+                const authBtn = document.getElementById('auth-btn');
+                if (authBtn) {
+                    authBtn.innerHTML = `<a class="btn btn-login w-100" href="#" onclick="localStorage.removeItem('buff_session'); localStorage.removeItem('buff_user'); location.reload();"><i class="fas fa-sign-out-alt mr-2"></i>Sign Out</a>`;
+                }
+
+                const signupCTA = document.getElementById('signup-cta');
+                if (signupCTA) {
+                    signupCTA.style.display = 'none';
+                }
+
             }
+        });
+    </script>
 
-            const signupCTA = document.getElementById('signup-cta');
-            if (signupCTA) {
-                signupCTA.style.display = 'none';
-            }
-
-    }    
-});
-</script>
-
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
-<script src="js/dashboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+    <script src="js/dashboard.js"></script>
 
 </body>
+
 </html>
