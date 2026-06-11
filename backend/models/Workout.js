@@ -14,14 +14,6 @@ const workoutSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
-  calories: {
-    type: Number,
-    default: 0
-  },
-  steps: {
-    type: Number,
-    default: 0
-  },
   date: {
     type: String,
     required: true

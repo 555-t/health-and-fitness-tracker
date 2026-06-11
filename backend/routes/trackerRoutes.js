@@ -24,8 +24,6 @@ router.post('/workouts', async (req, res) => {
       userId: user.userId,
       activity: req.body.activity,
       duration: req.body.duration,
-      calories: req.body.calories || 0,
-      steps: req.body.steps || 0,
       date: req.body.date,
       time: req.body.time
     });
