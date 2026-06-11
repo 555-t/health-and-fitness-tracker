@@ -1,4 +1,4 @@
-# 🏋️ Health & Fitness Tracker
+# 🏋️ GETBUFFD (Health & Fitness Tracker)
 
 A full-stack web application for tracking workouts, nutrition, steps, and fitness progress. Built with a vanilla JavaScript frontend and a Node.js/Express backend connected to MongoDB.
 
