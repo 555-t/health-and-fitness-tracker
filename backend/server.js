@@ -43,9 +43,16 @@ app.use("/api/reminders", reminderRoutes);
 // Serve frontend static files
 app.use(express.static(path.join(__dirname, "../frontend")));
 
-// SPA catch-all route (Express 5 compatible)
+// Unknown API routes
+app.use('/api', (req, res) => {
+  res.status(404).json({
+    error: 'API route not found'
+  });
+});
+
+// SPA catch-all
 app.get('/{*splat}', (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend/index.html"));
+  res.sendFile(path.join(__dirname, '../frontend/index.html'));
 });
 
 // MongoDB connection
