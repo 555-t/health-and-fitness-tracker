@@ -1,88 +1,224 @@
-# 📁 Project Structure
+# 🏋️ Health & Fitness Tracker
 
-## 📂 Frontend (Phase 1 – UI Development)
-
-* index.html → Dashboard (main page)
-* login.html → Login page
-* register.html → Register page
-* profile.html → Profile page
-* tracker.html → Fitness tracker page
-* nutrition.html → Nutrition planner page
-
-### /components
-
-* navbar.html → Shared navigation bar
-
-### /css
-
-* style.css → Main stylesheet
-
-### /js
-
-* auth.js → Authentication logic
-* profile.js → Profile functions
-* tracker.js → Workout tracking logic
-* nutrition.js → Nutrition logic
-* chart.js → Charts (Chart.js)
+A full-stack web application for tracking workouts, nutrition, steps, and fitness progress. Built with a vanilla JavaScript frontend and a Node.js/Express backend connected to MongoDB.
 
 ---
 
-## 📂 Backend (Phase 2 – System Development)
+## 🚀 Tech Stack
 
-* server.js → Main server file
-
-### /routes
-
-* authRoutes.js → Authentication routes
-* profileRoutes.js → Profile routes
-* trackerRoutes.js → Workout routes
-* stepsRoutes.js
-
-### /models
-
-* User.js → User schema
-* Workout.js → Workout schema
-* Steps.js (New) -> Steps schema
+| Layer | Technologies |
+|---|---|
+| Frontend | HTML5, CSS3, JavaScript (ES6+) |
+| UI Framework | Bootstrap 4, Font Awesome, Flaticon |
+| Charts | Chart.js |
+| Backend | Node.js, Express.js 5 |
+| Database | MongoDB, Mongoose 8 |
+| Auth | Session-based (in-memory) + bcryptjs |
+| Testing | Jest, Supertest, mongodb-memory-server |
+| Dev Tools | nodemon, dotenv |
 
 ---
 
-## 📂 Database
+## 📁 Project Structure
 
-* Stores exported MongoDB data (JSON format)
+```
+health-and-fitness-tracker/
+├── backend/
+│   ├── models/
+│   │   ├── User.js           # User schema (auth + profile fields)
+│   │   ├── Workout.js        # Workout entry schema
+│   │   ├── Steps.js          # Daily step count schema (unique per user/date)
+│   │   ├── Nutrition.js      # Daily nutrition log & goals schema
+│   │   └── Reminder.js       # User workout reminder schema
+│   ├── routes/
+│   │   ├── authRoutes.js     # POST /api/auth/register, /api/auth/login
+│   │   ├── trackerRoutes.js  # POST/GET/DELETE /api/tracker/workouts
+│   │   ├── stepsRoutes.js    # POST /api/steps (upsert by date)
+│   │   ├── nutritionRoutes.js# GET/POST /api/nutrition/:date
+│   │   ├── profileRoutes.js  # GET/PUT /api/profile (with validation)
+│   │   ├── progressRoutes.js # GET /api/progress/summary
+│   │   └── reminderRoutes.js # GET/POST /api/reminders
+│   ├── __tests__/
+│   │   ├── helpers/
+│   │   │   └── setup.js
+│   │   ├── ft01-register.test.js       # Functional: registration flow
+│   │   ├── ft02-login.test.js          # Functional: login flow
+│   │   ├── ft03-workouts.test.js       # Functional: workout CRUD
+│   │   ├── ft04-nutrition.test.js      # Functional: nutrition log
+│   │   ├── ft05-unknown-route.test.js  # Functional: 404 handling
+│   │   ├── it01-register-db.test.js    # Integration: DB persistence
+│   │   ├── it02-workout-isolation.test.js  # Integration: per-user isolation
+│   │   ├── it03-steps-upsert.test.js   # Integration: steps upsert logic
+│   │   ├── it04-profile-update.test.js # Integration: profile updates
+│   │   ├── ut01-user-schema.test.js    # Unit: User model validation
+│   │   ├── ut02-profile-validation.test.js # Unit: profile input validation
+│   │   ├── ut03-workout-schema.test.js # Unit: Workout model validation
+│   │   └── ut04-steps-schema.test.js   # Unit: Steps model validation
+│   └── server.js             # Express app entry point (port 5000)
+│
+├── frontend/
+│   ├── index.html            # Dashboard / landing page
+│   ├── login.html            # Login page
+│   ├── register.html         # Registration page
+│   ├── profile.html          # User profile page
+│   ├── tracker.html          # Workout tracker page
+│   ├── nutrition.html        # Nutrition planner page
+│   ├── progress.html         # Progress charts & summary page
+│   ├── components/
+│   │   └── navbar.html       # Shared navigation bar
+│   ├── css/
+│   │   └── style.css         # Custom stylesheet
+│   ├── js/
+│   │   ├── auth-status.js    # Auth guard / session check
+│   │   ├── dashboard.js      # Dashboard data & UI logic
+│   │   ├── tracker.js        # Workout logging logic
+│   │   ├── nutrition.js      # Nutrition planner logic
+│   │   ├── profile.js        # Profile view & update logic
+│   │   ├── chart.js          # Chart.js wrappers & data viz
+│   │   └── notify.js         # Reminder / notification logic
+│   └── assets/
+│       ├── css/              # Bootstrap, Font Awesome, template CSS
+│       ├── js/               # jQuery, Bootstrap JS, plugins
+│       ├── fonts/            # Font Awesome, Flaticon, Flexslider fonts
+│       └── images/           # App images and background videos
+│
+├── package.json
+├── .gitignore
+└── README.md
+```
 
 ---
 
-## 📂 Report
+## ⚙️ Getting Started
 
-* Contains project report and documentation
+### Prerequisites
+
+- Node.js ≥ 18
+- MongoDB (local instance or Atlas URI)
+
+### Installation
+
+```bash
+# 1. Clone the repository
+git clone <repo-url>
+cd health-and-fitness-tracker
+
+# 2. Install dependencies
+npm install
+
+# 3. Create a .env file in the project root
+echo "MONGO_URI=mongodb://127.0.0.1:27017/getbuffd" > backend/.env
+```
+
+### Running the App
+
+```bash
+# Production
+npm run start-backend
+
+# Development (auto-reload with nodemon)
+npm run dev-backend
+```
+
+The server starts on **http://localhost:5000** and serves the frontend statically from the `/frontend` directory.
+
+### Running Tests
+
+```bash
+npm test
+```
+
+Tests use `mongodb-memory-server` — no live database connection needed.
 
 ---
 
-# 👥 Task Distribution
+## 🔌 API Endpoints
 
-* Member 1 → Authentication (login & register)
-* Member 2 → Dashboard & navigation
-* Member 3 → Profile management
-* Member 4 → Fitness tracker
-* Member 5 → Nutrition planner
-* Member 6 → Charts & notifications
+### Authentication — `/api/auth`
+
+| Method | Endpoint | Description |
+|---|---|---|
+| POST | `/api/auth/register` | Register a new user |
+| POST | `/api/auth/login` | Log in an existing user |
+
+Auth uses in-memory sessions. After login/register, the server returns a `sessionId` and a `token`. Include `x-session-id: <sessionId>` in all subsequent requests.
+
+> **Note:** Sessions are not persisted — a server restart clears all active sessions.
+
+### Workouts — `/api/tracker`
+
+| Method | Endpoint | Description |
+|---|---|---|
+| POST | `/api/tracker/workouts` | Log a new workout |
+| GET | `/api/tracker/workouts` | Get all workouts for the logged-in user |
+| DELETE | `/api/tracker/workouts/:id` | Delete a workout by ID |
+
+### Steps — `/api/steps`
+
+| Method | Endpoint | Description |
+|---|---|---|
+| POST | `/api/steps` | Add steps for a date (upserts, increments existing) |
+| GET | `/api/steps` | Get step history for the logged-in user |
+
+### Nutrition — `/api/nutrition`
+
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/api/nutrition/:date` | Get nutrition log for a specific date |
+| POST | `/api/nutrition/:date` | Upsert nutrition log and goals for a date |
+
+### Profile — `/api/profile`
+
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/api/profile` | Get the logged-in user's profile |
+| PUT | `/api/profile` | Update profile fields (name, age, weight, height, gender, bio, picture) |
+| PUT | `/api/profile/password` | Change password |
+
+### Progress — `/api/progress`
+
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/api/progress/summary` | Weekly workout summary and per-day breakdown |
+
+### Reminders — `/api/reminders`
+
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/api/reminders` | Get the user's active reminder setting |
+| POST | `/api/reminders` | Create or update a workout reminder (delay + label) |
 
 ---
 
-# ⚠️ Collaboration Guidelines
+## 👥 Task Distribution
 
-* Each member works on assigned files only
-* Always pull latest changes before starting work
-* Push to your own branch (not main)
-* Use pull requests to merge
-* Avoid editing the same file at the same time
+| Member | Responsibility |
+|---|---|
+| Member 1 | Authentication — login & registration |
+| Member 2 | Dashboard & navigation |
+| Member 3 | Profile management |
+| Member 4 | Fitness tracker |
+| Member 5 | Nutrition planner |
+| Member 6 | Charts, progress & notifications |
 
 ---
 
-# 🚀 Technologies Used
+## ⚠️ Collaboration Guidelines
 
-* HTML5, CSS3, JavaScript
-* Bootstrap 4
-* Node.js (Express.js)
-* MongoDB (Mongoose)
-* Chart.js
+- Each member works on their assigned files only
+- Always `git pull` the latest changes before starting work
+- Push to your own feature branch — **never push directly to `main`**
+- Use pull requests to merge into `main`
+- Avoid editing the same file simultaneously
+
+---
+
+## 📋 Environment Variables
+
+Create `backend/.env`:
+
+```env
+MONGO_URI=mongodb://127.0.0.1:27017/getbuffd
+```
+
+The `.env` file is gitignored and should never be committed.
