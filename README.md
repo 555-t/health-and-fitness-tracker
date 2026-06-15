@@ -107,7 +107,8 @@ cd health-and-fitness-tracker
 npm install
 
 # 3. Create a .env file in the project root
-->follow instructions in database zip file
+MONGO_URI=mongodb+srv://<db_username>:<db_password>@getbuffd.wysa2hc.mongodb.net/?appName=getbuffd
+username and password can be found in database zip file
 ```
 
 ### Running the App
@@ -218,7 +219,8 @@ Auth uses in-memory sessions. After login/register, the server returns a `sessio
 Create `backend/.env`:
 
 ```env
-MONGO_URI=mongodb://127.0.0.1:27017/getbuffd
+MONGO_URI=mongodb+srv://<db_username>:<db_password>@getbuffd.wysa2hc.mongodb.net/?appName=getbuffd
+username and password can be found in database zip file
 ```
 
 The `.env` file is gitignored and should never be committed.
