@@ -108,8 +108,10 @@ npm install
 
 # 3. Create a .env file in the project root
 MONGO_URI=mongodb+srv://<db_username>:<db_password>@getbuffd.wysa2hc.mongodb.net/?appName=getbuffd
-username and password can be found in database zip file
+
 ```
+(Username and password can be found in database zip file)
+
 
 ### Running the App
 
@@ -195,12 +197,12 @@ Auth uses in-memory sessions. After login/register, the server returns a `sessio
 
 | Member | Responsibility |
 |---|---|
-| Member 1 | Authentication — login & registration |
-| Member 2 | Dashboard & navigation |
-| Member 3 | Profile management |
-| Member 4 | Fitness tracker |
-| Member 5 | Nutrition planner |
-| Member 6 | Charts, progress & notifications |
+| Maiza | Authentication — login & registration |
+| Leen | Dashboard & navigation |
+| Batrisyia | Profile management |
+| Aryssa | Fitness tracker |
+| Kamelia | Nutrition planner |
+| Malak | Charts, progress & notifications |
 
 ---
 
@@ -220,7 +222,7 @@ Create `backend/.env`:
 
 ```env
 MONGO_URI=mongodb+srv://<db_username>:<db_password>@getbuffd.wysa2hc.mongodb.net/?appName=getbuffd
-username and password can be found in database zip file
 ```
+(Username and password can be found in database zip file)
 
 The `.env` file is gitignored and should never be committed.
