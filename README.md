@@ -107,7 +107,7 @@ cd health-and-fitness-tracker
 npm install
 
 # 3. Create a .env file in the project root
-echo "MONGO_URI=mongodb://127.0.0.1:27017/getbuffd" > backend/.env
+->follow instructions in database zip file
 ```
 
 ### Running the App
